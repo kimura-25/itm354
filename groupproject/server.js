@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var myParser = require("body-parser");
 var mysql = require('mysql');
+const querystring = require('querystring');
 
 console.log("Connecting to localhost...");
 /*var con = mysql.createConnection({
