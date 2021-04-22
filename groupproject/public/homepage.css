@@ -92,3 +92,7 @@ h2 {
 .subnav:hover .subnav-content {
   display: block;
 }
+
+img {
+  border: 10px solid rgb(23, 94, 112);
+}
