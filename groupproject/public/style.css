@@ -34,7 +34,6 @@ h2 {
   text-align: center;
   padding: 14px 130px;
   text-decoration: none;
-
 }
 
 /* The subnavigation menu */
@@ -56,7 +55,7 @@ h2 {
 
 }
 
-/* Add a red background color to navigation links on hover */
+/* Adds background color to navigation links on hover */
 .navbar a:hover, .subnav:hover .subnavbtn {
   background-color: rgb(23, 94, 112);
 }
@@ -79,7 +78,7 @@ h2 {
   text-decoration: none;
 }
 
-/* Add a grey background color on hover */
+/* Adds background color on hover */
 .subnav-content a:hover {
   background-color:  rgb(104, 151, 163);
   color:white;
