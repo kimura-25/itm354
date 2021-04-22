@@ -5,12 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Advising Notes</title>
+    <script>
+        function displayDate(){
+            document.getElementById("showDate").innerHTML = Date();
+        }
+    </script>
 </head>
 <body>
     <form action="/logadvisingnote" method="POST"></form>
     <h1>Log Advising Note</h1>
     Student Name<br>
-    Appointment Date<br>
+    Appointment Date 
+    <button type="button" onclick="displayDate()">show date</button>
+    <p id="showDate"></p>
+    <p onload="displayDate()"></p>
+    <br>
     Note<br> <input type='text' name='Note'>
+    <button>Submit</button>
+    <br>
+    <button onclick="window.location.href='/student-single.html'">Back</button>
 </body>
 </html>
