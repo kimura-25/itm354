@@ -103,7 +103,20 @@ app.post("/advisingnotes", function (request, response) {
 });
 
 
-/*function isNonNegInt(stringToCheck, returnErrors = false) {
+
+
+function query_employers(POST, response) {
+  query = "SELECT * FROM Employer";
+};
+
+
+app.post("/employers", function (request, response) {
+  let POST = request.body;
+query_employers(POST, response);
+});
+
+
+function isNonNegInt(stringToCheck, returnErrors = false) {
   errors = []; // assume no errors at first
   if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
   if (stringToCheck < 0) errors.push('Negative value!'); // Check if it is non-negative
@@ -151,7 +164,7 @@ app.post("/process_query", function (request, response) {
   query_DB(POST, response);
 });
 
-*/
+
 
 app.all('*', function (request, response, next) {
   console.log(request.method + ' to ' + request.path);
