@@ -2,11 +2,12 @@
 This file contains style elements for the Home Page 
 Partial format used from https://www.w3schools.com/howto/howto_css_subnav.asp */ 
 
-/* Centers text*/
+/* Creates background color */
 body {
     background-color: rgb(186, 226, 233);
 }
-/* Creates background color */
+
+/* Centers text*/
 h1 {
     text-align: center; 
     font-size: 35px;
