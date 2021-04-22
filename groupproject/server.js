@@ -44,6 +44,19 @@ app.post("/advisingnotes", function (request, response) {
 });
 
 
+
+
+function query_employers(POST, response) {
+  query = "SELECT * FROM Employer";
+};
+
+
+app.post("/employers", function (request, response) {
+  let POST = request.body;
+query_employers(POST, response);
+});
+
+
 function isNonNegInt(stringToCheck, returnErrors = false) {
   errors = []; // assume no errors at first
   if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
