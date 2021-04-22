@@ -5,7 +5,7 @@ var mysql = require('mysql');
 const querystring = require('querystring');
 
 console.log("Connecting to localhost...");
-/*var con = mysql.createConnection({
+var con = mysql.createConnection({
   host: '127.0.0.1',
   user: "root",
   port: 3306,
@@ -16,12 +16,35 @@ console.log("Connecting to localhost...");
 con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
-});*/
+});
 
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
-/*function isNonNegInt(stringToCheck, returnErrors = false) {
+function query_advisingnote(POST, response){
+  query = "SELECT * FROM booking where guestNO = '1';"
+  console.log('studentsingletable');
+  response_form = `<form action="Room-query.html" method="GET">`;
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Advising Note</td><td><B>Date</td></b>`;
+      response_form += `<td><B>A</td><td><B>B</td></b>`;
+
+      /*for (i in res_json) {
+        response_form += `<tr><td> ${res_json[i].dateFrom}</td>`;
+        response_form += `<td> ${res_json[i].dateTo}</td>`;
+      }
+      response_form += "</table>";
+      response_form += `<input type="submit" value="Another Query?"> </form>`;
+      response.send(response_form);*/
+}
+
+app.post("/advisingnotes", function (request, response) {
+  let POST = request.body;
+  query_advisingnote(POST, response);
+});
+
+
+function isNonNegInt(stringToCheck, returnErrors = false) {
   errors = []; // assume no errors at first
   if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
   if (stringToCheck < 0) errors.push('Negative value!'); // Check if it is non-negative
@@ -29,6 +52,8 @@ app.use(myParser.urlencoded({ extended: true }));
 
   return returnErrors ? errors : (errors.length == 0);
 }
+
+
 
 function query_DB(POST, response) {
   if (isNonNegInt(POST['low_price'])
@@ -71,5 +96,5 @@ app.post("/process_query", function (request, response) {
   let POST = request.body;
   query_DB(POST, response);
 });
-*/
+
 app.listen(8080, () => console.log(`listening on port 8080`));
