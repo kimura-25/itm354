@@ -1,14 +1,10 @@
 /* Author: Kiara Furutani 
-This file contains style elements for the Home Page 
+This file contains style elements for the Sub-Pages 
 Partial format used from https://www.w3schools.com/howto/howto_css_subnav.asp */ 
 
 /* Creates background color */
 body {
     background-color: rgb(186, 226, 233);
-}
-
-body {
-  text-align: center;
 }
 
 /* Centers text*/
@@ -91,8 +87,4 @@ h2 {
 /* When you move the mouse over the subnav container, open the subnav content */
 .subnav:hover .subnav-content {
   display: block;
-}
-
-img {
-  border: 10px solid rgb(23, 94, 112);
 }
