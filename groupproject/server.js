@@ -32,7 +32,51 @@ function query_advisingnote(POST, response){
   console.log(res_json);
 
   //now build the response for student detail page
-  response_form =`<link rel="stylesheet" href="homepage.css">`;
+  response_form=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+     <!-- The navigation menu -->
+      <div class="navbar">
+          <a href="index.html">Home</a>
+          <div class="subnav">
+      
+            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./employers.html">Employers</a>
+              <a href="./contacts.html">Contacts</a>
+              <a href="./jobpostings.html">Job Postings</a>
+            </div>
+          </div>
+      
+          <div class="subnav">
+            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./careerexpo.html">Career Expo</a>
+              <a href="./addemployer.html">Add Employer</a>
+            </div>
+          </div>
+      
+          <div class="subnav">
+            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./studentinformation.html">Student Information</a>
+              <a href="./advising.html">Advising</a>
+        
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>`
     for (i in res_json){
   response_form +=`<p>Name: ${res_json[i].guestName}</p>
   <p>Phone: ${res_json[i].guestAddress}</p>
@@ -47,7 +91,8 @@ function query_advisingnote(POST, response){
         response_form += `<td> ${res_json[i].dateTo}</td>`;
       }
       response_form += "</table>";
-      response_form += `<input type="submit" value="Add Advising Note"> </form>`;
+      response_form += `<input type="submit" value="Add Advising Note"> </form>`; 
+      response_form += `</html>`;
       response.send(response_form);
 });
 }
@@ -58,7 +103,20 @@ app.post("/advisingnotes", function (request, response) {
 });
 
 
-/*function isNonNegInt(stringToCheck, returnErrors = false) {
+
+
+function query_employers(POST, response) {
+  query = "SELECT * FROM Employer";
+};
+
+
+app.post("/employers", function (request, response) {
+  let POST = request.body;
+query_employers(POST, response);
+});
+
+
+function isNonNegInt(stringToCheck, returnErrors = false) {
   errors = []; // assume no errors at first
   if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
   if (stringToCheck < 0) errors.push('Negative value!'); // Check if it is non-negative
@@ -106,7 +164,7 @@ app.post("/process_query", function (request, response) {
   query_DB(POST, response);
 });
 
-*/
+
 
 app.all('*', function (request, response, next) {
   console.log(request.method + ' to ' + request.path);
