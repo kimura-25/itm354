@@ -3,13 +3,15 @@ var app = express();
 var myParser = require("body-parser");
 var mysql = require('mysql');
 const querystring = require('querystring');
+const { query } = require('express');
+
 
 console.log("Connecting to localhost...");
 var con = mysql.createConnection({
   host: '127.0.0.1',
   user: "root",
   port: 3306,
-  database: "travel",
+  database: "employer_database_system",
   password: ""
 });
 
@@ -21,12 +23,20 @@ con.connect(function (err) {
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
+/*function storeappt(POST, response){
+  advisor = POST ['advisor'];
+  console.log(advisor);
+}
+
+app.post("/submitapp", function (request, response) {
+  let POST = request.body;
+  storeappt(POST, response);
+});
+*/
 
 function submitapp(POST, response){
-
-
   //now build the response for student detail page
-  submitapp=`<!DOCTYPE html>
+submitapp=`<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -70,20 +80,32 @@ function submitapp(POST, response){
           </div>
         </div>
         <br>
-        <p>Thank you for making your appointment with Career Services</p>
+        <p><strong>Thank you for making your appointment with Career Services</strong></p>
         </html>`;
-      response.send(submitapp);
-};
+  response.send(submitapp);
+  advisor = POST['advisor'];
+  date = POST['date'];
+  time = POST['time'];
+  console.log(advisor);
+sql = "INSERT INTO advises(Uname,advising_date,advising_time) VALUES ('" + advisor + "', '" + date + "','" + time + "')";
+con.query(sql,function(err){
+if(err) throw err
+console.log(sql)
+})
+con.end();
+    };
 
 app.post("/submitapp", function (request, response) {
   let POST = request.body;
   submitapp(POST, response);
 });
 
+//note:need to change attributes to eds
 function query_advisingnote(POST, response){
-  query = "SELECT * FROM booking, guest WHERE booking.guestNo = guest.guestNo AND guest.guestNO = '2';" //query for the given student
+  //note to self: need to create cases if person has no advising notes
+  var sql = "SELECT * FROM student WHERE s_id = '801'"; //query for the given student
   console.log('studentsingletable');
-  con.query(query,function (err, result, fields){ //run the query
+  con.query(sql,function (err, result, fields){ //run the query
   if (err) throw err;
   console.log(result);
   var res_string = JSON.stringify(result);
@@ -137,20 +159,20 @@ function query_advisingnote(POST, response){
         <br>
         <br>`
     for (i in res_json){
-  response_form +=`<p>Name: ${res_json[i].guestName}</p>
-  <p>Phone: ${res_json[i].guestAddress}</p>
-  <p>Email: ${res_json[i].guestAddress}</p>
-  <p>Major: ${res_json[i].guestNo}</p>`
+  response_form +=`<p>Name: ${res_json[i].S_id}</p>
+  <p>Phone: ${res_json[i].S_phone}</p>
+  <p>Email: ${res_json[i].S_email}</p>
+  <p>Major: ${res_json[i].St_major}</p>`
                   }
-  response_form += `<form action="advising.html" method="GET">`;
+/*  response_form += `<form action="advising.html" method="GET">`;
   response_form += `<table border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
   response_form += `<td><B>Advising Note</td><td><B>Date</td></b>`;
       for (i in res_json) {
-        response_form += `<tr><td> ${res_json[i].dateFrom}</td>`;
-        response_form += `<td> ${res_json[i].dateTo}</td>`;
+        response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
+        response_form += `<td> ${res_json[i].Advising_note}</td>`;
       }
       response_form += "</table>";
-      response_form += `<input type="submit" value="Add Advising Note"> </form>`; 
+      response_form += `<input type="submit" value="Add Advising Note"> </form>`;*/
       response_form += `</html>`;
       response.send(response_form);
 });
