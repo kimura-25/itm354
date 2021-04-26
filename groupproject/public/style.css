@@ -5,6 +5,7 @@ Partial format used from https://www.w3schools.com/howto/howto_css_subnav.asp */
 /* Creates background color */
 body {
     background-color: rgb(186, 226, 233);
+    text-align: center;
 }
 
 /* Centers text*/
@@ -88,3 +89,4 @@ h2 {
 .subnav:hover .subnav-content {
   display: block;
 }
+

@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
-    <title>Add Employer</title>
+    <title>Event Registration</title>
 </head>
 <body>
     <h1>Shidler Career Services and Professional Development</h1> 
-    <h2>Add Employer to Event</h2>
+    <h2>Event Registration</h2>
 
    <!-- The navigation menu -->
     <div class="navbar">
@@ -45,5 +45,27 @@
       <br>
       <br>
       <br>
+      <Form action="/contacts" method="POST"></Form>
+        Register for Career Expo<br>
+        View invitation here
+        <button type="button" onclick="displayTime()">show time</button>
+        <p id="showTime"></p>
+        <p onload="displayTime()"></p>
+        <input type="submit" value="Submit"><br>
+      
+        Register for Career Workshops<br>
+        View availability here
+        <button type="button" onclick="displayDate()">show date</button>
+        <p id="showDate"></p>
+        <p onload="displayDate()"></p>
+        <input type="submit" value="Submit"><br>
+        
+        <br>Event Notes<br>
+        Event Type <input type='text' name='Emp_eventtype'>
+        Event Date <input type="text" name='Emp_eventdate'><br>
+
+        <br>Note
+        <br> <input type='text' name='Note'>
+        <input type="submit" value="Submit">
 </body>
 </html>
