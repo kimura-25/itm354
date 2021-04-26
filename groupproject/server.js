@@ -53,29 +53,11 @@ submitapp=`<!DOCTYPE html>
       <div class="navbar">
           <a href="index.html">Home</a>
           <div class="subnav">
-      
-            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./employers.html">Employers</a>
-              <a href="./contacts.html">Contacts</a>
-              <a href="./jobpostings.html">Job Postings</a>
-            </div>
+          <a href="makeappointment.html"subnavbtn">Make Appointment</i></button></a>
           </div>
-      
           <div class="subnav">
-            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./careerexpo.html">Career Expo</a>
-              <a href="./addemployer.html">Add Employer</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./studentinformation.html">Student Information</a>
-              <a href="./advising.html">Advising</a>
-        
+             <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
+           </div>
             </div>
           </div>
         </div>
