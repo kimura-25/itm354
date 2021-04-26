@@ -5,7 +5,6 @@ var mysql = require('mysql');
 const querystring = require('querystring');
 const { query } = require('express');
 
-
 console.log("Connecting to localhost...");
 var con = mysql.createConnection({
   host: '127.0.0.1',
@@ -293,16 +292,48 @@ app.post("/advisingnotes", function (request, response) {
 
 function query_employers(POST, response) {
   query = "SELECT * FROM Employer";
+  con.query (query, function (err, result, fields){
+  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  //Response: table of results and form to do another query 
+  response_form = '<form action"employers.html" method = "GET">';
+  response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+  response_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+      for (i in res_json) {
+        response_form += `<tr><td> ${res_json[i].E_id}</td>`;
+        response_form += `<td> ${res_json[i].E_name}</td>`;
+        response_form += `<td> ${res_json[i].E_phone}</td>`;
+        response_form += `<td> ${res_json[i].E_email}</td>`
+        response_form += `<td> ${res_json[i].E_street}</td>`
+        response_form += `<td> ${res_json[i].E_city}</td>`
+        response_form += `<td> ${res_json[i].E_state}</td>`
+        response_form += `<td> ${res_json[i].E_zipcode}</td>`
+        response_form += `<td> ${res_json[i].E_industry}</td></tr>`;
+      }
+      response_form += "</table>";
+      response_form += `<input type="submit" value="Another Query?"> </form>`;
+      response.send(response_form);
+    });
 };
-
-app.post("/employers", function (request, response) {
+function query_jpostings (POST, response){
+  if (isNonNegInt(POST['Eid'])) { 
+  query = "SELECT* FROM job_posting, employer WHERE Emp_id = E_id  "
+}
+};
+app.all('*', function (request, response, next) {
+  console.log(request.method + ' to ' + request.path);
+  next();
+});
+app.post("/employers_query", function (request, response) {
   let POST = request.body;
 query_employers(POST, response);
 });
 
-app.all('*', function (request, response, next) {
-  console.log(request.method + ' to ' + request.path);
-  next();
+app.post("/Jposting_query", function (request, response) {
+  let POST = request.body;
+query_jpostings(POST, response);
 });
 
 
