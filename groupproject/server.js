@@ -255,7 +255,7 @@ function query_advisingnote(POST, response){
 
 function query_jobsearch(POST, response){
   eid = POST['employer_id'];
-  var sql = "SELECT * FROM job_posting WHERE empl_id == " + eid;
+  var sql = "SELECT * FROM job_posting WHERE empl_id =" + eid;
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
