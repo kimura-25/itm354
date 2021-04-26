@@ -1,0 +1,23 @@
+body {
+    text-align: center;
+    background-color: rgb(186, 226, 233);
+}
+
+h2 {
+    background-color: rgb(41, 136, 160);
+    color: white;
+}
+
+button {
+
+    appearance:none;
+    -webkit-appearance:none;
+  
+    padding:10px;
+    border:none;
+    background-color: rgb(136, 181, 192);
+    color:black;
+    border-radius:5px;
+  
+  }
+  
