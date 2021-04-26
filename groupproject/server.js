@@ -178,16 +178,12 @@ function query_advisingnote(POST, response){
 });
 }
 
-//Post for processing any job searches from students
-app.post("/process_jobsearch", function (request,response){
-  let POST = request.body;
-  query_jobsearch(POST, reponse);
-});
+
 
 function query_jobsearch(POST, response){
-  eid = POST['EmployerID'];
-  var query = "SELECT * FROM Job_posting WHERE Empl_id == " + eid;
-  con.query(query, function (err, result, fields){ 
+  eid = POST['employer_id'];
+  var sql = "SELECT * FROM job_posting WHERE empl_id == " + eid;
+  con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
     var res_string = JSON.stringify(result);
@@ -195,18 +191,24 @@ function query_jobsearch(POST, response){
     console.log(res_json);
   
 
-    response_form = `<form action="jobsearch.html" method="GET">`;
-      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-      response_form += `<td><B>Room#</td><td><B>Hotel#</td><td><B>Type</td></b>`;
+    job_search_form = `<form action="jobsearch.html" method="GET">`;
+      job_search_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      job_search_form += `<td><B>Room#</td><td><B>Hotel#</td><td><B>Type</td></b>`;
       for (i in res_json) {
-        response_form += `<tr><td> ${res_json[i].Job_id}</td>`;
-        response_form += `<td> ${res_json[i].Job_title}</td>`;
-        response_form += `<td> ${res_json[i].Job_description}</td>`;
+        job_search_form += `<tr><td> ${res_json[i].Job_id}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_title}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_description}</td>`;
       }
-      response_form += `</table> </form>`;
+      job_search_form += `</table> </form>`;
     response.send(job_search_form)
   })
 };
+
+//Post for processing any job searches from students
+app.post("/process_jobsearch", function (request,response){
+  let POST = request.body;
+  query_jobsearch(POST, response);
+});
 
 
 app.post("/advisingnotes", function (request, response) {
