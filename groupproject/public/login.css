@@ -3,21 +3,45 @@ body {
     background-color: rgb(186, 226, 233);
 }
 
-h2 {
+h1 {
     background-color: rgb(41, 136, 160);
     color: white;
 }
 
-button {
+a {
 
     appearance:none;
     -webkit-appearance:none;
-  
     padding:10px;
     border:none;
-    background-color: rgb(136, 181, 192);
-    color:black;
-    border-radius:5px;
+    background-color:white;
+    color:rgb(41, 136, 160);
+    width:100px;
+    font-size: large;
+    border-radius: 5px;
+    text-decoration: none;
   
   }
-  
+
+input {
+    width: 300px;
+    font-size: large;
+    border-radius: 5px;
+} 
+
+label {
+    font-size: 22px;
+    color: white;
+}
+ 
+  form {
+    position: relative;
+    z-index: 1;
+    background:  rgb(41, 136, 160);
+    max-width: 360px;
+    margin: 0 auto 50px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    /* Styles appearance of div holding form to fill out */
+  }
