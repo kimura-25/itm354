@@ -178,6 +178,37 @@ function query_advisingnote(POST, response){
 });
 }
 
+//Post for processing any job searches from students
+app.post("/process_jobsearch", function (request,response){
+  let POST = request.body;
+  query_jobsearch(POST, reponse);
+});
+
+function query_jobsearch(POST, response){
+  eid = POST['EmployerID'];
+  var query = "SELECT * FROM Job_posting WHERE Empl_id == " + eid;
+  con.query(query, function (err, result, fields){ 
+    if (err) throw err;
+    console.log(result);
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  
+
+    response_form = `<form action="jobsearch.html" method="GET">`;
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Room#</td><td><B>Hotel#</td><td><B>Type</td></b>`;
+      for (i in res_json) {
+        response_form += `<tr><td> ${res_json[i].Job_id}</td>`;
+        response_form += `<td> ${res_json[i].Job_title}</td>`;
+        response_form += `<td> ${res_json[i].Job_description}</td>`;
+      }
+      response_form += `</table> </form>`;
+    response.send(job_search_form)
+  })
+};
+
+
 app.post("/advisingnotes", function (request, response) {
   let POST = request.body;
   query_advisingnote(POST, response);
