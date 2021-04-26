@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EDS</title>
+    <title>Make Appointment</title>
     <link rel="stylesheet" href="homepage.css">
     
 <script>
@@ -35,34 +35,17 @@ function checkdate() {
 <body>
     
    <h1>Shidler Career Services and Professional Development</h1> 
-   <h2>Employer Database System</h2>
+   <h2>Make Advising Appointment</h2>
   
    <!-- The navigation menu -->
 <div class="navbar">
-    <a href="index.html">Home</a>
+    <a href="student_homepage.html">Home</a>
     <div class="subnav">
-
-      <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-      <div class="subnav-content">
-        <a href="./employers.html">Employers</a>
-        <a href="./contacts.html">Contacts</a>
-        <a href="./jobpostings.html">Job Postings</a>
-      </div>
+      <a href="makeappointment.html"subnavbtn">Make Appointment</i></button></a>
     </div>
-
     <div class="subnav">
-      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-      <div class="subnav-content">
-        <a href="./careerexpo.html">Career Expo</a>
-        <a href="./addemployer.html">Add Employer</a>
-      </div>
-    </div>
-
-    <div class="subnav">
-      <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-      <div class="subnav-content">
-        <a href="./studentinformation.html">Student Information</a>
-        <a href="./advising.html">Advising</a>
+       <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
+     </div>
   
       </div>
     </div>
@@ -74,7 +57,7 @@ function checkdate() {
 Student Name
 <br>
 <br>
-<form action="/submitapp" method="POST" name="makeappt"  >
+<form action="/submitapp" method="POST" name="submitapp"  >
     <label for="date">Appointment Date</label>
     <label for="dateerror" id="dateerror" name="dateerror"></label>
     <br>
@@ -94,9 +77,9 @@ Student Name
     <br>
     <br>
     <br>
-    <label for="request_notes">Please describe the reason for your appointment</label>
+    <label for="appt_notes">Please describe the reason for your appointment</label>
     <br>
-    <input type="text" id="request_notes" name="request_notes" style="height:200px;width:400px;">
+    <input type="text" id="appt_notes" name="appt_notes" style="height:200px;width:400px;">
     <br>
     <input type="submit" id="submit_appt" name="submit_appt">
 </form>
