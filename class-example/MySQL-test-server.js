@@ -20,6 +20,16 @@ con.connect(function (err) {
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
+app.post('/form', function (req,res){
+  var sql = "insert into hotel (hotelName) values (" + req.body.hotelname +")";
+  con.query (sql,function (err){
+    if (err) throw err
+    res.render('index', {title:'data saved',
+    message: 'data saved successfully'})
+  })
+con.end();
+})
+
 function isNonNegInt(stringToCheck, returnErrors = false) {
   errors = []; // assume no errors at first
   if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
