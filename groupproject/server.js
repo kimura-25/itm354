@@ -338,13 +338,23 @@ function query_jobsearch(POST, response){
     console.log(res_json);
   
 
-    job_search_form = `<form action="jobsearch.html" method="GET">`;
-      job_search_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-      job_search_form += `<td><B>Room#</td><td><B>Hotel#</td><td><B>Type</td></b>`;
+  job_search_form =`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Job search</title>
+  </head>`
+    job_search_form += `<form action="jobsearch.html" method="GET">`;
+      job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`;
+      job_search_form += `<td><B>Employer ID</td><td><B>Job title</td><td><B>Job description</td></b>`;
       for (i in res_json) {
         job_search_form += `<tr><td> ${res_json[i].Job_id}</td>`;
         job_search_form += `<td> ${res_json[i].Job_title}</td>`;
         job_search_form += `<td> ${res_json[i].Job_description}</td>`;
+        job_search_form += `<td> <button>Apply</button> </td>`
       }
       job_search_form += `</table> </form>`;
     response.send(job_search_form)
