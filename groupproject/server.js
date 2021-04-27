@@ -190,7 +190,7 @@ function studentinformation(POST, response){
         });
         }
 
-app.get("/studentinformation", function (request, response) {
+app.get("/studentinformation.html", function (request, response) {
   let POST = request.body;
   studentinformation(POST, response);
 });
@@ -357,6 +357,97 @@ app.post("/process_jobsearch", function (request,response){
   query_jobsearch(POST, response);
 });
 
+app.get("/makeappointment.html", function (request, response) {
+  //note to self: need to create cases if person has no advising notes
+  let POST = request.body;
+  makeappt=`<!DOCTYPE html>
+
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Make Appointment</title>
+      <link rel="stylesheet" href="homepage.css">`
+      
+      /*Validating Date is after today onclick*/
+  //Source: https://www.codexworld.com/how-to/check-given-date-is-greater-than-today-javascript/
+  
+  function checkdate() {
+      var d = new Date(date.value); //taking value of date from the form
+      console.log(date);
+      var t = new Date()
+      console.log(t + d);
+      //if date selected is today or before that, show error message
+      if(d <= t){ 
+          console.log('nogoodday');
+          document.getElementById("dateerror").innerHTML =  '<font color="red">Date has already passed. Please select a future date.</font>'
+      }
+      //if date selected is after today, do not display anything
+      else{
+          document.getElementById("dateerror").innerHTML = " "
+  
+      }
+  }
+  
+      
+  makeappt+=`</head>
+  <body>
+      
+     <h1>Shidler Career Services and Professional Development</h1> 
+     <h2>Make Advising Appointment</h2>
+    
+     <!-- The navigation menu -->
+  <div class="navbar">
+      <a href="student_homepage.html">Home</a>
+      <div class="subnav">
+        <a href="makeappointment.html"subnavbtn">Make Appointment</i></button></a>
+      </div>
+      <div class="subnav">
+         <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
+       </div>
+    
+        </div>
+      </div>
+    </div>
+    
+  </body>
+  <br>
+  <br>
+  Student Name
+  <br>
+  <br>
+  <form action="/submitapp" method="POST" name="submitapp"  >
+      <label for="date">Appointment Date</label>
+      <label for="dateerror" id="dateerror" name="dateerror"></label>
+      <br>
+      <input type="date" id="date" name="date" onclick="checkdate()" required>
+      <br>
+      <br>
+      <label for="time">Approximate Start time</label>
+      <br>
+      <input type="time" id="time" name="time" min="9:00" max="16:00" required>
+      <br>
+      <br>
+      <label for="advisor">Choose Advisor</label>
+      <select name="advisor" id="advisor">
+          <option value="rvarley">Richard Varley (Internships)</option>
+          <option value="jpstuart">Patrick Stuart (Full-Time Jobs)</option>
+      </select>
+      <br>
+      <br>
+      <br>
+      <label for="appt_notes">Please describe the reason for your appointment</label>
+      <br>
+      <input type="text" id="appt_notes" name="appt_notes" style="height:200px;width:400px;">
+      <br>
+      <input type="submit" id="submit_appt" name="submit_appt">
+  </form>
+  
+  </html>`;
+  response.send(makeappt);
+  
+});
 
 app.post("/advisingnotes", function (request, response) {
     //note to self: need to create cases if person has no advising notes
@@ -364,6 +455,165 @@ app.post("/advisingnotes", function (request, response) {
     console.log(s_id);
     advisingnote(request,response);
 });
+
+
+app.post("/advising.html", function (request, response) {
+  //note to self: need to create cases if person has no advising notes
+  let POST = request.body;
+  advisingpg=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Log Advising Notes</title>
+      
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Log Advising Notes</h2>
+  
+     <!-- The navigation menu -->
+      <div class="navbar">
+          <a href="index.html">Home</a>
+          <div class="subnav">
+      
+            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./employers.html">Employers</a>
+              <a href="./contacts.html">Contacts</a>
+              <a href="./jobpostings.html">Job Postings</a>
+              <a href="./contactlog.html">Contact Log</a>
+  
+            </div>
+          </div>
+      
+          <div class="subnav">
+            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./careerexpo.html">Career Expo</a>
+              <a href="./addemployer.html">Add Employer</a>
+            </div>
+          </div>
+      
+          <div class="subnav">
+            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./studentinformation.html">Student Information</a>
+              <a href="./advising.html">Advising</a>
+        
+            </div>
+          </div>
+        </div>
+        <br>
+    <form action="/addappt" method="POST" name="addappt"  >
+      <input type="hidden" id="s_id" name="s_id" value=${s_id}>
+      <label for="date">Appointment Date</label>
+      <br>
+      <input type="date" id="date" name="date" required>
+      <br>
+      <br>
+      <label for="time">Approximate Start time</label>
+      <br>
+      <input type="time" id="time" name="time" min="9:00" max="16:00" required>
+      <br>
+      <br>
+      <label for="advisor">Choose Advisor</label>
+      <select name="advisor" id="advisor">
+          <option value="rvarley">Richard Varley</option>
+          <option value="jpstuart">Patrick Stuart</option>
+      </select>
+      <br>
+      <br>
+      <br>
+      <label for="appt_notes">Advising Notes</label>
+      <br>
+      <input type="text" id="appt_notes" name="appt_notes" style="height:200px;width:400px;">
+      <br>
+      <input type="submit" id="addappt" name="addappt">
+  </form>
+  <br>
+  <br>
+      <button onclick="window.location.href='/student-single.html'">Back</button>
+  </body>
+  
+  </html>`;
+  response.send(advisingpg);
+});
+
+
+function addappt(POST, response){
+addappt=`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Log Advising Notes</title>
+    
+</head>
+<body>
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Log Advising Notes</h2>
+
+   <!-- The navigation menu -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="subnav">
+    
+          <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a href="./employers.html">Employers</a>
+            <a href="./contacts.html">Contacts</a>
+            <a href="./jobpostings.html">Job Postings</a>
+            <a href="./contactlog.html">Contact Log</a>
+
+          </div>
+        </div>
+    
+        <div class="subnav">
+          <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a href="./careerexpo.html">Career Expo</a>
+            <a href="./addemployer.html">Add Employer</a>
+          </div>
+        </div>
+    
+        <div class="subnav">
+          <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a href="./studentinformation.html">Student Information</a>
+            <a href="./advising.html">Advising</a>
+      
+          </div>
+        </div>
+      </div>
+      </div>
+      <br>
+      <p><strong>Appointment added</strong></p>
+      </html>`;
+    response.send(addappt);
+  s_id = POST['s_id'];
+  advisor = POST['advisor'];
+  date = POST['date'];
+  time = POST['time'];
+  appt_notes = POST['appt_notes'];
+  console.log(s_id);
+sql = "INSERT INTO advises(Stud_id,Uname,advising_date,advising_time,advising_note) VALUES ('"+ s_id +"', '" + advisor + "', '" + date + "','" + time + "', '" + appt_notes + "')";
+con.query(sql,function(err){
+if(err) throw err
+console.log(sql)
+})
+}
+
+app.post("/addappt", function (request, response) {
+  //note to self: need to create cases if person has no advising notes
+  let POST = request.body;
+  addappt(POST, response);
+});
+
 
 function advisingnote(request,response){
   s_id = request.body.s_id;
@@ -442,6 +692,12 @@ function advisingnote(request,response){
       <p>Email: ${res_json[i].S_email}</p>
       <p>Major: ${res_json[i].St_major}</p>`
                       }
+                      response_form += `<form action="advising.html" method="POST">`;
+                      response_form += `<input type="hidden" id="s_id" name="s_id" value="${res_json[0].S_id}">`;
+                      response_form += `<input type="hidden" id="s_fname" name="s_fname" value="${res_json[0].S_fname}">`;
+                      response_form += `<input type="hidden" id="s_lname" name="s_lname" value="${res_json[0].S_lname}">`;
+                      response_form += `<input type="submit" value="Add Advising Note"> </form>`;
+                  
           response_form += `</html>`;
           response.send(response_form);
         })} else {
@@ -499,15 +755,18 @@ function advisingnote(request,response){
     <p>Email: ${res_json[0].S_email}</p>
     <p>Major: ${res_json[0].St_major}</p>`
                     
-    response_form += `<form action="advising.html" method="GET">`;
-    response_form += `<table border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
+    response_form += `<table class="center" border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
     response_form += `<td><B>Advising Date</td><td><B>Time</td><td><B>Advising Note</td></b>`;
         for (i in res_json) {
           response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
           response_form += `<td> ${res_json[i].Advising_time}</td>`;
           response_form += `<td> ${res_json[i].Advising_note}</td>`;
         }
-        response_form += "</table>";
+        response_form += "</table><br><br>";
+        response_form += `<form action="advising.html" method="GET">`;
+        response_form += `<input type="hidden" id="s_id" name="s_id" value="${res_json[0].S_id}">`;
+        response_form += `<input type="hidden" id="s_fname" name="s_fname" value="${res_json[0].S_fname}">`;
+        response_form += `<input type="hidden" id="s_lname" name="s_lname" value="${res_json[0].S_lname}">`;
         response_form += `<input type="submit" value="Add Advising Note"> </form>`;
         response_form += `</html>`;
         response.send(response_form);
