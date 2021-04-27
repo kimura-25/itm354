@@ -340,7 +340,7 @@ function query_jobsearch(POST, response){
 
     job_search_form = `<form action="jobsearch.html" method="GET">`;
       job_search_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-      job_search_form += `<td><B>Room#</td><td><B>Hotel#</td><td><B>Type</td></b>`;
+      job_search_form += `<td><B>Employer ID</td><td><B>Job title</td><td><B>Job description</td></b>`;
       for (i in res_json) {
         job_search_form += `<tr><td> ${res_json[i].Job_id}</td>`;
         job_search_form += `<td> ${res_json[i].Job_title}</td>`;
