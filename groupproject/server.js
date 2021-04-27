@@ -443,37 +443,129 @@ function advisingnote(request,response){
   });
 }
 
-function query_employers(POST, response) {
-  Name = POST ['E_name'];
-  var sql = "SELECT * FROM Employer";
-  con.query (query, function (err, result, fields){
+function query_name(POST, response) {
+  Name = POST ['Employer_name'];
+  var sql = "SELECT * FROM employer WHERE E_name = " + Name;
+  con.query (sql, function (err, result, fields){
+    if (err) throw err;
   console.log(result);
   var res_string = JSON.stringify(result);
   var res_json = JSON.parse(res_string);
   console.log(res_json);
   //Response: table of results and form to do another query 
-  response_form = '<form action"employers.html" method = "GET">';
-  response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-  response_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+  name_form = '<form action"employers.html" method = "GET">';
+  name_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+  name_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
       for (i in res_json) {
-        response_form += `<tr><td> ${res_json[i].E_id}</td>`;
-        response_form += `<td> ${res_json[i].E_name}</td>`;
-        response_form += `<td> ${res_json[i].E_phone}</td>`;
-        response_form += `<td> ${res_json[i].E_email}</td>`
-        response_form += `<td> ${res_json[i].E_street}</td>`
-        response_form += `<td> ${res_json[i].E_city}</td>`
-        response_form += `<td> ${res_json[i].E_state}</td>`
-        response_form += `<td> ${res_json[i].E_zipcode}</td>`
-        response_form += `<td> ${res_json[i].E_industry}</td></tr>`;
+        name_form += `<tr><td> ${res_json[i].E_id}</td>`;
+        name_form += `<td> ${res_json[i].E_name}</td>`;
+        name_form += `<td> ${res_json[i].E_phone}</td>`;
+        name_form += `<td> ${res_json[i].E_email}</td>`
+        name_form += `<td> ${res_json[i].E_street}</td>`
+        name_form += `<td> ${res_json[i].E_city}</td>`
+        name_form += `<td> ${res_json[i].E_state}</td>`
+        name_form += `<td> ${res_json[i].E_zipcode}</td>`
+        name_form += `<td> ${res_json[i].E_industry}</td></tr>`;
       }
-      response_form += "</table>";
-      response_form += `<input type="submit" value="Another Query?"> </form>`;
-      response.send(response_form);
+      name_form += "</table>";
+      name_form += `<input type="submit" value="Another Query?"> </form>`;
+      response.send(name_form);
     });
 };
+
+function query_state(POST, response) {
+  State = POST ['Employer_state'];
+  var sql = "SELECT * FROM employer WHERE E_state = " + State;
+  con.query (sql, function (err, result, fields){
+    if (err) throw err;
+  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  //Response: table of results and form to do another query 
+  state_form = '<form action"employers.html" method = "GET">';
+  state_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+  state_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+      for (i in res_json) {
+        state_form += `<tr><td> ${res_json[i].E_id}</td>`;
+        state_form += `<td> ${res_json[i].E_name}</td>`;
+        state_form += `<td> ${res_json[i].E_phone}</td>`;
+        state_form += `<td> ${res_json[i].E_email}</td>`
+        state_form += `<td> ${res_json[i].E_street}</td>`
+        state_form += `<td> ${res_json[i].E_city}</td>`
+        state_form += `<td> ${res_json[i].E_state}</td>`
+        state_form += `<td> ${res_json[i].E_zipcode}</td>`
+        state_form += `<td> ${res_json[i].E_industry}</td></tr>`;
+      }
+      state_form += "</table>";
+      state_form += `<input type="submit" value="Another Query?"> </form>`;
+      response.send(state_form);
+    });
+};
+
+function query_zipcode(POST, response) {
+  Zip = POST ['Employer_zip'];
+  var sql = "SELECT * FROM employer WHERE E_zipcode = " + Zip;
+  con.query (sql, function (err, result, fields){
+    if (err) throw err;
+  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  //Response: table of results and form to do another query 
+  zip_form = '<form action"employers.html" method = "GET">';
+  zip_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+  zip_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+      for (i in res_json) {
+        zip_form += `<tr><td> ${res_json[i].E_id}</td>`;
+        zip_form += `<td> ${res_json[i].E_name}</td>`;
+        zip_form += `<td> ${res_json[i].E_phone}</td>`;
+        zip_form += `<td> ${res_json[i].E_email}</td>`
+        zip_form += `<td> ${res_json[i].E_street}</td>`
+        zip_form += `<td> ${res_json[i].E_city}</td>`
+        zip_form += `<td> ${res_json[i].E_state}</td>`
+        zip_form += `<td> ${res_json[i].E_zipcode}</td>`
+        zip_form += `<td> ${res_json[i].E_industry}</td></tr>`;
+      }
+      zip_form += "</table>";
+      zip_form += `<input type="submit" value="Another Query?"> </form>`;
+      response.send(zip_form);
+    });
+};
+
+function query_industry(POST, response) {
+  Ind = POST ['Employer_industry'];
+  var sql = "SELECT * FROM employer WHERE E_industry = " + Ind;
+  con.query (sql, function (err, result, fields){
+    if (err) throw err;
+  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  //Response: table of results and form to do another query 
+  industry_form = '<form action"employers.html" method = "GET">';
+  industry_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+  industry_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+      for (i in res_json) {
+        industry_form += `<tr><td> ${res_json[i].E_id}</td>`;
+        industry_form += `<td> ${res_json[i].E_name}</td>`;
+        industry_form += `<td> ${res_json[i].E_phone}</td>`;
+        industry_form += `<td> ${res_json[i].E_email}</td>`
+        industry_form += `<td> ${res_json[i].E_street}</td>`
+        industry_form += `<td> ${res_json[i].E_city}</td>`
+        industry_form += `<td> ${res_json[i].E_state}</td>`
+        industry_form += `<td> ${res_json[i].E_zipcode}</td>`
+        industry_form += `<td> ${res_json[i].E_industry}</td></tr>`;
+      }
+      industry_form += "</table>";
+      industry_form += `<input type="submit" value="Another Query?"> </form>`;
+      response.send(industry_form);
+    });
+};
+
 function query_jpostings (POST, response){
   emplid = POST ['empl_id']; 
-  var sql = "SELECT E_id, E_name, E_email, E_city, E_state, E_zipcode, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Empl_id = E_id " + emplid;
+  var sql = "SELECT E_id, E_name, E_email, E_city, E_state, E_zipcode, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Empl_id = E_id AND Empl_id = " + emplid;
   con.query (sql, function (err, result, fields){
     if (err) throw err;
     console.log(result);
@@ -483,7 +575,7 @@ function query_jpostings (POST, response){
     //Response: table of results and form to do another query 
     job_postings_form = `<form action"jobpostings.html" method = "GET">`;
     job_postings_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-    job_postings_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+    job_postings_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td><td><B>Job_title</td><td><B>Job_description</td></b>`;
         for (i in res_json) {
           job_postings_form += `<tr><td> ${res_json[i].E_id}</td>`;
           job_postings_form += `<td> ${res_json[i].E_name}</td>`;
@@ -495,9 +587,10 @@ function query_jpostings (POST, response){
           job_postings_form += `<td> ${res_json[i].E_zipcode}</td>`;
           job_postings_form += `<td> ${res_json[i].E_industry}</td>`;
           job_postings_form += `<td> ${res_json[i].Job_title}</td>`;
-          job_postings_form += `<td> ${res_json[i].E_Job_description}</td>`;
+          job_postings_form += `<td> ${res_json[i].Job_description}</td>`;
         }
-        job_postings_form += `</table> <input type="submit" value="Another Query?"> </form>`;
+        job_postings_form += "</table>";
+        job_postings_form += `<input type="submit" value="Another Query?"> </form>`;
         response.send(job_postings_form)
       })
   };
@@ -514,9 +607,24 @@ app.post("/advisingnotes", function (request, response) {
   query_advisingnote(POST, response);
 });
 
-app.post("/employers_query", function (request, response) {
+app.post("/name_query", function (request, response) {
   let POST = request.body;
-query_employers(POST, response);
+query_name(POST, response);
+});
+
+app.post("/state_query", function (request, response) {
+  let POST = request.body;
+query_state(POST, response);
+});
+
+app.post("/zip_query", function (request, response) {
+  let POST = request.body;
+query_zipcode(POST, response);
+});
+
+app.post("/industry_query", function (request, response) {
+  let POST = request.body;
+query_industry(POST, response);
 });
 
 app.post("/jposting_query", function (request, response) {
