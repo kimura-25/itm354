@@ -367,16 +367,87 @@ app.post("/advisingnotes", function (request, response) {
 
 function advisingnote(request,response){
   s_id = request.body.s_id;
-  var sql = "SELECT * FROM student, student_major WHERE s_id = st_id AND s_id = " + s_id; //query for the given student
-  //  var sql1 = "SELECT IF(EXISTS(SELECT * FROM advises WHERE stud_id = '801'), '1','0'"; //query for the given student
-  //  console.log(sql1);
+ var sql = "SELECT * FROM student, student_major, advises WHERE s_id = st_id AND s_id = stud_id AND s_id = " + s_id; //query for the given student
+//var sql1 = "SELECT * IF(s_id = " + s_id +" AND s_id = advises.Stud.id AND s_id = student_major.Stu_id, '1','0') AS meh FROM student, student_major, advises"; //query for the given student
+    //  console.log(sql1);
     con.query(sql,function (err, result, fields){ //run the query
-    if (err) throw err;
+      if (err) throw err;
   //  console.log(result);
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  
+    console.log(res_json.length);
+
+    if (res_json.length == 0){
+      console.log('no advising')
+      console.log(s_id);
+      var sql2 = "SELECT * FROM student, student_major WHERE s_id = st_id AND s_id = " + s_id;
+    con.query(sql2,function (err, result, fields){ //run the query
+      if (err) throw err;
+  //  console.log(result);
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+    console.log(res_json.length);
+    
+      response_form=`<!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="stylesheet" href="style.css">
+          <title>Student Notes</title>
+      </head>
+      <body>
+          <h1>Shidler Career Services and Professional Development</h1> 
+          <h2>Student Notes</h2>
+      
+         <!-- The navigation menu -->
+          <div class="navbar">
+              <a href="index.html">Home</a>
+              <div class="subnav">
+          
+                <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="./employers.html">Employers</a>
+                  <a href="./contacts.html">Contacts</a>
+                  <a href="./jobpostings.html">Job Postings</a>
+                </div>
+              </div>
+          
+              <div class="subnav">
+                <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="./careerexpo.html">Career Expo</a>
+                  <a href="./addemployer.html">Add Employer</a>
+                </div>
+              </div>
+          
+              <div class="subnav">
+                <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="./studentinformation.html">Student Information</a>
+                  <a href="./advising.html">Advising</a>
+            
+                </div>
+              </div>
+            </div>
+            <br>
+            <br>`
+        for (i in res_json){
+          console.log(i);
+          response_form +=`<p>Name: ${res_json[i].S_fname} ${res_json[i].S_lname}</p>
+      <p>Phone: ${res_json[i].S_phone}</p>
+      <p>Email: ${res_json[i].S_email}</p>
+      <p>Major: ${res_json[i].St_major}</p>`
+                      }
+          response_form += `</html>`;
+          response.send(response_form);
+        })} else {
+      console.log('has advising')
+    
+    
     //now build the response for student detail page
     response_form=`<!DOCTYPE html>
     <html lang="en">
@@ -423,24 +494,25 @@ function advisingnote(request,response){
           </div>
           <br>
           <br>`
-      for (i in res_json){
-    response_form +=`<p>Name: ${res_json[i].S_fname} ${res_json[i].S_lname}</p>
-    <p>Phone: ${res_json[i].S_phone}</p>
-    <p>Email: ${res_json[i].S_email}</p>
-    <p>Major: ${res_json[i].St_major}</p>`
-                    }
-  /*  response_form += `<form action="advising.html" method="GET">`;
+        response_form +=`<p>Name: ${res_json[0].S_fname} ${res_json[0].S_lname}</p>
+    <p>Phone: ${res_json[0].S_phone}</p>
+    <p>Email: ${res_json[0].S_email}</p>
+    <p>Major: ${res_json[0].St_major}</p>`
+                    
+    response_form += `<form action="advising.html" method="GET">`;
     response_form += `<table border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
-    response_form += `<td><B>Advising Note</td><td><B>Date</td></b>`;
+    response_form += `<td><B>Advising Date</td><td><B>Time</td><td><B>Advising Note</td></b>`;
         for (i in res_json) {
           response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
+          response_form += `<td> ${res_json[i].Advising_time}</td>`;
           response_form += `<td> ${res_json[i].Advising_note}</td>`;
         }
         response_form += "</table>";
-        response_form += `<input type="submit" value="Add Advising Note"> </form>`;*/
+        response_form += `<input type="submit" value="Add Advising Note"> </form>`;
         response_form += `</html>`;
         response.send(response_form);
-  });
+   
+      }});
 }
 
 
