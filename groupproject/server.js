@@ -515,9 +515,9 @@ function advisingnote(request,response){
       }});
 }
 
-
 function query_employers(POST, response) {
-  query = "SELECT * FROM Employer";
+  Name = POST ['E_name'];
+  var sql = "SELECT * FROM Employer";
   con.query (query, function (err, result, fields){
   console.log(result);
   var res_string = JSON.stringify(result);
@@ -544,47 +544,64 @@ function query_employers(POST, response) {
     });
 };
 function query_jpostings (POST, response){
-  if (isNonNegInt(POST['Eid'])) { 
-  query = "SELECT E_id, E_name, E_email, E_city, E_state, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Emp_id = E_id";
-  con.query (query, function (err, result, fields){
+  emplid = POST ['empl_id']; 
+  var sql = "SELECT E_id, E_name, E_email, E_city, E_state, E_zipcode, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Empl_id = E_id " + emplid;
+  con.query (sql, function (err, result, fields){
+    if (err) throw err;
     console.log(result);
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
     //Response: table of results and form to do another query 
-    response_form = '<form action"jobpostings.html" method = "GET">';
-    response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-    response_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+    job_postings_form = `<form action"jobpostings.html" method = "GET">`;
+    job_postings_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+    job_postings_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
         for (i in res_json) {
-          response_form += `<tr><td> ${res_json[i].E_id}</td>`;
-          response_form += `<td> ${res_json[i].E_name}</td>`;
-          response_form += `<td> ${res_json[i].E_phone}</td>`;
-          response_form += `<td> ${res_json[i].E_email}</td>`
-          response_form += `<td> ${res_json[i].E_street}</td>`
-          response_form += `<td> ${res_json[i].E_city}</td>`
-          response_form += `<td> ${res_json[i].E_state}</td>`
-          response_form += `<td> ${res_json[i].E_zipcode}</td>`
-          response_form += `<td> ${res_json[i].E_industry}</td></tr>`;
+          job_postings_form += `<tr><td> ${res_json[i].E_id}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_name}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_phone}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_email}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_street}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_city}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_state}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_zipcode}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_industry}</td>`;
+          job_postings_form += `<td> ${res_json[i].Job_title}</td>`;
+          job_postings_form += `<td> ${res_json[i].E_Job_description}</td>`;
         }
-        response_form += "</table>";
-        response_form += `<input type="submit" value="Another Query?"> </form>`;
-        response.send(response_form);
-      });
+        job_postings_form += `</table> <input type="submit" value="Another Query?"> </form>`;
+        response.send(job_postings_form)
+      })
   };
-};
-app.all('*', function (request, response, next) {
-  console.log(request.method + ' to ' + request.path);
-  next();
+
+//Post for processing any job searches from students
+app.post("/process_jobsearch", function (request,response){
+  let POST = request.body;
+  query_jobsearch(POST, response);
 });
+
+
+app.post("/advisingnotes", function (request, response) {
+  let POST = request.body;
+  query_advisingnote(POST, response);
+});
+
 app.post("/employers_query", function (request, response) {
   let POST = request.body;
 query_employers(POST, response);
 });
 
-app.post("/Jposting_query", function (request, response) {
+app.post("/jposting_query", function (request, response) {
   let POST = request.body;
 query_jpostings(POST, response);
 });
+
+
+app.all('*', function (request, response, next) {
+  console.log(request.method + ' to ' + request.path);
+  next();
+});
+
 
 
 app.listen(8080, () => console.log(`listening on port 8080`));
