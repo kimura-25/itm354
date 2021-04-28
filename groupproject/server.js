@@ -286,6 +286,16 @@ app.get("/makeappointment.html", function (request, response) {
   //note to self: need to create cases if person has no advising notes
   session = request.session.username;
   console.log(session);
+  username = session
+  var sql2 = "SELECT * FROM student WHERE S_email = '"+username+"'";
+  con.query(sql2,function (err, result, fields){ //run the query
+    if (err) throw err;
+//  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  console.log(res_json.length);
+
   makeappt=`<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -339,13 +349,13 @@ app.get("/makeappointment.html", function (request, response) {
   </body>
   <br>
   <br>
-  Student Name: <strong>${session}</strong>
+  Student Name: <strong>${res_json[0].S_fname} ${res_json[0].S_lname}</strong>
   <br>
   <br>
   <form action="/submitapp" method="POST" name="submitapp"  >
     
   <label for="date">Appointment Date</label>
-    <input type="hidden" id="session" name="session" value=${session}>
+    <input type="hidden" id="session" name="session" value="${res_json[0].S_id}">
     <label for="dateerror" id="dateerror" name="dateerror"></label>
       <br>
       <input type="date" id="date" name="date" onclick="checkdate()" required>
@@ -373,6 +383,7 @@ app.get("/makeappointment.html", function (request, response) {
   
   </html>`;
   response.send(makeappt);
+});
 });
 
 app.post("/advisingnotes", function (request, response) {
@@ -857,9 +868,17 @@ function query_jpostings (POST, response){
     response.redirect('student_homepage.html')
   })
 
+  app.get("/jobsearch.html", function(request,response){
+    username = request.session.username;
+    console.log(username);
+    response.redirect('jobsearch.html')
+  })
+
 //Post for processing any job searches from students
 app.post("/process_jobsearch", function (request,response){
   let POST = request.body;
+  username = request.session.username;
+  console.log(username);
   query_jobsearch(POST, response);
 });
 
