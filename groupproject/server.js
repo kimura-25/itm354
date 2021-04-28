@@ -287,7 +287,6 @@ app.get("/makeappointment.html", function (request, response) {
   //note to self: need to create cases if person has no advising notes
   session = request.session.username;
   makeappt=`<!DOCTYPE html>
-
   <html lang="en">
   <head>
       <meta charset="UTF-8">
