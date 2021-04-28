@@ -174,7 +174,6 @@ app.post("/submitapp", function (request, response) {
   var res_string = JSON.stringify(result);
   var res_json = JSON.parse(res_string);
   console.log(res_json);
-
   //now build the response for student detail page
   response_form=`<!DOCTYPE html>
   <html lang="en">
@@ -286,6 +285,7 @@ app.post("/process_jobsearch", function (request,response){
 app.get("/makeappointment.html", function (request, response) {
   //note to self: need to create cases if person has no advising notes
   session = request.session.username;
+  console.log(session);
   makeappt=`<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -373,7 +373,6 @@ app.get("/makeappointment.html", function (request, response) {
   
   </html>`;
   response.send(makeappt);
-  console.log(request.session.username);
 });
 
 app.post("/advisingnotes", function (request, response) {
@@ -484,7 +483,6 @@ addappt=`<!DOCTYPE html>
 <body>
     <h1>Shidler Career Services and Professional Development</h1> 
     <h2>Log Advising Notes</h2>
-
    <!-- The navigation menu -->
     <div class="navbar">
         <a href="index.html">Home</a>
@@ -496,7 +494,6 @@ addappt=`<!DOCTYPE html>
             <a href="./contacts.html">Contacts</a>
             <a href="./jobpostings.html">Job Postings</a>
             <a href="./contactlog.html">Contact Log</a>
-
           </div>
         </div>
     
