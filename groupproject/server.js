@@ -243,8 +243,8 @@ app.post("/submitapp", function (request, response) {
 
 
 function query_jobsearch(POST, response){
-  eid = POST['employer_id'];
-  var sql = "SELECT * FROM job_posting WHERE empl_id =" + eid;
+  ename = POST['employer_name'];
+  var sql = "SELECT * FROM employer, job_posting WHERE E_name = " + ename + " AND e_id = empl_id";
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
@@ -264,11 +264,15 @@ function query_jobsearch(POST, response){
   </head>`
     job_search_form += `<form action="jobsearch.html" method="GET">`;
       job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`;
-      job_search_form += `<td><B>Employer ID</td><td><B>Job title</td><td><B>Job description</td></b>`;
+      job_search_form += `<td><B>Company</td><td><B>Phone</td><td><B>E-mail</td><td><B>Industry</td><td><B>Job title</td><td><B>Job description</td><td><B>Job ID</td></b>`;
       for (i in res_json) {
-        job_search_form += `<tr><td> ${res_json[i].Job_id}</td>`;
+        job_search_form += `<tr><td> ${res_json[i].E_name}</td>`;
+        job_search_form += `<td> ${res_json[i].E_phone}</td>`;
+        job_search_form += `<td> ${res_json[i].E_email}</td>`;
+        job_search_form += `<td> ${res_json[i].E_industry}</td>`;
         job_search_form += `<td> ${res_json[i].Job_title}</td>`;
         job_search_form += `<td> ${res_json[i].Job_description}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_id}</td>`;
         job_search_form += `<td> <button>Apply</button> </td>`
       }
       job_search_form += `</table> </form>`;
