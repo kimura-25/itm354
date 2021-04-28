@@ -22,99 +22,9 @@ con.connect(function (err) {
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
-/*function storeappt(POST, response){
-  advisor = POST ['advisor'];
-  console.log(advisor);
-}
-
-app.post("/submitapp", function (request, response) {
-  let POST = request.body;
-  storeappt(POST, response);
-});
-*/
-//build student info page on server
-/*function studentinformation(POST,response){
-  studentinfo=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="style.css">
-      <title>Student Information</title>
-  </head>
-  <body>
-      <h1>Shidler Career Services and Professional Development</h1> 
-      <h2>Student Information</h2>
-  
-     <!-- The navigation menu -->
-      <div class="navbar">
-          <a href="index.html">Home</a>
-          <div class="subnav">
-      
-            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./employers.html">Employers</a>
-              <a href="./contacts.html">Contacts</a>
-              <a href="./jobpostings.html">Job Postings</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./careerexpo.html">Career Expo</a>
-              <a href="./addemployer.html">Add Employer</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./studentinformation.html">Student Information</a>
-              <a href="./advising.html">Advising</a>
-        
-            </div>
-          </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>`
-    for (i in res_json){
-      response_form += `<table border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
-      response_form += `<td><B>First Name</td><td><B>Last Name</td></b>`;
-            response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
-            response_form += `<td> ${res_json[i].Advising_note}</td>`;
-          }
- studentinfo=+`<table cellpadding="10" border="1">
-          <tr>
-              <th>Student ID</th>
-              <th>Student First Name</th>
-              <th>Student Last Name</th>
-              <th>Email</th>
-              <th>Major</th>
-              <th>Expected Graduation</th>
-              <th></th>
-          </tr>
-          <tr>
-              <td>12345678</td>
-              <td>Da Cookie</td>
-              <td>Monster</td>
-              <td>cookie@sesamestreet.com</td>
-              <td>Management</td>
-              <td>Spring 2022</td>
-              <td>            
-                  <form action="/advisingnotes" method="POST">
-                  <button type="view">View Student</button>
-                  </form>
-              </td>
-          </tr>
-  </body>
-  </html>`;
-  response.send(studentinfo);
-        }*/
-
+//STUDENT STUFF
+//Kelsey
+//showing all student information
 function studentinformation(POST, response){
           //note to self: need to create cases if person has no advising notes
           var sql = "SELECT * FROM student, student_major WHERE s_id = st_id"; //query for the given student
@@ -773,7 +683,7 @@ function advisingnote(request,response){
           response_form += `<td> ${res_json[i].Advising_note}</td>`;
         }
         response_form += "</table><br><br>";
-        response_form += `<form action="advising.html" method="GET">`;
+        response_form += `<form action="advising.html" method="POST">`;
         response_form += `<input type="hidden" id="s_id" name="s_id" value="${res_json[0].S_id}">`;
         response_form += `<input type="hidden" id="s_fname" name="s_fname" value="${res_json[0].S_fname}">`;
         response_form += `<input type="hidden" id="s_lname" name="s_lname" value="${res_json[0].S_lname}">`;
@@ -972,6 +882,7 @@ app.post("/jposting_query", function (request, response) {
   let POST = request.body;
 query_jpostings(POST, response);
 });
+
 
 
 app.all('*', function (request, response, next) {
