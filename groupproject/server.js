@@ -4,6 +4,11 @@ var myParser = require("body-parser");
 var mysql = require('mysql');
 const querystring = require('querystring');
 const { query } = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.use(session({ secret: "anything" }));
+
 
 console.log("Connecting to localhost...");
 var con = mysql.createConnection({
@@ -137,12 +142,13 @@ submitapp=`<!DOCTYPE html>
         <p><strong>Thank you for making your appointment with Career Services</strong></p>
         </html>`;
   response.send(submitapp);
+  session = POST['session']
   advisor = POST['advisor'];
   date = POST['date'];
   time = POST['time'];
   appt_notes = POST['appt_notes'];
   console.log(advisor);
-sql = "INSERT INTO advises(Uname,advising_date,advising_time,advising_note) VALUES ('" + advisor + "', '" + date + "','" + time + "', '" + appt_notes + "')";
+sql = "INSERT INTO advises(Stud_id, Uname,advising_date,advising_time,advising_note) VALUES ('" + session + "','" + advisor + "', '" + date + "','" + time + "', '" + appt_notes + "')";
 con.query(sql,function(err){
 if(err) throw err
 console.log(sql)
@@ -279,7 +285,7 @@ app.post("/process_jobsearch", function (request,response){
 
 app.get("/makeappointment.html", function (request, response) {
   //note to self: need to create cases if person has no advising notes
-  let POST = request.body;
+  session = request.session.username;
   makeappt=`<!DOCTYPE html>
 
   <html lang="en">
@@ -334,12 +340,14 @@ app.get("/makeappointment.html", function (request, response) {
   </body>
   <br>
   <br>
-  Student Name
+  Student Name: <strong>${session}</strong>
   <br>
   <br>
   <form action="/submitapp" method="POST" name="submitapp"  >
-      <label for="date">Appointment Date</label>
-      <label for="dateerror" id="dateerror" name="dateerror"></label>
+    
+  <label for="date">Appointment Date</label>
+    <input type="hidden" id="session" name="session" value=${session}>
+    <label for="dateerror" id="dateerror" name="dateerror"></label>
       <br>
       <input type="date" id="date" name="date" onclick="checkdate()" required>
       <br>
@@ -366,7 +374,7 @@ app.get("/makeappointment.html", function (request, response) {
   
   </html>`;
   response.send(makeappt);
-  
+  console.log(request.session.username);
 });
 
 app.post("/advisingnotes", function (request, response) {
@@ -845,6 +853,13 @@ function query_jpostings (POST, response){
         response.send(job_postings_form)
       })
   };
+
+  app.post("/student_homepage.html", function(request,response){
+    request.query.username = request.body.username;
+    request.session.username = request.query.username;
+    console.log(request.session.username);
+    response.redirect('student_homepage.html')
+  })
 
 //Post for processing any job searches from students
 app.post("/process_jobsearch", function (request,response){
