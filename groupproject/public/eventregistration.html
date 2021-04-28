@@ -28,20 +28,54 @@
       </div>
     </div>
   </div>
-  <br>
+  <br>  
+  <H1>Event Information</H1>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    </style>
+
+  <table>
+    <tr>
+      <th>Event Name</th>
+      <th>Type</th>
+      <th>ID</th>
+    </tr>
+    <tr>
+      <td>Career Expo</td>
+      <td>Career</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <td>Resume Workshop</td>
+      <td>Workshop</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <td>Professional Interaction Night</td>
+      <td>Career</td>
+      <td>103</td>
+    </tr>
+    </table>
+    
+    <br>
   <Form action="/contacts" method="POST"></Form>
         Register for Resume Workshop<br>
-        View invitation here
-        <button type="button" onclick="displayTime()">show time</button>
-        <p id="showTime"></p>
-        <p onload="displayTime()"></p>
+        Enter ID to view invitation
+        <input type="text" name="Employer_id">
         <input type="submit" value="Submit"><br>
 
         <br>Register for Professional Interaction Night<br>
-        View invitation here
-        <button type="button" onclick="displayTime()">show time</button>
-        <p id="showTime"></p>
-        <p onload="displayTime()"></p>
+        Enter ID to view invitation
+        <input type="text" name="Employer_id">
         <input type="submit" value="Submit"><br>
 </body>
 </html>
