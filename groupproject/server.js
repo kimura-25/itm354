@@ -83,6 +83,9 @@ function studentinformation(POST, response){
                 
                     </div>
                   </div>
+                  <div class="subnav" style="float: right;">
+                  <a href="index.html"subnavbtn">Log Out</i></button></a>
+                </div>
                 </div>
                 <br>
                 <br>`
@@ -135,6 +138,9 @@ submitapp=`<!DOCTYPE html>
           <div class="subnav">
              <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
            </div>
+           <div class="subnav" style="float: right;">
+           <a href="index.html"subnavbtn">Log Out</i></button></a>
+         </div>   
             </div>
           </div>
         </div>
@@ -341,7 +347,10 @@ app.get("/makeappointment.html", function (request, response) {
       <div class="subnav">
          <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
        </div>
-    
+       <div class="subnav" style="float: right;">
+       <a href="index.html"subnavbtn">Log Out</i></button></a>
+     </div>
+
         </div>
       </div>
     </div>
@@ -442,6 +451,9 @@ app.post("/advising.html", function (request, response) {
         
             </div>
           </div>
+          <div class="subnav" style="float: right;">
+          <a href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
         </div>
         <br>
     <form action="/addappt" method="POST" name="addappt"  >
@@ -524,6 +536,9 @@ addappt=`<!DOCTYPE html>
       
           </div>
         </div>
+        <div class="subnav" style="float: right;">
+        <a href="index.html"subnavbtn">Log Out</i></button></a>
+      </div>
       </div>
       </div>
       <br>
@@ -617,6 +632,9 @@ function advisingnote(request,response){
             
                 </div>
               </div>
+              <div class="subnav" style="float: right;">
+              <a href="index.html"subnavbtn">Log Out</i></button></a>
+            </div>
             </div>
             <br>
             <br>`
@@ -682,6 +700,9 @@ function advisingnote(request,response){
           
               </div>
             </div>
+            <div class="subnav" style="float: right;">
+            <a href="index.html"subnavbtn">Log Out</i></button></a>
+          </div>
           </div>
           <br>
           <br>`
@@ -866,12 +887,6 @@ function query_jpostings (POST, response){
     request.session.username = request.query.username;
     console.log(request.session.username);
     response.redirect('student_homepage.html')
-  })
-
-  app.get("/jobsearch.html", function(request,response){
-    username = request.session.username;
-    console.log(username);
-    response.redirect('jobsearch.html')
   })
 
 //Post for processing any job searches from students
