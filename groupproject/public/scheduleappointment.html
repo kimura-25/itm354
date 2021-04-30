@@ -13,54 +13,60 @@
    <h1>Shidler Career Services and Professional Development</h1> 
    <h2>Employer Database System</h2>
   
-   <!-- The navigation menu -->
-<div class="navbar">
-    <a href="homepage.html">Home</a>
+  <!-- The navigation menu -->
+  <div class="navbar">
+    <a href="./index.html">Home</a>
+
     <div class="subnav">
-      <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+      <button class="subnavbtn">About<i class="fa fa-caret-down"></i></button>
       <div class="subnav-content">
-        <a href="./employers.html">Employers</a>
-        <a href="./contacts.html">Contacts</a>
-        <a href="./jobpostings.html">Job Postings</a>
-        <a href="./contactlog.html">Contact Log</a>
+        <a href="./aboutus.html">About Shidler College</a>
+        <a href="./studentservices.html">About Student Services</a>
+
       </div>
     </div>
+    
     <div class="subnav">
-      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <button class="subnavbtn">Career Service Resources<i class="fa fa-caret-down"></i></button>
       <div class="subnav-content">
-        <a href="./careerexpo.html">Career Expo</a>
-        <a href="./addemployer.html">Add Employer</a>
+        <a href="./careeradvising.html">Career Advising</a>
+        <a href="./jobpostings.html">Jobs & Internships</a>
       </div>
     </div>
+
     <div class="subnav">
-      <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+      <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
       <div class="subnav-content">
-        <a href="/studentinformation.html">Student Information</a>
-        <a href="./advising.html">Advising</a>
-  
+        <a href="./addjposting.html">Post Jobs & Internships</a>
+  </div>
       </div>
+
+      <div class="subnav">
+        <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+          <a href="./eventregistration.html">Student Events & Registration</a>
+          <a href="./employerevents.html">Employer Events List</a>
+          <a href="./careerexpo.html">Employer Career Expo Registration</a>
+        </div>
     </div>
-    <div class="subnav" style="float: right;">
-     <a href="index.html"subnavbtn">Log Out</i></button></a>
-   </div>
+    </div>
   </div>
   <br>
-  <br>
+
   <h2>Select Your Appointment</h2>
   <br>
-  <br>
-  <br>
+  
   <form action="/studentlogin.html" method="GET" name="submitapp">
     <label for="date">Appointment Date</label>
     <label for="dateerror" id="dateerror" name="dateerror"></label>
     <br>
     <input type="date" id="date" name="date" onclick="checkdate()" required>
     <br>
-    <br>
+    <br><br>
     <label for="time">Start time</label>
     <br>
     <input type="time" id="time" name="time" min="9:00" max="16:00" required>
-    <br>
+    <br><br>
     <br>
     <label for="advisor">Choose Advisor</label>
     <select name="advisor" id="advisor">
@@ -73,7 +79,7 @@
     <label for="appt_notes">Please describe the reason for your appointment</label>
     <br>
     <input type="text" id="appt_notes" name="appt_notes" style="height:200px;width:400px;">
-    <br>
+    <br><br>
     <input type="submit" id="submit_appt" name="submit_appt">
 </form>
   <br>

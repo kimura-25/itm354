@@ -95,34 +95,75 @@ color: white;
 text-decoration: none;
 }
 
+/* Adds background color to navigation links on hover */
+.subnavbtn:hover {
+  background-color: rgb(9, 100, 122);
+}
+.subnav:hover {
+  background-color: rgb(9, 100, 122);
+}
+
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: rgb(136, 181, 192);
+  width: 100%;
+  z-index: 1;
+  
+}
+
+/* Style the subnav links */
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
 /* Adds background color on hover */
 .subnav-content a:hover {
-background-color: rgb(23, 94, 112);
-color:white;
+  background-color: rgb(116, 166, 179);
+  color:white;
 }
-
-/* When you move the mouse over the subnav container, open the subnav content */
-.subnav:hover .subnav-content {
-display: block;
-}
-
 .center {
   margin-left: auto;
   margin-right: auto;
 }
 
-.button {
-
-  appearance:none;
-  -webkit-appearance:none;
-  padding:10px;
-  border:none;
-  background-color:white;
-  color:rgb(41, 136, 160);
-  width:100px;
-  font-size: large;
-  border-radius: 5px;
-  text-decoration: none;
-
+.links {
+  background-color:rgb(136, 181, 192);
+  border-radius:28px;
+  display:inline-block;
+  cursor:pointer;
+  color: black;
+  font-family:Arial;
+  font-size:20px;
+  padding:16px 31px;
+  text-decoration:none;
+  font-weight: bold;
+  margin-inline: 50px;
+  text-align: center;
+}
+.links:hover {
+  background-color: rgb(23, 94, 112);
 }
 
+.searchjobs {
+  background-color:rgb(136, 181, 192);
+  border-radius:28px;
+  display:inline-block;
+  cursor:pointer;
+  color: black;
+  font-family:Arial;
+  font-size:15px;
+  padding:10px 20px;
+  text-decoration:none;
+  font-weight: bold;
+  margin-inline: 50px;
+  text-align: center;
+}
+
+.searchjobs:hover {
+  background-color: rgb(23, 94, 112);
+}
