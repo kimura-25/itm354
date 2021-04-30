@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+  let params = (new URL(document.location)).searchParams;
+  GET = {}; 
+  params.forEach(function (value, key) { GET[key] = value }); 
+
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Log Advising Notes</title>
+    
+</head>
+<body>
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Log Advising Notes</h2>
+
+   <!-- The navigation menu -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="subnav">
+    
+          <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a href="./employers.html">Employers</a>
+            <a href="./contacts.html">Contacts</a>
+            <a href="./jobpostings.html">Job Postings</a>
+            <a href="./contactlog.html">Contact Log</a>
+
+          </div>
+        </div>
+    
+        <div class="subnav">
+          <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a href="./careerexpo.html">Career Expo</a>
+            <a href="./addemployer.html">Add Employer</a>
+          </div>
+        </div>
+    
+        <div class="subnav">
+          <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a href="./studentinformation.html">Student Information</a>
+            <a href="./advising.html">Advising</a>
+      
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <script>
+      </script>
+      <br>
+      <br>
+      <script>
+        s_id = GET['s_id'];
+        s_fname = GET['s_fname'];
+        s_lname = GET['s_lname'];
+        document.write(`
+    <h2>${s_fname} ${s_lname}</h2>
+    `)
+    </script>
+  
+  <form action="/addappt" method="POST" name="addappt">
+    <input type="hidden" id="st_id" name="st_id" value=s_id
+    <label for="date">Appointment Date</label>
+    <br>
+    <input type="date" id="date" name="date" required>
+    <br>
+    <br>
+    <label for="time">Approximate Start time</label>
+    <br>
+    <input type="time" id="time" name="time" min="9:00" max="16:00" required>
+    <br>
+    <br>
+    <label for="advisor">Choose Advisor</label>
+    <select name="advisor" id="advisor">
+        <option value="rvarley">Richard Varley</option>
+        <option value="jpstuart">Patrick Stuart</option>
+    </select>
+    <br>
+    <br>
+    <br>
+    <label for="appt_notes">Advising Notes</label>
+    <br>
+    <input type="text" id="appt_notes" name="appt_notes" style="height:200px;width:400px;">
+    <br>
+    <input type="submit" id="addappt" name="addappt">
+</form>
+<br>
+<br>
+    <button onclick="window.location.href='/student-single.html'">Back</button>
+</body>
+
+</html>

@@ -94,3 +94,19 @@ h2 {
   margin-left: auto;
   margin-right: auto;
 }
+
+.button {
+
+  appearance:none;
+  -webkit-appearance:none;
+  padding:10px;
+  border:none;
+  background-color:white;
+  color:rgb(41, 136, 160);
+  width:100px;
+  font-size: large;
+  border-radius: 5px;
+  text-decoration: none;
+
+}
+

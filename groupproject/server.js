@@ -83,6 +83,9 @@ function studentinformation(POST, response){
                 
                     </div>
                   </div>
+                  <div class="subnav" style="float: right;">
+                  <a href="index.html"subnavbtn">Log Out</i></button></a>
+                </div>
                 </div>
                 <br>
                 <br>`
@@ -135,6 +138,9 @@ submitapp=`<!DOCTYPE html>
           <div class="subnav">
              <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
            </div>
+           <div class="subnav" style="float: right;">
+           <a href="index.html"subnavbtn">Log Out</i></button></a>
+         </div>   
             </div>
           </div>
         </div>
@@ -174,7 +180,6 @@ app.post("/submitapp", function (request, response) {
   var res_string = JSON.stringify(result);
   var res_json = JSON.parse(res_string);
   console.log(res_json);
-
   //now build the response for student detail page
   response_form=`<!DOCTYPE html>
   <html lang="en">
@@ -244,8 +249,8 @@ app.post("/submitapp", function (request, response) {
 
 
 function query_jobsearch(POST, response){
-  eid = POST['employer_id'];
-  var sql = "SELECT * FROM job_posting WHERE empl_id =" + eid;
+  ename = POST['employer_name'];
+  var sql = "SELECT * FROM employer, job_posting WHERE E_name = " + ename + " AND e_id = empl_id";
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
@@ -265,11 +270,15 @@ function query_jobsearch(POST, response){
   </head>`
     job_search_form += `<form action="jobsearch.html" method="GET">`;
       job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`;
-      job_search_form += `<td><B>Employer ID</td><td><B>Job title</td><td><B>Job description</td></b>`;
+      job_search_form += `<td><B>Company</td><td><B>Phone</td><td><B>E-mail</td><td><B>Industry</td><td><B>Job title</td><td><B>Job description</td><td><B>Job ID</td></b>`;
       for (i in res_json) {
-        job_search_form += `<tr><td> ${res_json[i].Job_id}</td>`;
+        job_search_form += `<tr><td> ${res_json[i].E_name}</td>`;
+        job_search_form += `<td> ${res_json[i].E_phone}</td>`;
+        job_search_form += `<td> ${res_json[i].E_email}</td>`;
+        job_search_form += `<td> ${res_json[i].E_industry}</td>`;
         job_search_form += `<td> ${res_json[i].Job_title}</td>`;
         job_search_form += `<td> ${res_json[i].Job_description}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_id}</td>`;
         job_search_form += `<td> <button>Apply</button> </td>`
       }
       job_search_form += `</table> </form>`;
@@ -286,8 +295,18 @@ app.post("/process_jobsearch", function (request,response){
 app.get("/makeappointment.html", function (request, response) {
   //note to self: need to create cases if person has no advising notes
   session = request.session.username;
-  makeappt=`<!DOCTYPE html>
+  console.log(session);
+  username = session
+  var sql2 = "SELECT * FROM student WHERE S_email = '"+username+"'";
+  con.query(sql2,function (err, result, fields){ //run the query
+    if (err) throw err;
+//  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  console.log(res_json.length);
 
+  makeappt=`<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -332,7 +351,10 @@ app.get("/makeappointment.html", function (request, response) {
       <div class="subnav">
          <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
        </div>
-    
+       <div class="subnav" style="float: right;">
+       <a href="index.html"subnavbtn">Log Out</i></button></a>
+     </div>
+
         </div>
       </div>
     </div>
@@ -340,13 +362,13 @@ app.get("/makeappointment.html", function (request, response) {
   </body>
   <br>
   <br>
-  Student Name: <strong>${session}</strong>
+  Student Name: <strong>${res_json[0].S_fname} ${res_json[0].S_lname}</strong>
   <br>
   <br>
   <form action="/submitapp" method="POST" name="submitapp"  >
     
   <label for="date">Appointment Date</label>
-    <input type="hidden" id="session" name="session" value=${session}>
+    <input type="hidden" id="session" name="session" value="${res_json[0].S_id}">
     <label for="dateerror" id="dateerror" name="dateerror"></label>
       <br>
       <input type="date" id="date" name="date" onclick="checkdate()" required>
@@ -374,7 +396,7 @@ app.get("/makeappointment.html", function (request, response) {
   
   </html>`;
   response.send(makeappt);
-  console.log(request.session.username);
+});
 });
 
 app.post("/advisingnotes", function (request, response) {
@@ -433,6 +455,9 @@ app.post("/advising.html", function (request, response) {
         
             </div>
           </div>
+          <div class="subnav" style="float: right;">
+          <a href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
         </div>
         <br>
     <form action="/addappt" method="POST" name="addappt"  >
@@ -485,7 +510,6 @@ addappt=`<!DOCTYPE html>
 <body>
     <h1>Shidler Career Services and Professional Development</h1> 
     <h2>Log Advising Notes</h2>
-
    <!-- The navigation menu -->
     <div class="navbar">
         <a href="index.html">Home</a>
@@ -497,7 +521,6 @@ addappt=`<!DOCTYPE html>
             <a href="./contacts.html">Contacts</a>
             <a href="./jobpostings.html">Job Postings</a>
             <a href="./contactlog.html">Contact Log</a>
-
           </div>
         </div>
     
@@ -517,6 +540,9 @@ addappt=`<!DOCTYPE html>
       
           </div>
         </div>
+        <div class="subnav" style="float: right;">
+        <a href="index.html"subnavbtn">Log Out</i></button></a>
+      </div>
       </div>
       </div>
       <br>
@@ -610,6 +636,9 @@ function advisingnote(request,response){
             
                 </div>
               </div>
+              <div class="subnav" style="float: right;">
+              <a href="index.html"subnavbtn">Log Out</i></button></a>
+            </div>
             </div>
             <br>
             <br>`
@@ -675,6 +704,9 @@ function advisingnote(request,response){
           
               </div>
             </div>
+            <div class="subnav" style="float: right;">
+            <a href="index.html"subnavbtn">Log Out</i></button></a>
+          </div>
           </div>
           <br>
           <br>`
@@ -864,6 +896,8 @@ function query_jpostings (POST, response){
 //Post for processing any job searches from students
 app.post("/process_jobsearch", function (request,response){
   let POST = request.body;
+  username = request.session.username;
+  console.log(username);
   query_jobsearch(POST, response);
 });
 
