@@ -20,6 +20,12 @@ h1 {
 h2 {
     text-align: center;
     font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+h3 {
+font-family: Arial, Helvetica, sans-serif; 
 }
 
 /* The navigation menu */
@@ -27,6 +33,7 @@ h2 {
   
   overflow: hidden;
   background-color: rgb(41, 136, 160);
+  text-align: center;
 }
 
 /* Navigation links */
@@ -36,8 +43,12 @@ h2 {
   font-size: 22px;
   color: white;
   text-align: center;
-  padding: 14px 130px;
+  padding: 14px 65px;
   text-decoration: none;
+margin: 10px 20px;
+
+
+
 }
 
 /* The subnavigation menu */
@@ -52,15 +63,17 @@ h2 {
   border: none;
   outline: none;
   color:white;
-  padding: 14px 130px;
+  padding: 14px 83px;
   background-color: inherit;
   font-family: inherit;
-  margin: 0;
+  margin: 10px 20px;
+
+}
 
 }
 
 /* Adds background color to navigation links on hover */
-.navbar a:hover, .subnav:hover .subnavbtn {
+.subnavbtn:hover .subnav:hover .navbar a:hover{
   background-color: rgb(23, 94, 112);
 }
 
@@ -72,9 +85,10 @@ h2 {
   background-color: rgb(136, 181, 192);
   width: 100%;
   z-index: 1;
-
+  
 }
 
+}
 /* Style the subnav links */
 .subnav-content a {
   float: left;
@@ -84,7 +98,7 @@ h2 {
 
 /* Adds background color on hover */
 .subnav-content a:hover {
-  background-color:  rgb(104, 151, 163);
+  background-color: rgb(23, 94, 112);
   color:white;
 }
 
@@ -93,7 +107,53 @@ h2 {
   display: block;
 }
 
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+/* Source: https://www.w3schools.com/howto/howto_css_images_side_by_side.asp */
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 img {
-  border: 10px solid rgb(23, 94, 112);
+  float: left;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.didyouknow {
+  background-color: rgb(23, 94, 112);
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65em
+
+}
+
+.links {
+    background-color:rgb(136, 181, 192);
+    border-radius:28px;
+    display:inline-block;
+    cursor:pointer;
+    color: black;
+    font-family:Arial;
+    font-size:25px;
+    padding:16px 31px;
+    text-decoration:none;
+    font-weight: bold;
+    margin-inline: 50px;
+    text-align: center;
+  }
+  .links:hover {
+    background-color: rgb(23, 94, 112);
 }
 
