@@ -17,7 +17,7 @@ h2 {
     text-align: center;
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
-
+ 
 }
 
 h3 {
@@ -73,8 +73,11 @@ a.logout {
 
 
 /* Adds background color to navigation links on hover */
-.subnavbtn:hover .subnav:hover .navbar a:hover{
-  background-color: rgb(23, 94, 112);
+.subnavbtn:hover {
+  background-color: rgb(9, 100, 122);
+}
+.subnav:hover {
+  background-color: rgb(9, 100, 122);
 }
 
 /* Style the subnav content - positioned absolute */
@@ -88,7 +91,6 @@ a.logout {
   
 }
 
-}
 /* Style the subnav links */
 .subnav-content a {
   float: left;
@@ -98,7 +100,7 @@ a.logout {
 
 /* Adds background color on hover */
 .subnav-content a:hover {
-  background-color: rgb(23, 94, 112);
+  background-color: rgb(116, 166, 179);
   color:white;
 }
 
