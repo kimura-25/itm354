@@ -1,0 +1,71 @@
+<!-- Author: Kiara Furutani 
+ This file contains code to display the Home Page 
+ Partial format used from https://www.w3schools.com/howto/howto_css_subnav.asp -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="style.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Employer Database System</h2>
+   
+    <!-- The navigation menu -->
+ <div class="navbar">
+     <a href="homepage.html">Home</a>
+     <div class="subnav">
+       <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./employers.html">Employers</a>
+         <a href="./contacts.html">Contacts</a>
+         <a href="./jobpostings.html">Job Postings</a>
+         <a href="./contactlog.html">Contact Log</a>
+       </div>
+     </div>
+     <div class="subnav">
+       <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./careerexpo.html">Career Expo</a>
+         <a href="./addemployer.html">Add Employer</a>
+       </div>
+     </div>
+     <div class="subnav">
+       <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="/studentinformation.html">Student Information</a>
+         <a href="./advising.html">Advising</a>
+   
+       </div>
+     </div>
+     <div class="subnav" style="float: right;">
+      <a href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
+   </div>
+   <br>
+   <br>
+<h2>Please review the below information to confirm your appointment information</h2>
+<br>
+<br>
+<p>Name: </p>
+<p>Date: </p>
+<p>Time: </p>
+<p>Advisor: </p>
+<p>Notes for Advisor: </p>
+<form action="/appointmentconfirmation.html" method="GET" name="submitappointment">
+    <input type="submit" id="submit_appt" name="submit_appt" value="Submit Appointment">
+</form>
+<br>
+<br>
+<br>
+<form action="/scheduleappointment.html" method="GET" name="editappointment">
+    <input type="submit" id="edit_appt" name="edit_appt" value="Edit Appointment">
+</form>
+
+</body>
+ </html>
