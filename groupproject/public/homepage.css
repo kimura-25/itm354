@@ -71,10 +71,9 @@ margin: 10px 20px;
 }
 
 
-
 /* Adds background color to navigation links on hover */
-.subnavbtn:hover .subnav:hover .navbar a:hover{
-  background-color: rgb(23, 94, 112);
+a.subnavbtn:hover a.subnav:hover a.navbar:hover a:hover{
+  background-color: rgb(8, 46, 54);
 }
 
 /* Style the subnav content - positioned absolute */
@@ -88,7 +87,6 @@ margin: 10px 20px;
   
 }
 
-}
 /* Style the subnav links */
 .subnav-content a {
   float: left;
