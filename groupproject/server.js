@@ -4,11 +4,7 @@ var myParser = require("body-parser");
 var mysql = require('mysql');
 const querystring = require('querystring');
 const { query } = require('express');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-app.use(cookieParser());
-app.use(session({ secret: "anything" }));
-
+const { ENAMETOOLONG } = require('node:constants');
 
 console.log("Connecting to localhost...");
 var con = mysql.createConnection({
@@ -27,9 +23,99 @@ con.connect(function (err) {
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
-//STUDENT STUFF
-//Kelsey
-//showing all student information
+/*function storeappt(POST, response){
+  advisor = POST ['advisor'];
+  console.log(advisor);
+}
+
+app.post("/submitapp", function (request, response) {
+  let POST = request.body;
+  storeappt(POST, response);
+});
+*/
+//build student info page on server
+/*function studentinformation(POST,response){
+  studentinfo=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Student Information</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Information</h2>
+  
+     <!-- The navigation menu -->
+      <div class="navbar">
+          <a href="index.html">Home</a>
+          <div class="subnav">
+      
+            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./employers.html">Employers</a>
+              <a href="./contacts.html">Contacts</a>
+              <a href="./jobpostings.html">Job Postings</a>
+            </div>
+          </div>
+      
+          <div class="subnav">
+            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./careerexpo.html">Career Expo</a>
+              <a href="./addemployer.html">Add Employer</a>
+            </div>
+          </div>
+      
+          <div class="subnav">
+            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <a href="./studentinformation.html">Student Information</a>
+              <a href="./advising.html">Advising</a>
+        
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>`
+    for (i in res_json){
+      response_form += `<table border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
+      response_form += `<td><B>First Name</td><td><B>Last Name</td></b>`;
+            response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
+            response_form += `<td> ${res_json[i].Advising_note}</td>`;
+          }
+ studentinfo=+`<table cellpadding="10" border="1">
+          <tr>
+              <th>Student ID</th>
+              <th>Student First Name</th>
+              <th>Student Last Name</th>
+              <th>Email</th>
+              <th>Major</th>
+              <th>Expected Graduation</th>
+              <th></th>
+          </tr>
+          <tr>
+              <td>12345678</td>
+              <td>Da Cookie</td>
+              <td>Monster</td>
+              <td>cookie@sesamestreet.com</td>
+              <td>Management</td>
+              <td>Spring 2022</td>
+              <td>            
+                  <form action="/advisingnotes" method="POST">
+                  <button type="view">View Student</button>
+                  </form>
+              </td>
+          </tr>
+  </body>
+  </html>`;
+  response.send(studentinfo);
+        }*/
+
 function studentinformation(POST, response){
           //note to self: need to create cases if person has no advising notes
           var sql = "SELECT * FROM student, student_major WHERE s_id = st_id"; //query for the given student
@@ -83,9 +169,6 @@ function studentinformation(POST, response){
                 
                     </div>
                   </div>
-                  <div class="subnav" style="float: right;">
-                  <a href="index.html"subnavbtn">Log Out</i></button></a>
-                </div>
                 </div>
                 <br>
                 <br>`
@@ -138,9 +221,6 @@ submitapp=`<!DOCTYPE html>
           <div class="subnav">
              <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
            </div>
-           <div class="subnav" style="float: right;">
-           <a href="index.html"subnavbtn">Log Out</i></button></a>
-         </div>   
             </div>
           </div>
         </div>
@@ -148,13 +228,12 @@ submitapp=`<!DOCTYPE html>
         <p><strong>Thank you for making your appointment with Career Services</strong></p>
         </html>`;
   response.send(submitapp);
-  session = POST['session']
   advisor = POST['advisor'];
   date = POST['date'];
   time = POST['time'];
   appt_notes = POST['appt_notes'];
   console.log(advisor);
-sql = "INSERT INTO advises(Stud_id, Uname,advising_date,advising_time,advising_note) VALUES ('" + session + "','" + advisor + "', '" + date + "','" + time + "', '" + appt_notes + "')";
+sql = "INSERT INTO advises(Uname,advising_date,advising_time,advising_note) VALUES ('" + advisor + "', '" + date + "','" + time + "', '" + appt_notes + "')";
 con.query(sql,function(err){
 if(err) throw err
 console.log(sql)
@@ -180,6 +259,7 @@ app.post("/submitapp", function (request, response) {
   var res_string = JSON.stringify(result);
   var res_json = JSON.parse(res_string);
   console.log(res_json);
+
   //now build the response for student detail page
   response_form=`<!DOCTYPE html>
   <html lang="en">
@@ -249,8 +329,8 @@ app.post("/submitapp", function (request, response) {
 
 
 function query_jobsearch(POST, response){
-  ename = POST['employer_name'];
-  var sql = "SELECT * FROM employer, job_posting WHERE E_name = " + ename + " AND e_id = empl_id";
+  eid = POST['employer_id'];
+  var sql = "SELECT * FROM job_posting WHERE empl_id =" + eid;
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
@@ -259,27 +339,13 @@ function query_jobsearch(POST, response){
     console.log(res_json);
   
 
-  job_search_form =`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="style.css">
-      <title>Job search</title>
-  </head>`
-    job_search_form += `<form action="jobsearch.html" method="GET">`;
-      job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`;
-      job_search_form += `<td><B>Company</td><td><B>Phone</td><td><B>E-mail</td><td><B>Industry</td><td><B>Job title</td><td><B>Job description</td><td><B>Job ID</td></b>`;
+    job_search_form = `<form action="jobsearch.html" method="GET">`;
+      job_search_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      job_search_form += `<td><B>Employer ID</td><td><B>Job title</td><td><B>Job description</td></b>`;
       for (i in res_json) {
-        job_search_form += `<tr><td> ${res_json[i].E_name}</td>`;
-        job_search_form += `<td> ${res_json[i].E_phone}</td>`;
-        job_search_form += `<td> ${res_json[i].E_email}</td>`;
-        job_search_form += `<td> ${res_json[i].E_industry}</td>`;
+        job_search_form += `<tr><td> ${res_json[i].Job_id}</td>`;
         job_search_form += `<td> ${res_json[i].Job_title}</td>`;
         job_search_form += `<td> ${res_json[i].Job_description}</td>`;
-        job_search_form += `<td> ${res_json[i].Job_id}</td>`;
-        job_search_form += `<td> <button>Apply</button> </td>`
       }
       job_search_form += `</table> </form>`;
     response.send(job_search_form)
@@ -294,19 +360,9 @@ app.post("/process_jobsearch", function (request,response){
 
 app.get("/makeappointment.html", function (request, response) {
   //note to self: need to create cases if person has no advising notes
-  session = request.session.username;
-  console.log(session);
-  username = session
-  var sql2 = "SELECT * FROM student WHERE S_email = '"+username+"'";
-  con.query(sql2,function (err, result, fields){ //run the query
-    if (err) throw err;
-//  console.log(result);
-  var res_string = JSON.stringify(result);
-  var res_json = JSON.parse(res_string);
-  console.log(res_json);
-  console.log(res_json.length);
-
+  let POST = request.body;
   makeappt=`<!DOCTYPE html>
+
   <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -351,10 +407,7 @@ app.get("/makeappointment.html", function (request, response) {
       <div class="subnav">
          <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
        </div>
-       <div class="subnav" style="float: right;">
-       <a href="index.html"subnavbtn">Log Out</i></button></a>
-     </div>
-
+    
         </div>
       </div>
     </div>
@@ -362,14 +415,12 @@ app.get("/makeappointment.html", function (request, response) {
   </body>
   <br>
   <br>
-  Student Name: <strong>${res_json[0].S_fname} ${res_json[0].S_lname}</strong>
+  Student Name
   <br>
   <br>
   <form action="/submitapp" method="POST" name="submitapp"  >
-    
-  <label for="date">Appointment Date</label>
-    <input type="hidden" id="session" name="session" value="${res_json[0].S_id}">
-    <label for="dateerror" id="dateerror" name="dateerror"></label>
+      <label for="date">Appointment Date</label>
+      <label for="dateerror" id="dateerror" name="dateerror"></label>
       <br>
       <input type="date" id="date" name="date" onclick="checkdate()" required>
       <br>
@@ -396,7 +447,7 @@ app.get("/makeappointment.html", function (request, response) {
   
   </html>`;
   response.send(makeappt);
-});
+  
 });
 
 app.post("/advisingnotes", function (request, response) {
@@ -455,9 +506,6 @@ app.post("/advising.html", function (request, response) {
         
             </div>
           </div>
-          <div class="subnav" style="float: right;">
-          <a href="index.html"subnavbtn">Log Out</i></button></a>
-        </div>
         </div>
         <br>
     <form action="/addappt" method="POST" name="addappt"  >
@@ -495,7 +543,7 @@ app.post("/advising.html", function (request, response) {
   response.send(advisingpg);
 });
 
- 
+
 function addappt(POST, response){
 addappt=`<!DOCTYPE html>
 <html lang="en">
@@ -510,6 +558,7 @@ addappt=`<!DOCTYPE html>
 <body>
     <h1>Shidler Career Services and Professional Development</h1> 
     <h2>Log Advising Notes</h2>
+
    <!-- The navigation menu -->
     <div class="navbar">
         <a href="index.html">Home</a>
@@ -521,6 +570,7 @@ addappt=`<!DOCTYPE html>
             <a href="./contacts.html">Contacts</a>
             <a href="./jobpostings.html">Job Postings</a>
             <a href="./contactlog.html">Contact Log</a>
+
           </div>
         </div>
     
@@ -540,9 +590,6 @@ addappt=`<!DOCTYPE html>
       
           </div>
         </div>
-        <div class="subnav" style="float: right;">
-        <a href="index.html"subnavbtn">Log Out</i></button></a>
-      </div>
       </div>
       </div>
       <br>
@@ -636,9 +683,6 @@ function advisingnote(request,response){
             
                 </div>
               </div>
-              <div class="subnav" style="float: right;">
-              <a href="index.html"subnavbtn">Log Out</i></button></a>
-            </div>
             </div>
             <br>
             <br>`
@@ -704,9 +748,6 @@ function advisingnote(request,response){
           
               </div>
             </div>
-            <div class="subnav" style="float: right;">
-            <a href="index.html"subnavbtn">Log Out</i></button></a>
-          </div>
           </div>
           <br>
           <br>`
@@ -723,7 +764,7 @@ function advisingnote(request,response){
           response_form += `<td> ${res_json[i].Advising_note}</td>`;
         }
         response_form += "</table><br><br>";
-        response_form += `<form action="advising.html" method="POST">`;
+        response_form += `<form action="advising.html" method="GET">`;
         response_form += `<input type="hidden" id="s_id" name="s_id" value="${res_json[0].S_id}">`;
         response_form += `<input type="hidden" id="s_fname" name="s_fname" value="${res_json[0].S_fname}">`;
         response_form += `<input type="hidden" id="s_lname" name="s_lname" value="${res_json[0].S_lname}">`;
@@ -886,18 +927,78 @@ function query_jpostings (POST, response){
       })
   };
 
-  app.post("/student_homepage.html", function(request,response){
-    request.query.username = request.body.username;
-    request.session.username = request.query.username;
-    console.log(request.session.username);
-    response.redirect('student_homepage.html')
-  })
+  function query_viewemp (POST, response){
+    emid = POST ['E_id']; 
+    var sql = "SELECT * FROM employer";
+    con.query (sql, function (err, result, fields){
+      if (err) throw err;
+      console.log(result);
+      var res_string = JSON.stringify(result);
+      var res_json = JSON.parse(res_string);
+      console.log(res_json);
+      //Response: table of results and form to do another query 
+      viewemp_form = `<form action"updateaccount.html" method = "GET">`;
+      viewemp_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      viewemp_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+          for (i in res_json) {
+            viewemp_form += `<tr><td> ${res_json[i].E_id}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_name}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_phone}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_email}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_street}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_city}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_state}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_zipcode}</td>`;
+            viewemp_form += `<td> ${res_json[i].E_industry}</td>`;
+          }
+          viewemp_form += "</table>";
+          viewemp_form += `<input type="submit" value="Another Query?"> </form>`;
+          response.send(viewemp_form)
+        })
+    };
+
+  function query_upempl (POST, response){
+      Id = POST ['E_id'];
+      Ename = POST ['E_name'];
+      Phone = POST ['E_phone'];
+      Email = POST ['E_email'];
+      Street = POST ['E_street'];
+      City = POST ['E_city'];
+      State = POST ['E_state'];
+      Zipcode = POST ['E_zipcode'];
+      Industry = POST ['E_industry'];
+      Cid = POST ['E_cid'];
+      var sql = "UPDATDE employees SET E_name = , E_phone = , E_email = , E_street = , E_city = , E_state = , E_zipcode = , E_industry = , E_cid =  FROM employer WHERE E_id =";
+      con.query (sql, function (err, result, fields){
+        if (err) throw err;
+        console.log(result);
+        var res_string = JSON.stringify(result);
+        var res_json = JSON.parse(res_string);
+        console.log(res_json);
+        //Response: table of results and form to do another query 
+        update_form = `<form action"updateaccount.html" method = "GET">`;
+        update_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+        update_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td></b>`;
+            for (i in res_json) {
+              update_form += `<tr><td> ${res_json[i].E_id}</td>`;
+              update_form += `<td> ${res_json[i].E_name}</td>`;
+              update_form += `<td> ${res_json[i].E_phone}</td>`;
+              update_form += `<td> ${res_json[i].E_email}</td>`;
+              update_form += `<td> ${res_json[i].E_street}</td>`;
+              update_form += `<td> ${res_json[i].E_city}</td>`;
+              update_form += `<td> ${res_json[i].E_state}</td>`;
+              update_form += `<td> ${res_json[i].E_zipcode}</td>`;
+              update_form += `<td> ${res_json[i].E_industry}</td>`;
+            }
+            update_form += "</table>";
+            update_form += `<input type="submit" value="Another Query?"> </form>`;
+            response.send(update_form)
+          })
+      };
 
 //Post for processing any job searches from students
 app.post("/process_jobsearch", function (request,response){
   let POST = request.body;
-  username = request.session.username;
-  console.log(username);
   query_jobsearch(POST, response);
 });
 
@@ -932,6 +1033,15 @@ app.post("/jposting_query", function (request, response) {
 query_jpostings(POST, response);
 });
 
+app.post("/view_employers_query", function (request, response) {
+  let POST = request.body;
+  query_viewemp(POST, response);
+});
+
+app.post("/update_employer_query", function (request, response) {
+  let POST = request.body;
+  query_upempl(POST, response);
+});
 
 
 app.all('*', function (request, response, next) {
