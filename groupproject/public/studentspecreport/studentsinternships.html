@@ -47,47 +47,35 @@
     <a href="./appointment.html">Appointments</a>
   </div>
 </div>
-<style>
-  .links {
-    background-color:rgb(136, 181, 192);
-    border-radius:28px;
-    display:inline-block;
-    cursor:pointer;
-    color: black;
-    font-family:Arial;
-    font-size:25px;
-    padding:16px 31px;
-    text-decoration:none;
-    font-weight: bold;
-    margin-inline: 50px;
-    text-align: center;
-  }
-  .links:hover {
-    background-color: rgb(23, 94, 112);
-}
-</style>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<a class="links" href = "./studentspecreport/studentsall.html" <button>List All Students</button></a>
-<a class="links" href = "./studentspecreport/studentsinternships.html" <button>List by Internship Class</button></a>
-<a class="links" href = "./studentspecreport/studentsadvising.html" <button>List Advising</button></a>
-<br>
-<br>
-<br>
-<br>
-<br>
+   <br>
+   <form action="/form/submit" method="GET"> 
+    <input type="text" name="text" class="search" placeholder="Search here!">
+    <label for="internship_class">Internship Class</label>
+    <select name="internship_class" id="internship_class">
+      <option value="ACC395">ACC395</option>
+      <option value="BUS395D">BUS395D</option>
+      <option value="BUS395K">BUS395K</option>
+      <option value="BUS395G">BUS395G</option>
 
-<a class="links" href = "./studentspecreport/studentsmajor.html" <button>List by Major</button></a>
-<a class="links" href = "./studentspecreport/studentsgrad.html" <button>List by Graduation</button></a>   
-<a class="links" href = "./studentspecreport/studentscustom.html" <button>Customized Student Reports</button></a>   
+      <label for="major">Internship Class</label>
+  </select>
+  <select name="semester" id="semester">
+    <option value="Spring 2020">Spring 2020</option>
+    <option value="Summer 2020">Summer 2020</option>
+    <option value="Fall 2020">Fall 2020</option>
+    <option value="Spring 2021">Spring 2021</option>
+    <option value="Summer 2021">Summer 2021</option>
+    <option value="Fall 2021">Fall 2021</option>
+    <option value="Spring 2022">Spring 2022</option>
+    <label for="semester">Semester</label>
+</select>
 
-</form>
+    <input type="submit" name="submit" class="submit" value="Search">
+    
 
- 
+  </form>
+
+   <br>
  </body>
  </html>
  

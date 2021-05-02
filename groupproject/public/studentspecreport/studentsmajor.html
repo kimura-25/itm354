@@ -47,47 +47,21 @@
     <a href="./appointment.html">Appointments</a>
   </div>
 </div>
-<style>
-  .links {
-    background-color:rgb(136, 181, 192);
-    border-radius:28px;
-    display:inline-block;
-    cursor:pointer;
-    color: black;
-    font-family:Arial;
-    font-size:25px;
-    padding:16px 31px;
-    text-decoration:none;
-    font-weight: bold;
-    margin-inline: 50px;
-    text-align: center;
-  }
-  .links:hover {
-    background-color: rgb(23, 94, 112);
-}
-</style>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<a class="links" href = "./studentspecreport/studentsall.html" <button>List All Students</button></a>
-<a class="links" href = "./studentspecreport/studentsinternships.html" <button>List by Internship Class</button></a>
-<a class="links" href = "./studentspecreport/studentsadvising.html" <button>List Advising</button></a>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<a class="links" href = "./studentspecreport/studentsmajor.html" <button>List by Major</button></a>
-<a class="links" href = "./studentspecreport/studentsgrad.html" <button>List by Graduation</button></a>   
-<a class="links" href = "./studentspecreport/studentscustom.html" <button>Customized Student Reports</button></a>   
-
-</form>
-
+   <br>
+   <form action="/form/submit" method="GET"> 
+    <label for="major">Major</label>
+    <select name="major" id="major">
+        <option value="accounting">Accounting</option>
+        <option value="marketing">Marketing</option>
+        <label for="major">Major</label>
+    </select>
  
+    <input type="submit" name="submit" class="submit" value="Search">
+    
+
+  </form>
+
+   <br>
  </body>
  </html>
  
