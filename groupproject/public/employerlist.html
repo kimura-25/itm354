@@ -49,6 +49,31 @@
 </div>
    <br>
    <br>
+   <H1>Search for Employers</H1>
+
+    <Form action="/name_query" method="POST">
+         <label for = "E_name">By Name</label><br>
+        <input type='text' name='Employer_name'><BR>
+        <input type="submit" value="Submit">
+        </Form>
+
+    <Form action="/state_query" method= "POST">
+          <label for="E_state">By State:</label><br>
+          <input type="text" name= "Employer_state"><br>
+          <input type="submit" value="Submit">
+        </Form> 
+
+    <Form action="/zip_query" method= "POST">
+          <label for="E_zip">By Zipcode:</label><br>
+          <input type="text" name= "Employer_zip"><br>
+          <input type="submit" value="Submit">
+        </Form> 
+
+    <Form action="/industry_query" method= "POST">
+          <label for="E_industry">By Industry:</label><br>
+          <input type="text" name= "Employer_industry"><br>
+          <input type="submit" value="Submit">
+        </Form> 
  </body>
  </html>
  
