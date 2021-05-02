@@ -345,6 +345,7 @@ function query_jobsearch(POST, response){
       for (i in res_json) {
         job_search_form += `<tr><td> ${res_json[i].Job_id}</td>`;
         job_search_form += `<td> ${res_json[i].Job_title}</td>`;
+        job_search_form += `<td> ${res_json[i].Type}</td>`;
         job_search_form += `<td> ${res_json[i].Job_description}</td>`;
       }
       job_search_form += `</table> </form>`;
@@ -352,11 +353,42 @@ function query_jobsearch(POST, response){
   })
 };
 
-//Post for processing any job searches from students
-app.post("/process_jobsearch", function (request,response){
-  let POST = request.body;
-  query_jobsearch(POST, response);
-});
+function query_jobsearchtype(POST, response){
+  jobtype = POST['job_type'];
+  var sql = "SELECT * FROM employer, job_posting WHERE type = " + jobtype + " AND e_id = empl_id";
+  con.query(sql, function (err, result, fields){ 
+    if (err) throw err;
+    console.log(result);
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  
+
+  job_search_form =`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Job search</title>
+  </head>`
+    job_search_form += `<form action="index.html" method="GET">`;
+      job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`;
+      job_search_form += `<td><B>Company</td><td><B>Industry</td><td><B>Job title</td><td><B>Type</td><td><B>Job description</td><td><B>Job ID</td></b>`;
+      for (i in res_json) {
+        job_search_form += `<tr><td> ${res_json[i].E_name}</td>`;
+        job_search_form += `<td> ${res_json[i].E_industry}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_title}</td>`;
+        job_search_form += `<td> ${res_json[i].Type}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_description}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_id}</td>`;
+        job_search_form += `<td> <button>Contact</button> </td>`
+      }
+      job_search_form += `</table> </form>`;
+    response.send(job_search_form)
+  })
+};
 
 app.get("/makeappointment.html", function (request, response) {
   //note to self: need to create cases if person has no advising notes
@@ -997,7 +1029,14 @@ function query_jpostings (POST, response){
       };
 
 //Post for processing any job searches from students
-app.post("/process_jobsearch", function (request,response){
+app.post("/search_job_by_name", function (request,response){
+  let POST = request.body;
+  username = request.session.username;
+  console.log(username);
+  query_jobsearchname(POST, response);
+});
+
+app.post("/search_job_by_type", function (request,response){
   let POST = request.body;
   query_jobsearch(POST, response);
 });

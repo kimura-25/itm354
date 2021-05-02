@@ -69,8 +69,9 @@
         </style>
         </head>
         <body>
+        <h2>We at Career Services are dedicated to ....:)</h2>
         
-        <h2>Employer List</h2>
+        <h2>Sample of current employers</h2>
         
         <table>
           <tr>
@@ -79,18 +80,18 @@
             <th>ID</th>
           </tr>
           <tr>
-            <td>Hawaiian Ziplines</td>
+            <td>Hawaiian Airlines</td>
             <td>Airlines</td>
             <td>101</td>
           </tr>
           <tr>
-            <td>HI Tech</td>
-            <td>Analytics</td>
+            <td>Bank of Hawaii</td>
+            <td>Banking</td>
             <td>102</td>
           </tr>
           <tr>
-            <td>Cross Bank</td>
-            <td>Banking</td>
+            <td>Deloitte</td>
+            <td>Accounting</td>
             <td>103</td>
           </tr>
           <tr>
@@ -99,7 +100,7 @@
             <td>104</td>
           </tr>
           <tr>
-            <td>Smart Security</td>
+            <td>SmartSecurity</td>
             <td>Information Security</td>
             <td>105</td>
           </tr>
@@ -110,11 +111,29 @@
         </html>
         <br>
         <br>
-    <form action="/process_jobsearch" method="POST">
-       <h3>Search by company below</h3>  <input type='text' name='employer_name' style="width: 300px;""><br><br>
+    
+      <div class="column">
+    <form action="/search_job_by_name" method="POST">
+       <h3>Search opportunuties by company</h3>  <input type='text' name='employer_name' style="width: 300px;""><br><br>
         <input class="searchjobs" type="submit" value="Search">
-    </form> 
+    </form>
+      </div>  
+
+      <div>
+    <form action="/search_job_by_type" method ="POST">
+        <h3>Search by job type</h3> 
+        <select name='job_type'>
+          <option value="'Internship'">Internship</option>
+          <option value="'Part-time'">Part-time</option>
+          <option value="'Full-time'">Full-time</option>
+        </select>
+        <br> <br>
+        <input class="searchjobs" type="submit" value ="Search" >
+    </form>
+  </div>
+  
 <br><br>
+<div>
     <div class="row">
       <div class="column">
         <img class="three" src="images/bank.jpeg" style="width:100%">
@@ -126,6 +145,7 @@
         <img  class="three" src="images/tech.jpeg" style="width:100%">
       </div>
     </div>
+  </div>
 <br><br><br>
 </body>
 </html>
