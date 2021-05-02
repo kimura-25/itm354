@@ -4,7 +4,11 @@ var myParser = require("body-parser");
 var mysql = require('mysql');
 const querystring = require('querystring');
 const { query } = require('express');
-const { ENAMETOOLONG } = require('node:constants');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.use(session({ secret: "anything" }));
+
 
 console.log("Connecting to localhost...");
 var con = mysql.createConnection({
