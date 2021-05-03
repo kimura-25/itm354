@@ -378,7 +378,6 @@ function query_jobsearchtype(POST, response){
     var res_json = JSON.parse(res_string);
     console.log(res_json);
   
-
   job_search_form =`<!DOCTYPE html>
   <html lang="en">
   <head>
