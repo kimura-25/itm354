@@ -65,29 +65,46 @@
   .links:hover {
     background-color: rgb(23, 94, 112);
 }
+  ul{
+    text-align: left;
+    padding: 20%;
+    ;
+  }
 </style>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<a class="links" href = "./studentspecreport/studentsall.html" <button>List All Students</button></a>
-<a class="links" href = "./studentspecreport/studentsinternships.html" <button>List by Internship Class</button></a>
-<a class="links" href = "./studentspecreport/studentsadvising.html" <button>List Advising</button></a>
-<br>
-<br>
-<br>
-<br>
-<br>
+<table>
+  <tr>
+    <th>Report Name</th>
+    <th>Report Type</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Career Expo Attendance</td>
+    <td>Career Expo</td>
+    <td>Pulls reports on companies that attended Career Expo each semester.</td>
+  </tr>
+  <tr>
+    <form action="/runreport.html" method="POST">
+    <td>Student Percent of Each Major</td>
+    <td>Student</td>
+    <td>Calculates the percent of students that are in each major at Shidler</td>
+    <td><input type="hidden" value="2" name="report" id="report"><input type="submit" id="runreport" name="runreport" value="Run Report"></td>
+  </form>
+  </tr>
+  <tr>
+    <td>Companies with the Most Students Interning</td>
+    <td>Internships</td>
+    <td>Reflects which companies have the most students interning at their company overall</td>
+  </tr>
+  <tr>
+    <td># of Students with X Amount of Internships</td>
+    <td>Internships</td>
+    <td>Calculates How Many Internships Each Student Has Done</td>
+  </tr>
+</table>
 
-<a class="links" href = "./studentspecreport/studentsmajor.html" <button>List by Major</button></a>
-<a class="links" href = "./studentspecreport/studentsgrad.html" <button>List by Graduation</button></a>   
-<a class="links" href = "./studentspecreport/studentscustom.html" <button>Customized Student Reports</button></a>   
-
-</form>
-
- 
+<script>
+  //note to self: need to make view for # of students with X amount of internships
+</script>
  </body>
  </html>
  
