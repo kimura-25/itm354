@@ -228,6 +228,108 @@ function runreport3(POST, response){
 })
 }
 
+app.get("/runreport5.html", function(request, response){
+  let POST = request.body;
+  runreport5(POST, response);
+});
+ 
+function runreport5(POST, response){
+  reportsql = "SELECT * FROM Contact WHERE C_specialty = 'accounting'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>EDS</title>
+      <link rel="stylesheet" href="officestyle.css">
+      
+  </head>
+  <body>
+      
+     <h1>Shidler Career Services and Professional Development</h1> 
+     <h2>Run Student Reports</h2>
+    
+     <!-- The navigation menu -->
+  <div class="navbar">
+ 
+   <div class="subnav">
+     <a href="./officehomepage.html">Home</a>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="/studentreport.html">Student</a>
+       <a href="./companyreport.html">Company</a>
+       <a href="./eventreport.html">Event</a>
+  </div>
+   </div>
+   <div class="subnav">
+    <a href="./contactlist.html">Contact List</a>
+  </div>
+ 
+  <div class="subnav">
+    <a href="./employerlist.html">Employer List</a>
+  </div>
+   
+  <div class="subnav">
+    <a href="./internshiplist.html">Internship List</a>
+  </div>
+ 
+  
+   <div class="subnav">
+     <a href="./appointment.html">Appointments</a>
+   </div>
+ </div>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <table>
+ <td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].C_email}</td>
+   <td>${res_json[i].C_phone}</td>
+   <td>${res_json[i].C_jobtitle}</td>
+
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
 function studentinformation(POST, response){
           //note to self: need to create cases if person has no advising notes
           var sql = "SELECT * FROM student, student_major WHERE s_id = st_id"; //query for the given student
