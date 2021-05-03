@@ -27,98 +27,97 @@ con.connect(function (err) {
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
-/*function storeappt(POST, response){
-  advisor = POST ['advisor'];
-  console.log(advisor);
-}
-
-app.post("/submitapp", function (request, response) {
+app.post("/runreport.html", function(request, response){
   let POST = request.body;
-  storeappt(POST, response);
+  runreport(POST, response);
 });
-*/
-//build student info page on server
-/*function studentinformation(POST,response){
-  studentinfo=`<!DOCTYPE html>
+ 
+function runreport(POST, response){
+  runreport=`<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="style.css">
-      <title>Student Information</title>
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>EDS</title>
+      <link rel="stylesheet" href="officestyle.css">
+      
   </head>
   <body>
-      <h1>Shidler Career Services and Professional Development</h1> 
-      <h2>Student Information</h2>
-  
+      
+     <h1>Shidler Career Services and Professional Development</h1> 
+     <h2>Run Student Reports</h2>
+    
      <!-- The navigation menu -->
-      <div class="navbar">
-          <a href="index.html">Home</a>
-          <div class="subnav">
-      
-            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./employers.html">Employers</a>
-              <a href="./contacts.html">Contacts</a>
-              <a href="./jobpostings.html">Job Postings</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./careerexpo.html">Career Expo</a>
-              <a href="./addemployer.html">Add Employer</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./studentinformation.html">Student Information</a>
-              <a href="./advising.html">Advising</a>
-        
-            </div>
-          </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>`
-    for (i in res_json){
-      response_form += `<table border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
-      response_form += `<td><B>First Name</td><td><B>Last Name</td></b>`;
-            response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
-            response_form += `<td> ${res_json[i].Advising_note}</td>`;
-          }
- studentinfo=+`<table cellpadding="10" border="1">
-          <tr>
-              <th>Student ID</th>
-              <th>Student First Name</th>
-              <th>Student Last Name</th>
-              <th>Email</th>
-              <th>Major</th>
-              <th>Expected Graduation</th>
-              <th></th>
-          </tr>
-          <tr>
-              <td>12345678</td>
-              <td>Da Cookie</td>
-              <td>Monster</td>
-              <td>cookie@sesamestreet.com</td>
-              <td>Management</td>
-              <td>Spring 2022</td>
-              <td>            
-                  <form action="/advisingnotes" method="POST">
-                  <button type="view">View Student</button>
-                  </form>
-              </td>
-          </tr>
+  <div class="navbar">
+ 
+   <div class="subnav">
+     <a href="./officehomepage.html">Home</a>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="/studentreport.html">Student</a>
+       <a href="./companyreport.html">Company</a>
+       <a href="./eventreport.html">Event</a>
+  </div>
+   </div>
+   <div class="subnav">
+    <a href="./contactlist.html">Contact List</a>
+  </div>
+ 
+  <div class="subnav">
+    <a href="./employerlist.html">Employer List</a>
+  </div>
+   
+  <div class="subnav">
+    <a href="./internshiplist.html">Internship List</a>
+  </div>
+ 
+  
+   <div class="subnav">
+     <a href="./appointment.html">Appointments</a>
+   </div>
+ </div>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <table>
+   <tr>
+     <th>Report Name</th>
+     <th>Report Type</th>
+     <th>Description</th>
+   </tr>
+ </table>
+ 
+ <script>
+   //note to self: need to make view for # of students with X amount of internships
+ </script>
   </body>
   </html>`;
-  response.send(studentinfo);
-        }*/
+  response.send(runreport);
+}
 
 function studentinformation(POST, response){
           //note to self: need to create cases if person has no advising notes
