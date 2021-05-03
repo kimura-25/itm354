@@ -33,7 +33,7 @@ app.post("/runreport2.html", function(request, response){
 });
  
 function runreport2(POST, response){
-  reportsql = "SELECT st_major, (COUNT(st_major)*100/(SELECT COUNT(st_major) FROM student_major)) AS percent FROM student_major GROUP BY st_major"; 
+  reportsql = "SELECT st_major, percent FROM percent_students_by_major"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
