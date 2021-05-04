@@ -432,7 +432,8 @@ function runreport5(POST, response){
  <form action="/runreport5a.html" method="POST">
  <label for="major">Select Major to Search By</label>
  <select name="major" id="major">
-     <option value="Accounting">Accounting</option>
+ <option value="" disable selected>Choose a major</option>
+   <option value="Accounting">Accounting</option>
      <option value="Finance">Finance</option>
      <option value="Human Resource Management">Human Resource Management</option>
      <option value="IT Management">IT Management</option>
