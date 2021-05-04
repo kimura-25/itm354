@@ -33,7 +33,7 @@ app.get("/runreport1.html", function(request, response){
 });
  
 function runreport1(POST, response){
-  reportsql = "SELECT * FROM employer, events, presents_at WHERE E_id = Emp_id AND Event_name = 'Career Expo' AND Event_name = Evt_name AND Events.Date = Presents_at.Date"; 
+  reportsql = " SELECT * FROM Employer WHERE E_id IN (SELECT Emp_id FROM Presents_at WHERE Evt_name IN (SELECT Event_name FROM Events  WHERE Event_name = 'Career Expo' AND Events.Date = Presents_at.Date))"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -86,11 +86,13 @@ function runreport1(POST, response){
  <form>
  <label for="semester">Choose Semester</label>
  <select name="semester" id="semester">
+ <option value="" disable selected>Semester</option>
      <option value="spring">Spring</option>
      <option value="fall">Fall</option>
 </select>
      <label for="year">Choose Year</label>
      <select name="year" id="year">
+     <option value="" disable selected>Year</option>
         <option value="2019">2019</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
