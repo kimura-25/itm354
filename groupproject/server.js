@@ -1307,8 +1307,8 @@ function query_industry(POST, response) {
 };
 
 function query_jpostings (POST, response){
-  emplid = POST ['empl_id']; 
-  var sql = "SELECT E_id, E_name, E_email, E_city, E_state, E_zipcode, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Empl_id = E_id AND Empl_id = " + emplid;
+  Cname = POST ['E_name']; 
+  var sql = "SELECT E_id, E_name, E_email, E_city, E_state, E_zipcode, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Empl_id = E_id AND E_name = '" + Cname + "'";
   con.query (sql, function (err, result, fields){
     if (err) throw err;
     console.log(result);
@@ -1332,8 +1332,7 @@ function query_jpostings (POST, response){
           job_postings_form += `<td> ${res_json[i].Job_title}</td>`;
           job_postings_form += `<td> ${res_json[i].Job_description}</td>`;
         }
-        job_postings_form += "</table>";
-        job_postings_form += `<input type="submit" value="Another Query?"> </form>`;
+        job_postings_form += `</table></form>`;
         response.send(job_postings_form)
       })
   };
