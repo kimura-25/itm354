@@ -33,7 +33,7 @@ app.post("/runreport2.html", function(request, response){
 });
  
 function runreport2(POST, response){
-  reportsql = "SELECT st_major, (COUNT(st_major)*100/(SELECT COUNT(st_major) FROM student_major)) AS percent FROM student_major GROUP BY st_major"; 
+  reportsql = "SELECT st_major, percent FROM percent_students_by_major"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -218,6 +218,108 @@ function runreport3(POST, response){
    <tr>
    <td>${res_json[i].E_name}</td>
    <td>${res_json[i].Students_who_interned}</td>
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.get("/runreport5.html", function(request, response){
+  let POST = request.body;
+  runreport5(POST, response);
+});
+ 
+function runreport5(POST, response){
+  reportsql = "SELECT * FROM Contact WHERE C_specialty = 'accounting'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>EDS</title>
+      <link rel="stylesheet" href="officestyle.css">
+      
+  </head>
+  <body>
+      
+     <h1>Shidler Career Services and Professional Development</h1> 
+     <h2>Run Student Reports</h2>
+    
+     <!-- The navigation menu -->
+  <div class="navbar">
+ 
+   <div class="subnav">
+     <a href="./officehomepage.html">Home</a>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="/studentreport.html">Student</a>
+       <a href="./companyreport.html">Company</a>
+       <a href="./eventreport.html">Event</a>
+  </div>
+   </div>
+   <div class="subnav">
+    <a href="./contactlist.html">Contact List</a>
+  </div>
+ 
+  <div class="subnav">
+    <a href="./employerlist.html">Employer List</a>
+  </div>
+   
+  <div class="subnav">
+    <a href="./internshiplist.html">Internship List</a>
+  </div>
+ 
+  
+   <div class="subnav">
+     <a href="./appointment.html">Appointments</a>
+   </div>
+ </div>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <table>
+ <td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].C_email}</td>
+   <td>${res_json[i].C_phone}</td>
+   <td>${res_json[i].C_jobtitle}</td>
+
  </tr>
 `}
  runreport+=`
@@ -458,8 +560,49 @@ function query_jobsearchname(POST, response){
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
-  </head>`
-    job_search_form += `<form action="index.html" method="GET">`;
+  </head><h1>Shidler Career Services and Professional Development</h1> 
+      <!-- The navigation menu -->
+      <div class="navbar">
+        <div class="subnav">
+       <a href="./index.html">Home</a></div>
+       <div class="subnav">
+         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./aboutus.html">About Shidler College</a>
+           <a href="./studentservices.html">About Student Services</a>
+   
+         </div>
+       </div>
+        
+       <div class="subnav">
+         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./careeradvising.html">Career Advising</a>
+           <a href="./jobintsearch.html">Jobs & Internships</a>
+         </div>
+       </div>
+   
+       <div class="subnav">
+         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./addjposting.html">Post Jobs & Internships</a>
+     </div>
+         </div>
+   
+         <div class="subnav">
+           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+           <div class="subnav-content">
+             <a href="./eventregistration.html">Student Events & Registration</a>
+             <a href="./employerevents.html">Employer Events List</a>
+             <a href="./careerexpo.html">Employer Career Expo Registration</a>
+           </div>
+       </div>
+       </div>
+      <br>
+  <div class = "aboutus"> 
+   <div class="row">`
+   job_search_form += `<h2>Current career opportunuties</h2>`
+    job_search_form += `<form action="/apply" method="POST">`;
     job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`
       job_search_form += `<td><B>Company</td><td><B>Industry</td><td><B>Job title</td><td><B>Type</td><td><B>Job description</td><td><B>Job ID</td></b>`;
       for (i in res_json) {
@@ -469,9 +612,9 @@ function query_jobsearchname(POST, response){
         job_search_form += `<td> ${res_json[i].Type}</td>`;
         job_search_form += `<td> ${res_json[i].Job_description}</td>`;
         job_search_form += `<td> ${res_json[i].Job_id}</td>`;
-        job_search_form += `<td> <button>Contact</button> </td>`
       }
-      job_search_form += `</table> </form>`;
+      job_search_form += `</table> <br> <br>
+      Enter the job ID of the opportunity you want to apply for: <input name = 'job_id'> <input type = "submit" value = "Apply"> </form>`;
     response.send(job_search_form)
   })
 };
@@ -494,8 +637,49 @@ function query_jobsearchtype(POST, response){
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
-  </head>`
-    job_search_form += `<form action="index.html" method="GET">`;
+  </head><h1>Shidler Career Services and Professional Development</h1> 
+      <!-- The navigation menu -->
+      <div class="navbar">
+        <div class="subnav">
+       <a href="./index.html">Home</a></div>
+       <div class="subnav">
+         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./aboutus.html">About Shidler College</a>
+           <a href="./studentservices.html">About Student Services</a>
+   
+         </div>
+       </div>
+        
+       <div class="subnav">
+         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./careeradvising.html">Career Advising</a>
+           <a href="./jobintsearch.html">Jobs & Internships</a>
+         </div>
+       </div>
+   
+       <div class="subnav">
+         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./addjposting.html">Post Jobs & Internships</a>
+     </div>
+         </div>
+   
+         <div class="subnav">
+           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+           <div class="subnav-content">
+             <a href="./eventregistration.html">Student Events & Registration</a>
+             <a href="./employerevents.html">Employer Events List</a>
+             <a href="./careerexpo.html">Employer Career Expo Registration</a>
+           </div>
+       </div>
+       </div>
+      <br>
+  <div class = "aboutus"> 
+   <div class="row">`
+   job_search_form += `<h2>Current career opportunities</h2>`
+    job_search_form += `<form action="/apply" method="POST">`;
       job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`;
       job_search_form += `<td><B>Company</td><td><B>Industry</td><td><B>Job title</td><td><B>Type</td><td><B>Job description</td><td><B>Job ID</td></b>`;
       for (i in res_json) {
@@ -505,10 +689,87 @@ function query_jobsearchtype(POST, response){
         job_search_form += `<td> ${res_json[i].Type}</td>`;
         job_search_form += `<td> ${res_json[i].Job_description}</td>`;
         job_search_form += `<td> ${res_json[i].Job_id}</td>`;
-        job_search_form += `<td> <button>Contact</button> </td>`
       }
-      job_search_form += `</table> </form>`;
+      job_search_form += `</table> <br> <br>
+      Enter the job ID of the opportunity you want to apply for: <input name = 'job_id'> <input type = "submit" value = "Apply"></form>`;
     response.send(job_search_form)
+  })
+};
+
+function apply(POST, response){
+  job_id = POST['job_id'];
+  var sql = "SELECT * FROM employer, job_posting WHERE Job_id = " + job_id + " AND empl_id = e_id";
+  con.query(sql, function (err, result, fields){ 
+    if (err) throw err;
+    console.log(result);
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  
+    apply_form =`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Job search</title>
+  </head><h1>Shidler Career Services and Professional Development</h1> 
+      <!-- The navigation menu -->
+      <div class="navbar">
+        <div class="subnav">
+       <a href="./index.html">Home</a></div>
+       <div class="subnav">
+         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./aboutus.html">About Shidler College</a>
+           <a href="./studentservices.html">About Student Services</a>
+   
+         </div>
+       </div>
+        
+       <div class="subnav">
+         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./careeradvising.html">Career Advising</a>
+           <a href="./jobintsearch.html">Jobs & Internships</a>
+         </div>
+       </div>
+   
+       <div class="subnav">
+         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./addjposting.html">Post Jobs & Internships</a>
+     </div>
+         </div>
+   
+         <div class="subnav">
+           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+           <div class="subnav-content">
+             <a href="./eventregistration.html">Student Events & Registration</a>
+             <a href="./employerevents.html">Employer Events List</a>
+             <a href="./careerexpo.html">Employer Career Expo Registration</a>
+           </div>
+       </div>
+       </div>
+      <br>
+  <div class = "aboutus"> 
+   <div class="row">`
+    apply_form += `<h2>Thank you for using Shidler Career Services! <br> Please send your resume and application to the contact information provided</h2>`
+    apply_form += `<form action="/apply" method="POST">`;
+    apply_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`
+      apply_form += `<td><B>Company</td><td><B>Phone</td><td><B>Email</td><td><B>Job title</td><td><B>Type</td><td><B>Job description</td><td><B>Job ID</td></b>`;
+      for (i in res_json) {
+        apply_form += `<tr><td> ${res_json[i].E_name}</td>`;
+        apply_form += `<td> ${res_json[i].E_phone}</td>`
+        apply_form += `<td> ${res_json[i].E_email}</td>`;
+        apply_form += `<td> ${res_json[i].Job_title}</td>`;
+        apply_form += `<td> ${res_json[i].Type}</td>`;
+        apply_form += `<td> ${res_json[i].Job_description}</td>`;
+        apply_form += `<td> ${res_json[i].Job_id}</td>`;
+      }
+      apply_form += `</table> </form>`;
+    response.send(apply_form)
   })
 };
 
@@ -1168,6 +1429,11 @@ app.post("/search_job_by_name", function (request,response){
 app.post("/search_job_by_type", function (request,response){
   let POST = request.body;
   query_jobsearchtype(POST, response);
+});
+
+app.post("/apply", function (request,response){
+  let POST = request.body;
+  apply(POST, response);
 });
 
 
