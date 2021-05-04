@@ -1123,7 +1123,126 @@ app.post("/submitapp", function (request, response) {
 });
 }*/
 
+function query_internshipsearchstudent(POST, response){
+  stuID = POST['studentID'];
+  var sql = "SELECT * FROM interns_at, employer, job_posting WHERE Stu_id = " + stuID + " AND E_id = Empl_id AND Empl_id = Emplo_id AND Type = 'Internship'";
+  con.query(sql, function (err, result, fields){ 
+    if (err) throw err;
+    console.log(result);
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  
+    job_search_form =`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Job search</title>
+  </head><h1>Shidler Career Services and Professional Development</h1> 
+  <div class="navbar">
 
+  <div class="subnav">
+    <a href="./officehomepage.html">Home</a>
+  </div>
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+  <div class="subnav">
+   <a href="./contactlist.html">Contact List</a>
+ </div>
+
+ <div class="subnav">
+   <a href="./employerlist.html">Employer List</a>
+ </div>
+  
+ <div class="subnav">
+   <a href="./internshiplist.html">Internship List</a>
+ </div>
+
+  
+  <div class="subnav">
+    <a href="./appointment.html">Appointments</a>
+  </div>
+</div>`
+   job_search_form += `<h2>Internships</h2>`
+    job_search_form += `<form action="/apply" method="POST">`;
+    job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`
+      job_search_form += `<td><B>Student ID</td><td><B>Internship class</td><td><B>Position</td><td><B>Company</td><td><B>Semester</td></b>`;
+      for (i in res_json) {
+        job_search_form += `<tr><td> ${res_json[i].Stu_id}</td>`;
+        job_search_form += `<td> ${res_json[i].Internship_class}</td>`;
+        job_search_form += `<td> ${res_json[i].Position}</td>`;
+        job_search_form += `<td> ${res_json[i].E_name}</td>`;
+        job_search_form += `<td> ${res_json[i].Semester}</td>`
+      }
+      job_search_form += `</table> <br> <br>`
+    response.send(job_search_form)
+  })
+};
+
+function query_internshipsearch(POST, response){
+  ename = POST['employer_name'];
+  var sql = "SELECT * FROM employer, job_posting WHERE E_name = '" + ename + "' AND E_id = empl_id AND type = 'Internship'";
+  con.query(sql, function (err, result, fields){ 
+    if (err) throw err;
+    console.log(result);
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  
+    job_search_form =`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Job search</title>
+  </head><h1>Shidler Career Services and Professional Development</h1> 
+  <div class="navbar">
+
+  <div class="subnav">
+    <a href="./officehomepage.html">Home</a>
+  </div>
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+  <div class="subnav">
+   <a href="./contactlist.html">Contact List</a>
+ </div>
+
+ <div class="subnav">
+   <a href="./employerlist.html">Employer List</a>
+ </div>
+  
+ <div class="subnav">
+   <a href="./internshiplist.html">Internship List</a>
+ </div>
+
+  
+  <div class="subnav">
+    <a href="./appointment.html">Appointments</a>
+  </div>
+</div>`
+   job_search_form += `<h2>Internships</h2>`
+    job_search_form += `<form action="/apply" method="POST">`;
+    job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`
+      job_search_form += `<td><B>Company</td><td><B>Industry</td><td><B>Job title</td><td><B>Type</td><td><B>Job description</td><td><B>Job ID</td></b>`;
+      for (i in res_json) {
+        job_search_form += `<tr><td> ${res_json[i].E_name}</td>`;
+        job_search_form += `<td> ${res_json[i].E_industry}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_title}</td>`;
+        job_search_form += `<td> ${res_json[i].Type}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_description}</td>`;
+        job_search_form += `<td> ${res_json[i].Job_id}</td>`;
+      }
+      job_search_form += `</table> <br> <br>`
+    response.send(job_search_form)
+  })
+};
 
 function query_jobsearchname(POST, response){
   ename = POST['employer_name'];
@@ -2078,6 +2197,19 @@ app.post("/search_job_by_name", function (request,response){
   username = request.session.username;
   console.log(username);
   query_jobsearchname(POST, response);
+});
+
+app.post("/search_internship_by_name", function (request,response){
+  let POST = request.body;
+  username = request.session.username;
+  console.log(username);
+  query_internshipsearch(POST, response);
+});
+app.post("/search_internship_by_student", function (request,response){
+  let POST = request.body;
+  username = request.session.username;
+  console.log(username);
+  query_internshipsearchstudent(POST, response);
 });
 
 app.post("/search_job_by_type", function (request,response){
