@@ -27,7 +27,126 @@ con.connect(function (err) {
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
-app.post("/runreport2.html", function(request, response){
+app.get("/runreport1.html", function(request, response){
+  let POST = request.body;
+  runreport1(POST, response);
+});
+ 
+function runreport1(POST, response){
+  reportsql = "SELECT * FROM employer, events, presents_at WHERE E_id = Emp_id AND Event_name = 'Career Expo' AND Event_name = Evt_name AND Events.Date = Presents_at.Date"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>EDS</title>
+      <link rel="stylesheet" href="reportstyle.css">
+      
+  </head>
+  <body>
+      
+     <h1>Shidler Career Services and Professional Development</h1> 
+     <h2>Run Student Reports</h2>
+    
+     <!-- The navigation menu -->
+  <div class="navbar">
+ 
+   <div class="subnav">
+     <a href="./officehomepage.html">Home</a>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="/studentreport.html">Student</a>
+       <a href="./companyreport.html">Company</a>
+       <a href="./eventreport.html">Event</a>
+  </div>
+   </div>
+   <div class="subnav">
+    <a href="./contactlist.html">Contact List</a>
+  </div>
+ 
+  <div class="subnav">
+    <a href="./employerlist.html">Employer List</a>
+  </div>
+   
+  <div class="subnav">
+    <a href="./internshiplist.html">Internship List</a>
+  </div>
+ 
+  
+   <div class="subnav">
+     <a href="./appointment.html">Appointments</a>
+   </div>
+ </div>
+ <h2>Career Expo Attendees for Spring 2021</h2>
+ <br>
+ <form>
+ <label for="semester">Choose Semester</label>
+ <select name="semester" id="semester">
+     <option value="spring">Spring</option>
+     <option value="fall">Fall</option>
+</select>
+     <label for="year">Choose Year</label>
+     <select name="year" id="year">
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+</select>
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <table>
+ <td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].E_name}</td>
+   <td>${res_json[i].E_email}</td>
+   <td>${res_json[i].E_phone}</td>
+   </tr>
+`}
+ runreport+=`
+ </table>
+ <script>
+   //note to self: need to make view for # of students with X amount of internships
+ </script>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.get("/runreport2.html", function(request, response){
   let POST = request.body;
   runreport2(POST, response);
 });
@@ -46,7 +165,7 @@ function runreport2(POST, response){
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>EDS</title>
-      <link rel="stylesheet" href="officestyle.css">
+      <link rel="stylesheet" href="reportstyle.css">
       
   </head>
   <body>
@@ -148,7 +267,7 @@ function runreport3(POST, response){
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>EDS</title>
-      <link rel="stylesheet" href="officestyle.css">
+      <link rel="stylesheet" href="reportstyle.css">
       
   </head>
   <body>
@@ -247,7 +366,238 @@ function runreport5(POST, response){
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>EDS</title>
-      <link rel="stylesheet" href="officestyle.css">
+      <link rel="stylesheet" href="reportstyle.css">
+      
+  </head>
+  <body>
+      
+     <h1>Shidler Career Services and Professional Development</h1> 
+     <h2>Run Student Reports</h2>
+    
+     <!-- The navigation menu -->
+  <div class="navbar">
+ 
+   <div class="subnav">
+     <a href="./officehomepage.html">Home</a>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="/studentreport.html">Student</a>
+       <a href="./companyreport.html">Company</a>
+       <a href="./eventreport.html">Event</a>
+  </div>
+   </div>
+   <div class="subnav">
+    <a href="./contactlist.html">Contact List</a>
+  </div>
+ 
+  <div class="subnav">
+    <a href="./employerlist.html">Employer List</a>
+  </div>
+   
+  <div class="subnav">
+    <a href="./internshiplist.html">Internship List</a>
+  </div>
+ 
+  
+   <div class="subnav">
+     <a href="./appointment.html">Appointments</a>
+   </div>
+ </div>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <form action="/runreport5a.html" method="POST">
+ <label for="major">Select Major to Search By</label>
+ <select name="major" id="major">
+     <option value="Accounting">Accounting</option>
+     <option value="Finance">Finance</option>
+     <option value="Human Resource Management">Human Resource Management</option>
+     <option value="IT Management">IT Management</option>
+</select>
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+
+ <table>
+ <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].C_email}</td>
+   <td>${res_json[i].C_phone}</td>
+   <td>${res_json[i].C_jobtitle}</td>
+
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.post("/runreport5a.html", function(request, response){
+  let POST = request.body;
+  runreport5a(POST, response);
+});
+ 
+function runreport5a(POST, response){
+  major = POST['major'];
+  console.log(major);
+  reportsql = "SELECT * FROM Contact WHERE C_specialty = '" + major +"'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>EDS</title>
+      <link rel="stylesheet" href="reportstyle.css">
+      
+  </head>
+  <body>
+      
+     <h1>Shidler Career Services and Professional Development</h1> 
+     <h2>Run Student Reports</h2>
+    
+     <!-- The navigation menu -->
+  <div class="navbar">
+ 
+   <div class="subnav">
+     <a href="./officehomepage.html">Home</a>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="/studentreport.html">Student</a>
+       <a href="./companyreport.html">Company</a>
+       <a href="./eventreport.html">Event</a>
+  </div>
+   </div>
+   <div class="subnav">
+    <a href="./contactlist.html">Contact List</a>
+  </div>
+ 
+  <div class="subnav">
+    <a href="./employerlist.html">Employer List</a>
+  </div>
+   
+  <div class="subnav">
+    <a href="./internshiplist.html">Internship List</a>
+  </div>
+ 
+  
+   <div class="subnav">
+     <a href="./appointment.html">Appointments</a>
+   </div>
+ </div>
+ <h2>Company Contacts in ${res_json[0].C_specialty}</h2>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <form action="/runreport5a.html" method="POST">
+ <label for="major">Select Major to Search By</label>
+ <select name="Major" id="Major">
+     <option value="Accounting">Accounting</option>
+     <option value="Finance">Finance</option>
+     <option value="Human Resource Management">Human Resource Management</option>
+     <option value="IT Management">IT Management</option>
+</select>
+
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+
+ <table>
+ <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].C_email}</td>
+   <td>${res_json[i].C_phone}</td>
+   <td>${res_json[i].C_jobtitle}</td>
+
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+
+app.get("/runreport6.html", function(request, response){
+  let POST = request.body;
+  runreport6(POST, response);
+});
+ 
+function runreport6(POST, response){
+  reportsql = "SELECT * FROM Employer, Contact WHERE Primary_cid = C_id"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>EDS</title>
+      <link rel="stylesheet" href="reportstyle.css">
       
   </head>
   <body>
@@ -311,10 +661,11 @@ function runreport5(POST, response){
    }
  </style>
  <table>
- <td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ <td><strong>Company Name</strong></td><td><strong>Primary Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
  for (i in res_json){
    runreport+=`
    <tr>
+   <td>${res_json[i].E_name}</td>
    <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
    <td>${res_json[i].C_email}</td>
    <td>${res_json[i].C_phone}</td>
@@ -1307,8 +1658,8 @@ function query_industry(POST, response) {
 };
 
 function query_jpostings (POST, response){
-  emplid = POST ['empl_id']; 
-  var sql = "SELECT E_id, E_name, E_email, E_city, E_state, E_zipcode, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Empl_id = E_id AND Empl_id = " + emplid;
+  Cname = POST ['E_name']; 
+  var sql = "SELECT E_id, E_name, E_email, E_city, E_state, E_zipcode, E_industry, Job_title, Job_description FROM job_posting, employer WHERE Empl_id = E_id AND E_name = '" + Cname + "'";
   con.query (sql, function (err, result, fields){
     if (err) throw err;
     console.log(result);
@@ -1332,8 +1683,7 @@ function query_jpostings (POST, response){
           job_postings_form += `<td> ${res_json[i].Job_title}</td>`;
           job_postings_form += `<td> ${res_json[i].Job_description}</td>`;
         }
-        job_postings_form += "</table>";
-        job_postings_form += `<input type="submit" value="Another Query?"> </form>`;
+        job_postings_form += `</table></form>`;
         response.send(job_postings_form)
       })
   };
