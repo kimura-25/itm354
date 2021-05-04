@@ -105,3 +105,39 @@ a.logout {
 .subnav:hover .subnav-content {
   display: block;
 }
+
+table {
+  border-collapse: collapse;
+  border: 5px solid black;
+
+
+}
+
+ th, td {
+  border: 2px solid black;
+  height: 50px;
+  background-color: rgb(215, 245, 250);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px 10px;
+  color: rgb(3, 29, 36);
+}
+
+th {
+  background-color: rgb(9, 56, 68);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+td.reportlink {
+  background-color: rgb(99, 175, 194);
+  color: white;
+}
+
+td.reportlink:hover {
+  background-color: rgb(17, 104, 126);
+}
+
+a {
+  color:white;
+}

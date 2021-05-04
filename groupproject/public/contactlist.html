@@ -23,12 +23,7 @@
     <a href="./officehomepage.html">Home</a>
   </div>
   <div class="subnav">
-    <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-    <div class="subnav-content">
-      <a href="/studentreport.html">Student</a>
-      <a href="./companyreport.html">Company</a>
-      <a href="./eventreport.html">Event</a>
- </div>
+    <a href="./runreports.html">Run Reports</a>
   </div>
   <div class="subnav">
    <a href="./contactlist.html">Contact List</a>
@@ -47,42 +42,23 @@
     <a href="./appointment.html">Appointments</a>
   </div>
 </div>
-   <br>
-   <br>
-   <br>
-   <br>
-<!--INSERT HERE MARC LOL-->
-<table cellpadding="10" border="1">
-  <tr>
-      <th>Contact First Name</th>
-      <th>Contact Middle Initial</th>
-      <th>Contact Last Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip Code</th>
-      <th>Job Title</th>
-      <th>Speciality</th>
-      <th>Notes</th>
-  </tr>
 
-  <tr>
-    <th>Jonah</th>
-    <th>A</th>
-    <th>Aberilla</th>
-    <th>jonaha@gmail.com</th>
-    <th>8085542420</th>
-    <th>39 Avenue</th>
-    <th>Kaneohe</th>
-    <th>HI</th>
-    <th>96744</th>
-    <th>CFO</th>
-    <th>Accounting</th>
-    <th></th>
+<H1>Search for Contacts</H1>
 
-</tr>
+    <Form action="/contact_query" method="POST">
+         <label for = "C_name">By Name</label><br>
+        <input type='text' name='Contact_name'><BR>
+        <input type="submit" value="Submit">
+        </Form>
+<br>
+    <Form action="/email_query" method= "POST">
+          <label for="C_email">By Email:</label><br>
+          <input type="text" name= "Contact_email"><br>
+          <input type="submit" value="Submit">
+        </Form> 
+<br>
+
+
  </body>
  </html>
  
