@@ -33,68 +33,66 @@ app.get("/runreport1.html", function(request, response){
 });
  
 function runreport1(POST, response){
-  reportsql = "SELECT * FROM employer, events, presents_at WHERE E_id = Emp_id AND Event_name = 'Career Expo' AND Event_name = Evt_name AND Events.Date = Presents_at.Date"; 
+  reportsql = " SELECT * FROM Employer WHERE E_id IN (SELECT Emp_id FROM Presents_at WHERE Evt_name IN (SELECT Event_name FROM Events  WHERE Event_name = 'Career Expo' AND Events.Date = Presents_at.Date))"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <h2>Career Expo Attendees for Spring 2021</h2>
  <br>
  <form>
  <label for="semester">Choose Semester</label>
  <select name="semester" id="semester">
+ <option value="" disable selected>Semester</option>
      <option value="spring">Spring</option>
      <option value="fall">Fall</option>
 </select>
      <label for="year">Choose Year</label>
      <select name="year" id="year">
+     <option value="" disable selected>Year</option>
         <option value="2019">2019</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
@@ -158,52 +156,48 @@ function runreport2(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
@@ -260,52 +254,48 @@ function runreport3(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
@@ -353,58 +343,55 @@ app.get("/runreport5.html", function(request, response){
 });
  
 function runreport5(POST, response){
-  reportsql = "SELECT * FROM Contact WHERE C_specialty = 'accounting'"; 
+  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
+ <h2>All Company Contacts</h2>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
@@ -431,8 +418,9 @@ function runreport5(POST, response){
  </style>
  <form action="/runreport5a.html" method="POST">
  <label for="major">Select Major to Search By</label>
- <select name="major" id="major">
-     <option value="Accounting">Accounting</option>
+ <select name="Major" id="Major">
+ <option value="" disable selected>Choose a major</option>
+   <option value="Accounting">Accounting</option>
      <option value="Finance">Finance</option>
      <option value="Human Resource Management">Human Resource Management</option>
      <option value="IT Management">IT Management</option>
@@ -441,11 +429,12 @@ function runreport5(POST, response){
  </form>
 
  <table>
- <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ <td><strong>Contact Name</strong></td><td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
  for (i in res_json){
    runreport+=`
    <tr>
    <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].E_name}</td>
    <td>${res_json[i].C_email}</td>
    <td>${res_json[i].C_phone}</td>
    <td>${res_json[i].C_jobtitle}</td>
@@ -466,60 +455,171 @@ app.post("/runreport5a.html", function(request, response){
 });
  
 function runreport5a(POST, response){
-  major = POST['major'];
+  major = POST['Major'];
   console.log(major);
-  reportsql = "SELECT * FROM Contact WHERE C_specialty = '" + major +"'"; 
+  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id AND C_specialty = '" + major +"'"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
+ <h2>Company Contacts in ${res_json[0].C_specialty}</h2>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <form action="/runreport5b.html" method="POST">
+ <label for="major">Select Major to Search By</label>
+ <select name="Major" id="Major">
+ <option value="" disable selected>Choose a major</option>
+ <option value="Accounting">Accounting</option>
+     <option value="Finance">Finance</option>
+     <option value="Human Resource Management">Human Resource Management</option>
+     <option value="IT Management">IT Management</option>
+</select>
+
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+
+ <table>
+ <td><strong>Contact Name</strong></td><td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].E_name}</td>
+   <td>${res_json[i].C_email}</td>
+   <td>${res_json[i].C_phone}</td>
+   <td>${res_json[i].C_jobtitle}</td>
+
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.post("/runreport5b.html", function(request, response){
+  let POST = request.body;
+  runreport5b(POST, response);
+});
+ 
+function runreport5b(POST, response){
+  major = POST['Major'];
+  console.log(major);
+  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id AND C_specialty = '" + major +"'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
+   
+    <!-- The navigation menu -->
+ <div class="navbar">
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
+ 
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
+ </div>
+  
+   </div>
  <h2>Company Contacts in ${res_json[0].C_specialty}</h2>
  <style>
    .links {
@@ -548,7 +648,8 @@ function runreport5a(POST, response){
  <form action="/runreport5a.html" method="POST">
  <label for="major">Select Major to Search By</label>
  <select name="Major" id="Major">
-     <option value="Accounting">Accounting</option>
+ <option value="" disable selected>Choose a major</option>
+ <option value="Accounting">Accounting</option>
      <option value="Finance">Finance</option>
      <option value="Human Resource Management">Human Resource Management</option>
      <option value="IT Management">IT Management</option>
@@ -558,11 +659,12 @@ function runreport5a(POST, response){
  </form>
 
  <table>
- <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ <td><strong>Contact Name</strong></td> <td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
  for (i in res_json){
    runreport+=`
    <tr>
    <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].E_name}</td>
    <td>${res_json[i].C_email}</td>
    <td>${res_json[i].C_phone}</td>
    <td>${res_json[i].C_jobtitle}</td>
@@ -590,52 +692,48 @@ function runreport6(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
@@ -671,6 +769,103 @@ function runreport6(POST, response){
    <td>${res_json[i].C_phone}</td>
    <td>${res_json[i].C_jobtitle}</td>
 
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.get("/runreport7.html", function(request, response){
+  let POST = request.body;
+  runreport7(POST, response);
+});
+ 
+function runreport7(POST, response){
+  reportsql = "SELECT * FROM Employer WHERE E_state = 'HI'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
+   
+    <!-- The navigation menu -->
+ <div class="navbar">
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
+ 
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
+ </div>
+  
+   </div>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <table>
+ <td><strong>Company Name</strong></td><td><strong>Phone</strong></td><td><strong>Email</strong></td><td><strong>Street</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].E_name}</td>
+   <td>${res_json[i].E_phone}</td>
+   <td>${res_json[i].E_email}</td>
+   <td>${res_json[i].E_street} ${res_json[i].E_city}, ${res_json[i].E_state} ${res_json[i].E_zipcode}</td>
  </tr>
 `}
  runreport+=`
@@ -777,18 +972,55 @@ submitapp=`<!DOCTYPE html>
       <h1>Shidler Career Services and Professional Development</h1> 
       <h2>Student Notes</h2>
   
-     <!-- The navigation menu -->
-      <div class="navbar">
-          <a href="index.html">Home</a>
-          <div class="subnav">
-          <a href="makeappointment.html"subnavbtn">Make Appointment</i></button></a>
-          </div>
-          <div class="subnav">
-             <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
-           </div>
-            </div>
-          </div>
-        </div>
+      <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
+   
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
         <br>
         <p><strong>Thank you for making your appointment with Career Services</strong></p>
         </html>`;
@@ -912,43 +1144,55 @@ function query_jobsearchname(POST, response){
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
   </head><h1>Shidler Career Services and Professional Development</h1> 
-      <!-- The navigation menu -->
-      <div class="navbar">
-        <div class="subnav">
-       <a href="./index.html">Home</a></div>
-       <div class="subnav">
-         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./aboutus.html">About Shidler College</a>
-           <a href="./studentservices.html">About Student Services</a>
+  <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
    
-         </div>
-       </div>
-        
-       <div class="subnav">
-         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./careeradvising.html">Career Advising</a>
-           <a href="./jobintsearch.html">Jobs & Internships</a>
-         </div>
-       </div>
-   
-       <div class="subnav">
-         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./addjposting.html">Post Jobs & Internships</a>
-     </div>
-         </div>
-   
-         <div class="subnav">
-           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-           <div class="subnav-content">
-             <a href="./eventregistration.html">Student Events & Registration</a>
-             <a href="./employerevents.html">Employer Events List</a>
-             <a href="./careerexpo.html">Employer Career Expo Registration</a>
-           </div>
-       </div>
-       </div>
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
       <br>
   <div class = "aboutus"> 
    <div class="row">`
@@ -989,43 +1233,55 @@ function query_jobsearchtype(POST, response){
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
   </head><h1>Shidler Career Services and Professional Development</h1> 
-      <!-- The navigation menu -->
-      <div class="navbar">
-        <div class="subnav">
-       <a href="./index.html">Home</a></div>
-       <div class="subnav">
-         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./aboutus.html">About Shidler College</a>
-           <a href="./studentservices.html">About Student Services</a>
+  <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
    
-         </div>
-       </div>
-        
-       <div class="subnav">
-         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./careeradvising.html">Career Advising</a>
-           <a href="./jobintsearch.html">Jobs & Internships</a>
-         </div>
-       </div>
-   
-       <div class="subnav">
-         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./addjposting.html">Post Jobs & Internships</a>
-     </div>
-         </div>
-   
-         <div class="subnav">
-           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-           <div class="subnav-content">
-             <a href="./eventregistration.html">Student Events & Registration</a>
-             <a href="./employerevents.html">Employer Events List</a>
-             <a href="./careerexpo.html">Employer Career Expo Registration</a>
-           </div>
-       </div>
-       </div>
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
       <br>
   <div class = "aboutus"> 
    <div class="row">`
@@ -1066,43 +1322,55 @@ function apply(POST, response){
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
   </head><h1>Shidler Career Services and Professional Development</h1> 
-      <!-- The navigation menu -->
-      <div class="navbar">
-        <div class="subnav">
-       <a href="./index.html">Home</a></div>
-       <div class="subnav">
-         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./aboutus.html">About Shidler College</a>
-           <a href="./studentservices.html">About Student Services</a>
+  <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
    
-         </div>
-       </div>
-        
-       <div class="subnav">
-         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./careeradvising.html">Career Advising</a>
-           <a href="./jobintsearch.html">Jobs & Internships</a>
-         </div>
-       </div>
-   
-       <div class="subnav">
-         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./addjposting.html">Post Jobs & Internships</a>
-     </div>
-         </div>
-   
-         <div class="subnav">
-           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-           <div class="subnav-content">
-             <a href="./eventregistration.html">Student Events & Registration</a>
-             <a href="./employerevents.html">Employer Events List</a>
-             <a href="./careerexpo.html">Employer Career Expo Registration</a>
-           </div>
-       </div>
-       </div>
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
       <br>
   <div class = "aboutus"> 
    <div class="row">`
@@ -1165,18 +1433,54 @@ app.get("/makeappointment.html", function (request, response) {
      <h2>Make Advising Appointment</h2>
     
      <!-- The navigation menu -->
-  <div class="navbar">
-      <a href="student_homepage.html">Home</a>
-      <div class="subnav">
-        <a href="makeappointment.html"subnavbtn">Make Appointment</i></button></a>
-      </div>
-      <div class="subnav">
-         <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
+     <div class="navbar">
+       <div class="subnav">
+         <a href="./index.html">Home</a></div>
+     <div class="subnav">
+       <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./aboutus.html">About Shidler College</a>
+         <a href="./studentservices.html">About Student Services</a>
+   
        </div>
-    
-        </div>
-      </div>
-    </div>
+     </div>
+      
+     <div class="subnav">
+       <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./careeradvising.html">Career Advising</a>
+         <a href="./jobintsearch.html">Jobs & Internships</a>
+       </div>
+     </div>
+   
+     <div class="subnav">
+       <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./companies.html">Resources</a>
+   </div>
+       </div>
+   
+       <div class="subnav">
+         <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./eventregistration.html">Student Events & Registration</a>
+           <a href="./employerevents.html">Employer Events List</a>
+           <a href="./careerexpo.html">Employer Career Expo Registration</a>
+         </div>
+     </div>
+     <div class="subnav">
+       <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./internships.html">Internships Information</a>
+       </div>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="./addjposting.html">Post Job Opportunities</a>
+     </div>
+   </div>
+     </div>
     
   </body>
   <br>
