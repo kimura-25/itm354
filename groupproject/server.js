@@ -777,18 +777,55 @@ submitapp=`<!DOCTYPE html>
       <h1>Shidler Career Services and Professional Development</h1> 
       <h2>Student Notes</h2>
   
-     <!-- The navigation menu -->
-      <div class="navbar">
-          <a href="index.html">Home</a>
-          <div class="subnav">
-          <a href="makeappointment.html"subnavbtn">Make Appointment</i></button></a>
-          </div>
-          <div class="subnav">
-             <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
-           </div>
-            </div>
-          </div>
-        </div>
+      <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
+   
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
         <br>
         <p><strong>Thank you for making your appointment with Career Services</strong></p>
         </html>`;
@@ -912,43 +949,55 @@ function query_jobsearchname(POST, response){
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
   </head><h1>Shidler Career Services and Professional Development</h1> 
-      <!-- The navigation menu -->
-      <div class="navbar">
-        <div class="subnav">
-       <a href="./index.html">Home</a></div>
-       <div class="subnav">
-         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./aboutus.html">About Shidler College</a>
-           <a href="./studentservices.html">About Student Services</a>
+  <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
    
-         </div>
-       </div>
-        
-       <div class="subnav">
-         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./careeradvising.html">Career Advising</a>
-           <a href="./jobintsearch.html">Jobs & Internships</a>
-         </div>
-       </div>
-   
-       <div class="subnav">
-         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./addjposting.html">Post Jobs & Internships</a>
-     </div>
-         </div>
-   
-         <div class="subnav">
-           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-           <div class="subnav-content">
-             <a href="./eventregistration.html">Student Events & Registration</a>
-             <a href="./employerevents.html">Employer Events List</a>
-             <a href="./careerexpo.html">Employer Career Expo Registration</a>
-           </div>
-       </div>
-       </div>
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
       <br>
   <div class = "aboutus"> 
    <div class="row">`
@@ -989,43 +1038,55 @@ function query_jobsearchtype(POST, response){
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
   </head><h1>Shidler Career Services and Professional Development</h1> 
-      <!-- The navigation menu -->
-      <div class="navbar">
-        <div class="subnav">
-       <a href="./index.html">Home</a></div>
-       <div class="subnav">
-         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./aboutus.html">About Shidler College</a>
-           <a href="./studentservices.html">About Student Services</a>
+  <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
    
-         </div>
-       </div>
-        
-       <div class="subnav">
-         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./careeradvising.html">Career Advising</a>
-           <a href="./jobintsearch.html">Jobs & Internships</a>
-         </div>
-       </div>
-   
-       <div class="subnav">
-         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./addjposting.html">Post Jobs & Internships</a>
-     </div>
-         </div>
-   
-         <div class="subnav">
-           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-           <div class="subnav-content">
-             <a href="./eventregistration.html">Student Events & Registration</a>
-             <a href="./employerevents.html">Employer Events List</a>
-             <a href="./careerexpo.html">Employer Career Expo Registration</a>
-           </div>
-       </div>
-       </div>
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
       <br>
   <div class = "aboutus"> 
    <div class="row">`
@@ -1066,43 +1127,55 @@ function apply(POST, response){
       <link rel="stylesheet" href="style.css">
       <title>Job search</title>
   </head><h1>Shidler Career Services and Professional Development</h1> 
-      <!-- The navigation menu -->
-      <div class="navbar">
-        <div class="subnav">
-       <a href="./index.html">Home</a></div>
-       <div class="subnav">
-         <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./aboutus.html">About Shidler College</a>
-           <a href="./studentservices.html">About Student Services</a>
+  <!-- The navigation menu -->
+  <div class="navbar">
+    <div class="subnav">
+      <a href="./index.html">Home</a></div>
+  <div class="subnav">
+    <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./aboutus.html">About Shidler College</a>
+      <a href="./studentservices.html">About Student Services</a>
+
+    </div>
+  </div>
    
-         </div>
-       </div>
-        
-       <div class="subnav">
-         <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./careeradvising.html">Career Advising</a>
-           <a href="./jobintsearch.html">Jobs & Internships</a>
-         </div>
-       </div>
-   
-       <div class="subnav">
-         <button class="subnavbtn">Company<i class="fa fa-caret-down"></i></button>
-         <div class="subnav-content">
-           <a href="./addjposting.html">Post Jobs & Internships</a>
-     </div>
-         </div>
-   
-         <div class="subnav">
-           <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-           <div class="subnav-content">
-             <a href="./eventregistration.html">Student Events & Registration</a>
-             <a href="./employerevents.html">Employer Events List</a>
-             <a href="./careerexpo.html">Employer Career Expo Registration</a>
-           </div>
-       </div>
-       </div>
+  <div class="subnav">
+    <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./careeradvising.html">Career Advising</a>
+      <a href="./jobintsearch.html">Jobs & Internships</a>
+    </div>
+  </div>
+
+  <div class="subnav">
+    <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./companies.html">Resources</a>
+</div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./eventregistration.html">Student Events & Registration</a>
+        <a href="./employerevents.html">Employer Events List</a>
+        <a href="./careerexpo.html">Employer Career Expo Registration</a>
+      </div>
+  </div>
+  <div class="subnav">
+    <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./internships.html">Internships Information</a>
+    </div>
+</div>
+<div class="subnav">
+  <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+  <div class="subnav-content">
+    <a href="./addjposting.html">Post Job Opportunities</a>
+  </div>
+</div>
+  </div>
       <br>
   <div class = "aboutus"> 
    <div class="row">`
@@ -1165,18 +1238,54 @@ app.get("/makeappointment.html", function (request, response) {
      <h2>Make Advising Appointment</h2>
     
      <!-- The navigation menu -->
-  <div class="navbar">
-      <a href="student_homepage.html">Home</a>
-      <div class="subnav">
-        <a href="makeappointment.html"subnavbtn">Make Appointment</i></button></a>
-      </div>
-      <div class="subnav">
-         <a href="jobsearch.html"subnavbtn">Search Jobs</i></button></a>
+     <div class="navbar">
+       <div class="subnav">
+         <a href="./index.html">Home</a></div>
+     <div class="subnav">
+       <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./aboutus.html">About Shidler College</a>
+         <a href="./studentservices.html">About Student Services</a>
+   
        </div>
-    
-        </div>
-      </div>
-    </div>
+     </div>
+      
+     <div class="subnav">
+       <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./careeradvising.html">Career Advising</a>
+         <a href="./jobintsearch.html">Jobs & Internships</a>
+       </div>
+     </div>
+   
+     <div class="subnav">
+       <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./companies.html">Resources</a>
+   </div>
+       </div>
+   
+       <div class="subnav">
+         <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+         <div class="subnav-content">
+           <a href="./eventregistration.html">Student Events & Registration</a>
+           <a href="./employerevents.html">Employer Events List</a>
+           <a href="./careerexpo.html">Employer Career Expo Registration</a>
+         </div>
+     </div>
+     <div class="subnav">
+       <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+       <div class="subnav-content">
+         <a href="./internships.html">Internships Information</a>
+       </div>
+   </div>
+   <div class="subnav">
+     <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+     <div class="subnav-content">
+       <a href="./addjposting.html">Post Job Opportunities</a>
+     </div>
+   </div>
+     </div>
     
   </body>
   <br>
