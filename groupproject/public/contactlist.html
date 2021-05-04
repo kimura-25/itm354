@@ -47,42 +47,23 @@
     <a href="./appointment.html">Appointments</a>
   </div>
 </div>
-   <br>
-   <br>
-   <br>
-   <br>
 
-<table cellpadding="10" border="1">
-  <tr>
-      <th>Contact First Name</th>
-      <th>Contact Middle Initial</th>
-      <th>Contact Last Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip Code</th>
-      <th>Job Title</th>
-      <th>Speciality</th>
-      <th>Notes</th>
-  </tr>
+<H1>Search for Contacts</H1>
 
-  <tr>
-    <th>Jonah</th>
-    <th>A</th>
-    <th>Aberilla</th>
-    <th>jonaha@gmail.com</th>
-    <th>8085542420</th>
-    <th>39 Avenue</th>
-    <th>Kaneohe</th>
-    <th>HI</th>
-    <th>96744</th>
-    <th>CFO</th>
-    <th>Accounting</th>
-    <th></th>
+    <Form action="/contact_query" method="POST">
+         <label for = "C_name">By Name</label><br>
+        <input type='text' name='Contact_name'><BR>
+        <input type="submit" value="Submit">
+        </Form>
+<br>
+    <Form action="/email_query" method= "POST">
+          <label for="C_email">By Email:</label><br>
+          <input type="text" name= "Contact_email"><br>
+          <input type="submit" value="Submit">
+        </Form> 
+<br>
 
-</tr>
+
  </body>
  </html>
  
