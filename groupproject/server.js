@@ -932,7 +932,7 @@ app.post("/submitapp", function (request, response) {
 
 function query_jobsearchname(POST, response){
   ename = POST['employer_name'];
-  var sql = "SELECT * FROM employer, job_posting WHERE E_name = " + ename + " AND E_id = empl_id";
+  var sql = "SELECT * FROM employer, job_posting WHERE E_name = '" + ename + "' AND E_id = empl_id";
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
