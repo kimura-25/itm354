@@ -341,7 +341,7 @@ app.get("/runreport5.html", function(request, response){
 });
  
 function runreport5(POST, response){
-  reportsql = "SELECT * FROM Contact"; 
+  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -427,11 +427,12 @@ function runreport5(POST, response){
  </form>
 
  <table>
- <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ <td><strong>Contact Name</strong></td><td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
  for (i in res_json){
    runreport+=`
    <tr>
    <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].E_name}</td>
    <td>${res_json[i].C_email}</td>
    <td>${res_json[i].C_phone}</td>
    <td>${res_json[i].C_jobtitle}</td>
@@ -454,7 +455,7 @@ app.post("/runreport5a.html", function(request, response){
 function runreport5a(POST, response){
   major = POST['Major'];
   console.log(major);
-  reportsql = "SELECT * FROM Contact WHERE C_specialty = '" + major +"'"; 
+  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id AND C_specialty = '" + major +"'"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -541,11 +542,12 @@ function runreport5a(POST, response){
  </form>
 
  <table>
- <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ <td><strong>Contact Name</strong></td><td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
  for (i in res_json){
    runreport+=`
    <tr>
    <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].E_name}</td>
    <td>${res_json[i].C_email}</td>
    <td>${res_json[i].C_phone}</td>
    <td>${res_json[i].C_jobtitle}</td>
@@ -568,7 +570,7 @@ app.post("/runreport5b.html", function(request, response){
 function runreport5b(POST, response){
   major = POST['Major'];
   console.log(major);
-  reportsql = "SELECT * FROM Contact WHERE C_specialty = '" + major +"'"; 
+  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id AND C_specialty = '" + major +"'"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -655,11 +657,12 @@ function runreport5b(POST, response){
  </form>
 
  <table>
- <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ <td><strong>Contact Name</strong></td> <td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
  for (i in res_json){
    runreport+=`
    <tr>
    <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].E_name}</td>
    <td>${res_json[i].C_email}</td>
    <td>${res_json[i].C_phone}</td>
    <td>${res_json[i].C_jobtitle}</td>
