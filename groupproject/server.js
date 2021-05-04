@@ -39,52 +39,48 @@ function runreport1(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <h2>Career Expo Attendees for Spring 2021</h2>
  <br>
  <form>
@@ -158,52 +154,48 @@ function runreport2(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
@@ -260,52 +252,48 @@ function runreport3(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
@@ -353,58 +341,55 @@ app.get("/runreport5.html", function(request, response){
 });
  
 function runreport5(POST, response){
-  reportsql = "SELECT * FROM Contact WHERE C_specialty = 'accounting'"; 
+  reportsql = "SELECT * FROM Contact"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
+ <h2>All Company Contacts</h2>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
@@ -431,7 +416,7 @@ function runreport5(POST, response){
  </style>
  <form action="/runreport5a.html" method="POST">
  <label for="major">Select Major to Search By</label>
- <select name="major" id="major">
+ <select name="Major" id="Major">
  <option value="" disable selected>Choose a major</option>
    <option value="Accounting">Accounting</option>
      <option value="Finance">Finance</option>
@@ -467,7 +452,7 @@ app.post("/runreport5a.html", function(request, response){
 });
  
 function runreport5a(POST, response){
-  major = POST['major'];
+  major = POST['Major'];
   console.log(major);
   reportsql = "SELECT * FROM Contact WHERE C_specialty = '" + major +"'"; 
   con.query(reportsql, function(err, result, fields){
@@ -475,52 +460,162 @@ function runreport5a(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
+ <h2>Company Contacts in ${res_json[0].C_specialty}</h2>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <form action="/runreport5b.html" method="POST">
+ <label for="major">Select Major to Search By</label>
+ <select name="Major" id="Major">
+ <option value="" disable selected>Choose a major</option>
+ <option value="Accounting">Accounting</option>
+     <option value="Finance">Finance</option>
+     <option value="Human Resource Management">Human Resource Management</option>
+     <option value="IT Management">IT Management</option>
+</select>
+
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+
+ <table>
+ <td><strong>Contact Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td><td><strong>Job Title</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}</td>
+   <td>${res_json[i].C_email}</td>
+   <td>${res_json[i].C_phone}</td>
+   <td>${res_json[i].C_jobtitle}</td>
+
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.post("/runreport5b.html", function(request, response){
+  let POST = request.body;
+  runreport5b(POST, response);
+});
+ 
+function runreport5b(POST, response){
+  major = POST['Major'];
+  console.log(major);
+  reportsql = "SELECT * FROM Contact WHERE C_specialty = '" + major +"'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
+   
+    <!-- The navigation menu -->
+ <div class="navbar">
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
+ 
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
+ </div>
+  
+   </div>
  <h2>Company Contacts in ${res_json[0].C_specialty}</h2>
  <style>
    .links {
@@ -549,7 +644,8 @@ function runreport5a(POST, response){
  <form action="/runreport5a.html" method="POST">
  <label for="major">Select Major to Search By</label>
  <select name="Major" id="Major">
-     <option value="Accounting">Accounting</option>
+ <option value="" disable selected>Choose a major</option>
+ <option value="Accounting">Accounting</option>
      <option value="Finance">Finance</option>
      <option value="Human Resource Management">Human Resource Management</option>
      <option value="IT Management">IT Management</option>
@@ -591,52 +687,48 @@ function runreport6(POST, response){
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>EDS</title>
-      <link rel="stylesheet" href="reportstyle.css">
-      
-  </head>
-  <body>
-      
-     <h1>Shidler Career Services and Professional Development</h1> 
-     <h2>Run Student Reports</h2>
-    
-     <!-- The navigation menu -->
-  <div class="navbar">
- 
-   <div class="subnav">
-     <a href="./officehomepage.html">Home</a>
-   </div>
-   <div class="subnav">
-     <button class="subnavbtn">Run Reports<i class="fa fa-caret-down"></i></button>
-     <div class="subnav-content">
-       <a href="/studentreport.html">Student</a>
-       <a href="./companyreport.html">Company</a>
-       <a href="./eventreport.html">Event</a>
-  </div>
-   </div>
-   <div class="subnav">
-    <a href="./contactlist.html">Contact List</a>
-  </div>
- 
-  <div class="subnav">
-    <a href="./employerlist.html">Employer List</a>
-  </div>
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
    
+    <!-- The navigation menu -->
+ <div class="navbar">
   <div class="subnav">
-    <a href="./internshiplist.html">Internship List</a>
+    <a href="./runreports.html">Run Reports</a>
   </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
  
-  
-   <div class="subnav">
-     <a href="./appointment.html">Appointments</a>
-   </div>
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+     
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
  </div>
+  
+   </div>
  <style>
    .links {
      background-color:rgb(136, 181, 192);
