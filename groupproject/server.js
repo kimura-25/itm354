@@ -2401,7 +2401,7 @@ function query_jpostings (POST, response){
     //Response: table of results and form to do another query 
     job_postings_form = `<form action"jobpostings.html" method = "GET">`;
     job_postings_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-    job_postings_form += `<td><B>E_id</td><td><B>E_name</td><td><B>E_phone</td><td><B>E_email</td><td><B>E_street</td><td><B>E_city</td><td><B>E_state</td><td><B>E_zipcode</td><td><B>E_industry</td><td><B>Job_title</td><td><B>Job_description</td></b>`;
+    job_postings_form += `<td><B>Comp_id</td><td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Street</td><td><B>City</td><td><B>State</td><td><B>Zipcode</td><td><B>Industry</td><td><B>Job_title</td><td><B>Job_description</td></b>`;
         for (i in res_json) {
           job_postings_form += `<tr><td> ${res_json[i].E_id}</td>`;
           job_postings_form += `<td> ${res_json[i].E_name}</td>`;
@@ -2500,6 +2500,35 @@ function query_jpostings (POST, response){
           })
       };
 
+      function query_addingjp (POST, response){
+        Jid = POST ['Job_id'];
+        Jtitle = POST ['Job_title'];
+        Descrip = POST ['Job_description'];
+        Jtype = POST ['Type'];
+        Jpid = POST ['Empl_id']; 
+        var sql = "INSERT INTO job_posting(Job_id,Job_title,Job_description,Type,Empl_id) VALUES ('" + Jid + "', '" + Jtitle + "','" + Descrip + "', '" + Jtype + "','" + Jpid + "')";
+        con.query (sql, function (err, result, fields){
+          if (err) throw err;
+          console.log(result);
+          var res_string = JSON.stringify(result);
+          var res_json = JSON.parse(res_string);
+          console.log(res_json);
+          //Response: table of results and form to do another query 
+          adding_jp_form = `<form action"jobpostings.html" method = "GET">`;
+          adding_jp_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+          adding_jp_form += `<td><B>JobId</td><td><B>Title</td><td><B>Description</td><td><B>Type</td><td><B>Comp_id</td></b>`;
+              for (i in res_json) {
+                adding_jp_form += `<tr><td> ${res_json[i].Job_id}</td>`;
+                adding_jp_form += `<td> ${res_json[i].Job_title}</td>`;
+                adding_jp_form += `<td> ${res_json[i].Job_description}</td>`;
+                adding_jp_form += `<td> ${res_json[i].Type}</td>`;
+                adding_jp_form += `<td> ${res_json[i].Empl_id}</td>`;
+              }
+              adding_jp_form += `</table></form>`;
+              response.send(adding_jp_form)
+            })
+        };
+
 //Post for processing any job searches from students
 app.post("/search_job_by_name", function (request,response){
   let POST = request.body;
@@ -2570,6 +2599,11 @@ app.post("/view_employers_query", function (request, response) {
 app.post("/update_employer_query", function (request, response) {
   let POST = request.body;
   query_upempl(POST, response);
+});
+
+app.post ("/addingjpost_query", function (request, response) {
+  let POST = request.body;
+  query_addingjp(POST, response);
 });
 
 

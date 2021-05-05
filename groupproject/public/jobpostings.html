@@ -13,40 +13,17 @@
 
     <!-- The navigation menu -->
     <div class="navbar">
-      <a href="./index.html">Home</a>
-
+      <a href="employers_homepage.html">Home</a>
       <div class="subnav">
-        <button class="subnavbtn">About<i class="fa fa-caret-down"></i></button>
-        <div class="subnav-content">
-          <a href="./aboutus.html">About Shidler College</a>
-          <a href="./studentservices.html">About Student Services</a>
-  
-        </div>
+         <a href="postjobs.html"subnavbtn">Post Jobs</i></button></a>
+       </div>
+       <div class="subnav">
+         <a href="updateaccount.html"subnavbtn">Update Account</i></button></a>
+       </div>
+       <div class="subnav">
+        <a href="eventregistration.html"subnavbtn">Event Registration</i></button></a>
       </div>
-      
-      <div class="subnav">
-        <button class="subnavbtn">Career Service Resources<i class="fa fa-caret-down"></i></button>
-        <div class="subnav-content">
-          <a href="./careeradvising.html">Career Advising</a>
-          <a href="./jobpostings.html">Jobs & Internships</a>
         </div>
-      </div>
-  
-      <div class="subnav">
-        <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
-        <div class="subnav-content">
-          <a href="./addjposting.html">Post Jobs & Internships</a>
-    </div>
-        </div>
-  
-        <div class="subnav">
-          <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-          <div class="subnav-content">
-            <a href="./eventregistration.html">Student Events & Registration</a>
-            <a href="./employerevents.html">Employer Events List</a>
-            <a href="./careerexpo.html">Employer Career Expo Registration</a>
-          </div>
-      </div>
       </div>
     </div>
 
@@ -114,8 +91,32 @@ tr:nth-child(even) {
 
 </form> 
 
+<form action="/addingjpost_query" method= "POST">
+  <h2>Add Job Postings</h2>
+  <label for="Job_id">Job Id:</label><br>
+  <input type="text" name= "Job_id"><br>
 
-</html>
+  <label for="Job_title">Title:</label><br>
+  <input type="text" name= "Job_title"><br>
+
+  <label for="Job_description">Description:</label><br>
+  <input type="text" name= "Job_description"><br>
+
+  <label for="Type">Type:</label><br>
+  <input type="text" name= "Type"><br>
+
+  <label for="Empl_id">Company ID:</label><br>
+  <input type="text" name= "Empl_id"><br>
+
+
+  <input type="submit" value="ADD">
+
+</form> 
+
+
+
+
+
 
   <br>
   <br>
