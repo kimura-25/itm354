@@ -620,7 +620,7 @@ app.get("/runreport3.html", function(request, response){
 });
  
 function runreport3(POST, response){
-  reportsql = "SELECT E_name, Students_who_interned FROM total_students_interning_per_co ORDER BY Students_who_interned DESC"; 
+  reportsql = "SELECT E_name, E_phone, E_email, E_street, E_city, E_state, E_zipcode, Students_who_interned FROM total_students_interning_per_co ORDER BY Students_who_interned DESC"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -698,11 +698,14 @@ function runreport3(POST, response){
    }
  </style>
  <table>
- <td><strong>Company Name</strong></td><td><strong>Number of Students</strong></td>`;
+ <td><strong>Company Name</strong></td> <td><strong>Phone</strong></td><td><strong>Email</strong></td> <td><strong>Address</strong></td><td><strong>Number of Students</strong></td>`;
  for (i in res_json){
    runreport+=`
    <tr>
    <td>${res_json[i].E_name}</td>
+   <td>${res_json[i].E_phone}</td>
+   <td>${res_json[i].E_email}</td>
+   <td>${res_json[i].E_street} ${res_json[i].E_city}, ${res_json[i].E_state} ${res_json[i].E_zipcode}</td>
    <td>${res_json[i].Students_who_interned}</td>
  </tr>
 `}
@@ -2467,7 +2470,7 @@ app.post("/addappt", function (request, response) {
 
 function advisingnote(request,response){
   s_id = request.body.s_id;
- var sql = "SELECT * FROM student, student_major, advises WHERE s_id = st_id AND s_id = stud_id AND s_id = " + s_id; //query for the given student
+ var sql = "SELECT * FROM student, student_major, advises, career_services_employee WHERE s_id = st_id AND s_id = stud_id AND Username = Uname AND s_id = " + s_id; //query for the given student
 //var sql1 = "SELECT * IF(s_id = " + s_id +" AND s_id = advises.Stud.id AND s_id = student_major.Stu_id, '1','0') AS meh FROM student, student_major, advises"; //query for the given student
     //  console.log(sql1);
     con.query(sql,function (err, result, fields){ //run the query
@@ -2505,37 +2508,36 @@ function advisingnote(request,response){
       
           <!-- The navigation menu -->
           <div class="navbar">
+            <div class="subnav">
+             <a href="./officehomepage.html">Home</a>
+           </div>
            <div class="subnav">
-            <a href="./officehomepage.html">Home</a>
-          </div>
-          <div class="subnav">
-            <a href="./runreports.html">Run Reports</a>
-          </div>
+             <a href="./runreports.html">Run Reports</a>
+           </div>
+              <div class="subnav">
+               <a href="./contactlist.html">Contact List</a>
+             </div>
+          
              <div class="subnav">
-              <a href="./contactlist.html">Contact List</a>
-            </div>
+               <a href="./employerlist.html">Employer List</a>
+             </div>
          
-            <div class="subnav">
-              <a href="./employerlist.html">Employer List</a>
-            </div>
-        
-            <div class="subnav">
-              <a href="./studentinformation.html">Student List</a>
-            </div>
-            
-            <div class="subnav">
-              <a href="./internshiplist.html">Internship List</a>
-            </div>
-        
              <div class="subnav">
-              <a href="./appointment.html">Appointments</a>
-            </div>
-        
-             <div>
-              <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
-            </div>
-         </div>
-               <br>
+               <a href="./studentinformation.html">Student List</a>
+             </div>
+             
+             <div class="subnav">
+               <a href="./internshiplist.html">Internship List</a>
+             </div>
+         
+              <div class="subnav">
+               <a href="./appointment.html">Appointments</a>
+             </div>
+         
+              <div>
+               <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+             </div>
+          </div>               <br>
             <br>`
         for (i in res_json){
           console.log(i);
@@ -2570,35 +2572,38 @@ function advisingnote(request,response){
         <h1>Shidler Career Services and Professional Development</h1> 
         <h2>Student Notes</h2>
     
-       <!-- The navigation menu -->
+        <!-- The navigation menu -->
         <div class="navbar">
-            <a href="index.html">Home</a>
+          <div class="subnav">
+           <a href="./officehomepage.html">Home</a>
+         </div>
+         <div class="subnav">
+           <a href="./runreports.html">Run Reports</a>
+         </div>
             <div class="subnav">
+             <a href="./contactlist.html">Contact List</a>
+           </div>
         
-              <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-              <div class="subnav-content">
-                <a href="./employers.html">Employers</a>
-                <a href="./contacts.html">Contacts</a>
-                <a href="./jobpostings.html">Job Postings</a>
-              </div>
-            </div>
-        
+           <div class="subnav">
+             <a href="./employerlist.html">Employer List</a>
+           </div>
+       
+           <div class="subnav">
+             <a href="./studentinformation.html">Student List</a>
+           </div>
+           
+           <div class="subnav">
+             <a href="./internshiplist.html">Internship List</a>
+           </div>
+       
             <div class="subnav">
-              <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-              <div class="subnav-content">
-                <a href="./careerexpo.html">Career Expo</a>
-                <a href="./addemployer.html">Add Employer</a>
-              </div>
-            </div>
-        
-            <div class="subnav">
-              <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-              <div class="subnav-content">
-                <a href="./studentinformation.html">Student Information</a>
-                <a href="./advising.html">Advising</a>
-          
-              </div>
-            </div>
+             <a href="./appointment.html">Appointments</a>
+           </div>
+       
+            <div>
+             <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+           </div>
+        </div>
           </div>
           <br>
           <br>`
@@ -2608,10 +2613,13 @@ function advisingnote(request,response){
     <p>Major: ${res_json[0].St_major}</p>`
                     
     response_form += `<table class="center" border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
-    response_form += `<td><B>Advising Date</td><td><B>Advising Note</td></b>`;
+    response_form += `<td><B>Advising Date</B></td><td><B>Appointment Note</B></td><td><B>Advisor</B></td><td><B>Advisor's Note</B></td>`;
         for (i in res_json) {
           response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
           response_form += `<td> ${res_json[i].Advising_note}</td>`;
+          response_form += `<td> ${res_json[i].A_name}</td>`;
+          response_form += `<td> ${res_json[i].advisor_note}</td>`;
+
         }
         response_form += "</table><br><br>";
         response_form += `<form action="advising.html" method="GET">`;
