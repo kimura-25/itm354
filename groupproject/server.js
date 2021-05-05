@@ -89,6 +89,129 @@ function runreport1(POST, response){
    </div>
  <h2>Career Expo Attendees for Spring 2021</h2>
  <br>
+ <form action="/runreport1a.html" method="GET">
+ <label for="semester">Choose Semester</label>
+ <select name="semester" id="semester">
+ <option value="" disable selected>Semester</option>
+     <option value="spring">Spring</option>
+     <option value="fall">Fall</option>
+</select>
+     <label for="year">Choose Year</label>
+     <select name="year" id="year">
+     <option value="" disable selected>Year</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+</select>
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <table>
+ <td><strong>Company Name</strong></td><td><strong>Email</strong></td><td><strong>Phone</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].E_name}</td>
+   <td>${res_json[i].E_email}</td>
+   <td>${res_json[i].E_phone}</td>
+   </tr>
+`}
+ runreport+=`
+ </table>
+ <script>
+   //note to self: need to make view for # of students with X amount of internships
+ </script>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.get("/runreport1a.html", function(request, response){
+  let POST = request.body;
+  runreport1a(POST, response);
+});
+ 
+function runreport1a(POST, response){
+  reportsql = " SELECT * FROM Employer WHERE E_id IN (SELECT Emp_id FROM Presents_at WHERE Evt_name IN (SELECT Event_name FROM Events  WHERE Event_name = 'Career Expo Fall 2020' AND Events.Date = Presents_at.Date))"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Welcome Rick Varley!</h2>
+   
+       <!-- The navigation menu -->
+ <div class="navbar">
+   <div class="subnav">
+    <a href="./officehomepage.html">Home</a>
+  </div>
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
+ 
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+
+    <div class="subnav">
+      <a href="./studentinformation.html">Student List</a>
+    </div>
+    
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
+ </div>
+   </div>
+ <h2>Career Expo Attendees for Fall 2020</h2>
+ <br>
  <form>
  <label for="semester">Choose Semester</label>
  <select name="semester" id="semester">
