@@ -1,32 +1,104 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EDS</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    
+   <h1>Shidler Career Services and Professional Development</h1> 
+   <h2>Career Advising</h2>
+  
     <!-- The navigation menu -->
- <div class="navbar">
-   <div class="subnav">
-    <a href="./officehomepage.html">Home</a>
+    <div class="navbar">
+      <div class="subnav">
+        <a href="./index.html">Home</a></div>
+    <div class="subnav">
+      <button class="subnavbtn" >About<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./aboutus.html">About Shidler College</a>
+        <a href="./studentservices.html">About Student Services</a>
+  
+      </div>
+    </div>
+     
+    <div class="subnav">
+      <button class="subnavbtn">Career Development<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./careeradvising.html">Career Advising</a>
+        <a href="./jobintsearch.html">Jobs & Internships</a>
+      </div>
+    </div>
+  
+    <div class="subnav">
+      <button class="subnavbtn">Company Resources<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./companies.html">Resources</a>
+  </div>
+      </div>
+  
+      <div class="subnav">
+        <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+          <a href="./eventregistration.html">Student Events & Registration</a>
+          <a href="./employerevents.html">Employer Events List</a>
+          <a href="./careerexpo.html">Employer Career Expo Registration</a>
+        </div>
+    </div>
+    <div class="subnav">
+      <button class="subnavbtn">Internships<i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="./internships.html">Internships Information</a>
+      </div>
   </div>
   <div class="subnav">
-    <a href="./runreports.html">Run Reports</a>
+    <button class="subnavbtn">Job Opportunities<i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="./jobintsearch.html">Search Job Opportunities</a>
+    </div>
   </div>
-     <div class="subnav">
-      <a href="./contactlist.html">Contact List</a>
     </div>
- 
-    <div class="subnav">
-      <a href="./employerlist.html">Employer List</a>
-    </div>
+  <br>
 
-    <div class="subnav">
-      <a href="./studentinformation.html">Student List</a>
-    </div>
-    
-    <div class="subnav">
-      <a href="./internshiplist.html">Internship List</a>
-    </div>
+  <h2>Select Your Appointment</h2>
+  <br>
+  
+  <form action="/studentreg.html" method="GET" name="submitapp">
+    <label for="date">Appointment Date</label>
+    <label for="dateerror" id="dateerror" name="dateerror"></label>
+    <br>
+    <input type="date" id="date" name="date" onclick="checkdate()" required>
+    <br>
+    <br><br>
+    <label for="time">Start time</label>
+    <br>
+    <input type="time" id="time" name="time" min="9:00" max="16:00" required>
+    <br><br>
+    <br>
+    <label for="advisor">Choose Advisor</label>
+    <select name="advisor" id="advisor">
+        <option value="rvarley">Richard Varley (Internships)</option>
+        <option value="jpstuart">Patrick Stuart (Full-Time Jobs)</option>
+    </select>
+    <br>
+    <br>
+    <br>
+    <label for="appt_notes">Please describe the reason for your appointment</label>
+    <br>
+    <input type="text" id="appt_notes" name="appt_notes" style="height:200px;width:400px;">
+    <br>
+    <p> You will be prompted to create a student account or to login to your existing account to schedule your appointment on the next page.</p>
+    <br>
+    <input class="links" type="submit" id="submit_appt" name="submit_appt" value="Register/Login">
+</form>
+  <br>
+  <br>
+  <br>
 
-     <div class="subnav">
-      <a href="./appointment.html">Appointments</a>
-    </div>
 
-     <div>
-      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
-    </div>
- </div>
+</body>
+</html>

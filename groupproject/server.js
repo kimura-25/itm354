@@ -1345,7 +1345,7 @@ function studentinformation(POST, response){
                <input type="submit" value="Submit">
                </Form>
                <br>
-           <Form action="/s_state_query" method= "POST">
+           <Form action="/s_phone_query" method= "POST">
                  <label for="S_phone">By Phone:</label>
                  <input type="text" name= "S_phone">
                  <input type="submit" value="Submit">
@@ -1556,7 +1556,7 @@ app.post("/submitapp", function (request, response) {
 
 function query_internshipsearchstudent(POST, response){
   stuID = POST['studentID'];
-  var sql = "SELECT * FROM interns_at, employer, job_posting WHERE Stu_id = " + stuID + " AND E_id = Empl_id AND Empl_id = Emplo_id AND Type = 'Internship'";
+  var sql = "SELECT * FROM student, interns_at, employer, job_posting WHERE Stu_id = S_id AND S_id = " + stuID + " AND Stu_id = " + stuID + " AND E_id = Empl_id AND Empl_id = Emplo_id AND Type = 'Internship'";
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
@@ -1601,9 +1601,9 @@ function query_internshipsearchstudent(POST, response){
    job_search_form += `<h2>Internships</h2>`
     job_search_form += `<form action="/apply" method="POST">`;
     job_search_form += `<table align="center" border="3" cellpadding="5" cellspacing="5">`
-      job_search_form += `<td><B>Student ID</td><td><B>Internship class</td><td><B>Position</td><td><B>Company</td><td><B>Semester</td></b>`;
+      job_search_form += `<td><B>Student Name</td><td><B>Internship class</td><td><B>Position</td><td><B>Company</td><td><B>Semester</td></b>`;
       for (i in res_json) {
-        job_search_form += `<tr><td> ${res_json[i].Stu_id}</td>`;
+        job_search_form += `<tr><td> ${res_json[i].S_fname} ${res_json[i].S_lname}</td>`;
         job_search_form += `<td> ${res_json[i].Internship_class}</td>`;
         job_search_form += `<td> ${res_json[i].Position}</td>`;
         job_search_form += `<td> ${res_json[i].E_name}</td>`;
@@ -2798,7 +2798,7 @@ function s_query_fname(POST, response) {
        <input type="submit" value="Submit">
        </Form>
 <br>
-   <Form action="/s_state_query" method= "POST">
+   <Form action="/s_phone_query" method= "POST">
          <label for="S_phone">By Phone:</label><br>
          <input type="text" name= "S_phone"><br>
          <input type="submit" value="Submit">
@@ -2898,7 +2898,7 @@ function s_query_st_major(POST, response) {
        <input type="submit" value="Submit">
        </Form>
 <br>
-   <Form action="/s_state_query" method= "POST">
+   <Form action="/s_phone_query" method= "POST">
          <label for="S_phone">By Phone:</label><br>
          <input type="text" name= "S_phone"><br>
          <input type="submit" value="Submit">
@@ -2934,6 +2934,216 @@ function s_query_st_major(POST, response) {
       response.send(response_form);
     });
 };
+
+function s_email_query(POST, response) {
+  email = POST ['S_email'];
+  var sql = "SELECT * FROM Student,Student_major WHERE S_id = St_id AND S_email = '" + email +"'";
+  con.query (sql, function (err, result, fields){
+    if (err) throw err;
+  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  //Response: table of results and form to do another query 
+  response_form = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+       </div>
+        <br>
+        <Form action="/s_fname_query" method="POST">
+        <label for = "S_fname">By Name</label><br>
+       <input type='text' name='S_fname'><BR>
+       <input type="submit" value="Submit">
+       </Form>
+<br>
+   <Form action="/s_phone_query" method= "POST">
+         <label for="S_phone">By Phone:</label><br>
+         <input type="text" name= "S_phone"><br>
+         <input type="submit" value="Submit">
+       </Form> 
+<br>
+   <Form action="/s_email_query" method= "POST">
+         <label for="S_email">By Email:</label><br>
+         <input type="text" name= "S_email"><br>
+         <input type="submit" value="Submit">
+       </Form> 
+<br>
+   <Form action="/s_major_query" method= "POST">
+         <label for="S_major">By Major:</label><br>
+         <input type="text" name= "S_major"><br>
+         <input type="submit" value="Submit">
+       </Form> 
+        <br>`
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Major</td></b>`;
+      for (i in res_json){
+        console.log(i)
+        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`
+        <tr>
+        <td>${res_json[i].S_fname} ${res_json[i].S_lname}
+        <input type="hidden" id="s_id" name="s_id" value="${res_json[i].S_id}">
+        <input type="submit" name="${res_json[i].S_id}" value="View"></form></td>
+        <td>${res_json[i].S_phone}</td>
+        <td>${res_json[i].S_email}</td>
+        <td>${res_json[i].St_major}</td>`
+        }
+      response_form += `</tr></html>`;
+      response.send(response_form);
+    });
+};
+
+function s_phone_query(POST, response) {
+  email = POST ['S_phone'];
+  var sql = "SELECT * FROM Student,Student_major WHERE S_id = St_id AND S_phone = '" + email +"'";
+  con.query (sql, function (err, result, fields){
+    if (err) throw err;
+  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+  //Response: table of results and form to do another query 
+  response_form = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+       </div>
+        <br>
+        <Form action="/s_fname_query" method="POST">
+        <label for = "S_fname">By Name</label><br>
+       <input type='text' name='S_fname'><BR>
+       <input type="submit" value="Submit">
+       </Form>
+<br>
+   <Form action="/s_phone_query" method= "POST">
+         <label for="S_phone">By Phone:</label><br>
+         <input type="text" name= "S_phone"><br>
+         <input type="submit" value="Submit">
+       </Form> 
+<br>
+   <Form action="/s_email_query" method= "POST">
+         <label for="S_email">By Email:</label><br>
+         <input type="text" name= "S_email"><br>
+         <input type="submit" value="Submit">
+       </Form> 
+<br>
+   <Form action="/s_major_query" method= "POST">
+         <label for="S_major">By Major:</label><br>
+         <input type="text" name= "S_major"><br>
+         <input type="submit" value="Submit">
+       </Form> 
+        <br>`
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Major</td></b>`;
+      for (i in res_json){
+        console.log(i)
+        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`
+        <tr>
+        <td>${res_json[i].S_fname} ${res_json[i].S_lname}
+        <input type="hidden" id="s_id" name="s_id" value="${res_json[i].S_id}">
+        <input type="submit" name="${res_json[i].S_id}" value="View"></form></td>
+        <td>${res_json[i].S_phone}</td>
+        <td>${res_json[i].S_email}</td>
+        <td>${res_json[i].St_major}</td>`
+        }
+      response_form += `</tr></html>`;
+      response.send(response_form);
+    });
+};
+
+app.post("/s_phone_query", function (request, response) {
+  let POST = request.body;
+  s_email_query(POST, response);
+});
+
+app.post("/s_email_query", function (request, response) {
+  let POST = request.body;
+  s_email_query(POST, response);
+});
 
 app.post("/s_fname_query", function (request, response) {
   let POST = request.body;
