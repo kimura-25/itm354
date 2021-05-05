@@ -9,7 +9,23 @@
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <title>EDS</title>
      <link rel="stylesheet" href="officestyle.css">
-     
+     <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
  </head>
  <body>
      
@@ -44,6 +60,85 @@
 </div>
    <br>
    <br>
+   <H1>Current Interns & Internships</H1>
+   <br>
+
+   <Form action="/search_internship_by_student" method= "POST">
+    <h3>Search internships by student ID</h3>  <input type='text' name='studentID' style="width: 300px;""><br>
+    <input class="searchjobs" type="submit" value="Search">
+       </Form> 
+<br>
+   <Form action="/search_internship_by_name" method= "POST">
+    <h3>Search internships by company name</h3>  <input type='text' name='employer_name' style="width: 300px;""><br>
+    <input class="searchjobs" type="submit" value="Search">
+       </Form> 
+  <br>
+   <h1>Interning Students</h1>
+   <table>
+     <tr>
+      <th>Student ID</th>
+      <th>Student E-mail</th>
+      <th>Internship class</th>
+      <th>Position</th>
+      <th>Semester</th>
+     </tr>
+     <tr>
+       <td>801</td>
+       <td>angelal@hawaii.edu</td>
+       <td>BUS 395D</td>
+       <td>Software Engineering Intern - Hawaiian Airlines</td>
+       <td>Spring 2021</td>
+     </tr>
+     <tr>
+      <td>803</td>
+      <td>kiaraf@hawaii.edu</td>
+      <td>BUS 395F</td>
+      <td>Sales Analyst Intern - Bank of Hawaii</td>
+      <td>Spring 2021</td>
+    </tr>
+    <tr>
+      <td>809</td>
+      <td>kelseyk@hawaii.edu</td>
+      <td>BUS 395G</td>
+      <td>Software Engineering Intern - Deloitte</td>
+      <td>Fall 2021</td>
+    </tr>
+     
+   </table>
+   <h1>Current Internships</h1>
+   <table>
+    <tr>
+      <th>Internship ID</th>
+      <th>Title</th>
+      <th>Company</th>
+    </tr>
+    <tr>
+      <td>302</td>
+      <td>Analyst, Sourcing, Procurement</td>
+      <td>Hawaiian Airlines</td>
+    </tr>
+    <tr>
+      <td>305</td>
+      <td>Insurance Branch Assistant</td>
+      <td>Deloitte</td>
+    </tr>
+    <tr>
+      <td>307</td>
+      <td>Accounting</td>
+      <td>International Express</td>
+    </tr>
+    <tr>
+      <td>307</td>
+      <td>Director of International Growth</td>
+      <td>International Express</td>
+    </tr>
+    <tr>
+      <td>310</td>
+      <td>Security Risk Analyst</td>
+      <td>SmartSecurity</td>
+    </tr>
+    
+  </table>
  </body>
  </html>
  
