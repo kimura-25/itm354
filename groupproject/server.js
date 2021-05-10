@@ -2528,7 +2528,7 @@ app.post("/advising.html", function (request, response) {
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="reportstyle.css">
       <title>Log Advising Notes</title>
       
   </head>
@@ -2536,37 +2536,38 @@ app.post("/advising.html", function (request, response) {
       <h1>Shidler Career Services and Professional Development</h1> 
       <h2>Log Advising Notes</h2>
   
-     <!-- The navigation menu -->
+      <!-- The navigation menu -->
       <div class="navbar">
-          <a href="index.html">Home</a>
-          <div class="subnav">
-      
-            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./employers.html">Employers</a>
-              <a href="./contacts.html">Contacts</a>
-              <a href="./jobpostings.html">Job Postings</a>
-              <a href="./contactlog.html">Contact Log</a>
-  
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./careerexpo.html">Career Expo</a>
-              <a href="./addemployer.html">Add Employer</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./studentinformation.html">Student Information</a>
-              <a href="./advising.html">Advising</a>
+       <div class="subnav">
+        <a href="./officehomepage.html">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
         
-            </div>
-          </div>
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
         </div>
         <br>
     <form action="/addappt" method="POST" name="addappt"  >
@@ -2612,7 +2613,7 @@ addappt=`<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reportstyle.css">
     <title>Log Advising Notes</title>
     
 </head>
@@ -2620,37 +2621,38 @@ addappt=`<!DOCTYPE html>
     <h1>Shidler Career Services and Professional Development</h1> 
     <h2>Log Advising Notes</h2>
 
-   <!-- The navigation menu -->
+    <!-- The navigation menu -->
     <div class="navbar">
-        <a href="index.html">Home</a>
-        <div class="subnav">
-    
-          <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-          <div class="subnav-content">
-            <a href="./employers.html">Employers</a>
-            <a href="./contacts.html">Contacts</a>
-            <a href="./jobpostings.html">Job Postings</a>
-            <a href="./contactlog.html">Contact Log</a>
-
-          </div>
-        </div>
-    
-        <div class="subnav">
-          <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-          <div class="subnav-content">
-            <a href="./careerexpo.html">Career Expo</a>
-            <a href="./addemployer.html">Add Employer</a>
-          </div>
-        </div>
-    
-        <div class="subnav">
-          <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-          <div class="subnav-content">
-            <a href="./studentinformation.html">Student Information</a>
-            <a href="./advising.html">Advising</a>
+     <div class="subnav">
+      <a href="./officehomepage.html">Home</a>
+    </div>
+    <div class="subnav">
+      <a href="./runreports.html">Run Reports</a>
+    </div>
+       <div class="subnav">
+        <a href="./contactlist.html">Contact List</a>
+      </div>
+   
+      <div class="subnav">
+        <a href="./employerlist.html">Employer List</a>
+      </div>
+  
+      <div class="subnav">
+        <a href="./studentinformation.html">Student List</a>
+      </div>
       
-          </div>
-        </div>
+      <div class="subnav">
+        <a href="./internshiplist.html">Internship List</a>
+      </div>
+  
+       <div class="subnav">
+        <a href="./appointment.html">Appointments</a>
+      </div>
+  
+       <div>
+        <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+      </div>
+   </div>
       </div>
       </div>
       <br>
@@ -2824,7 +2826,7 @@ function advisingnote(request,response){
           response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
           response_form += `<td> ${res_json[i].Advising_note}</td>`;
           response_form += `<td> ${res_json[i].A_name}</td>`;
-          response_form += `<td> ${res_json[i].advisor_note}</td>`;
+          response_form += `<td> ${res_json[i].Advisor_note}</td>`;
 
         }
         response_form += "</table><br><br>";
