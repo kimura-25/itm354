@@ -15,7 +15,7 @@ var con = mysql.createConnection({
   host: '127.0.0.1',
   user: "root",
   port: 3306,
-  database: "employer_database_system",
+  database: "eds",
   password: ""
 });
 
@@ -33,7 +33,7 @@ app.get("/runreport5.html", function(request, response){
 });
  
 function runreport5(POST, response){
-  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id"; 
+  reportsql = "SELECT * FROM contact_info"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -234,7 +234,130 @@ function runreport0(POST, response){
  <label for="E_industry">Select Industry to Search By</label>
  <select name="E_industry" id="E_industry">
  <option value="" disable selected>Choose an industry</option>
- <option value="Airline">Accounting</option>
+ <option value="Airline">Airline</option>
+     <option value="Banking">Banking</option>
+     <option value="Accounting">Accounting</option>
+     <option value="Business Policy">Business Policy</option>
+     <option value="Information Security">Information Security</option>
+
+     </select>
+
+
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+
+ <table>
+ <td><strong>Company Name</strong></td><td><strong>Phone</strong></td><td><strong>Email</strong></td><td><strong>Address</strong></td><td><strong>Industry</strong></td>`;
+ for (i in res_json){
+   runreport+=`
+   <tr>
+   <td>${res_json[i].E_name}</td>
+   <td>${res_json[i].E_phone}</td>
+   <td>${res_json[i].E_email}</td>
+   <td>${res_json[i].E_street} ${res_json[i].E_city}, ${res_json[i].E_state} ${res_json[i].E_zipcode}</td>
+   <td>${res_json[i].E_industry}</td>
+
+ </tr>
+`}
+ runreport+=`
+ </table>
+  </body>
+  </html>`;
+  response.send(runreport);
+})
+}
+
+app.post("/runreport0a.html", function(request, response){
+  let POST = request.body;
+  runreport0a(POST, response);
+});
+ 
+function runreport0a(POST, response){
+  E_industry = POST['E_industry'];
+  console.log(E_industry);
+  reportsql = "SELECT * FROM Employer WHERE E_industry = '" + E_industry+"'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+  runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+   
+       <!-- The navigation menu -->
+ <div class="navbar">
+   <div class="subnav">
+    <a href="./officehomepage.html">Home</a>
+  </div>
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
+ 
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+
+    <div class="subnav">
+      <a href="./studentinformation.html">Student List</a>
+    </div>
+    
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
+ </div>
+   </div>
+ <h2>Company Contacts in All Industries</h2>
+ <style>
+   .links {
+     background-color:rgb(136, 181, 192);
+     border-radius:28px;
+     display:inline-block;
+     cursor:pointer;
+     color: black;
+     font-family:Arial;
+     font-size:25px;
+     padding:16px 31px;
+     text-decoration:none;
+     font-weight: bold;
+     margin-inline: 50px;
+     text-align: center;
+   }
+   .links:hover {
+     background-color: rgb(23, 94, 112);
+ }
+   ul{
+     text-align: left;
+     padding: 20%;
+     ;
+   }
+ </style>
+ <form action="/runreport0a.html" method="POST">
+ <label for="E_industry">Select Industry to Search By</label>
+ <select name="E_industry" id="E_industry">
+ <option value="" disable selected>Choose an industry</option>
+ <option value="Airline">Airline</option>
      <option value="Banking">Banking</option>
      <option value="Accounting">Accounting</option>
      <option value="Business Policy">Business Policy</option>
@@ -273,7 +396,7 @@ app.get("/runreport1.html", function(request, response){
 });
  
 function runreport1(POST, response){
-  reportsql = " SELECT * FROM Employer WHERE E_id IN (SELECT Emp_id FROM Presents_at WHERE Evt_name IN (SELECT Event_name FROM Events  WHERE Event_name = 'Career Expo' AND Events.Date = Presents_at.Date))"; 
+  reportsql = " SELECT * FROM Employer WHERE E_id IN (SELECT Emp_id FROM Presents_at WHERE Evt_name IN (SELECT Event_name FROM Events  WHERE Event_name = 'Career Expo Spring 2021'))"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -328,12 +451,12 @@ function runreport1(POST, response){
    </div>
  <h2>Career Expo Attendees for Spring 2021</h2>
  <br>
- <form action="/runreport1a.html" method="GET">
+ <form action="/runreport1a.html" method="POST">
  <label for="semester">Choose Semester</label>
  <select name="semester" id="semester">
  <option value="" disable selected>Semester</option>
-     <option value="spring">Spring</option>
-     <option value="fall">Fall</option>
+     <option value="Spring">Spring</option>
+     <option value="Fall">Fall</option>
 </select>
      <label for="year">Choose Year</label>
      <select name="year" id="year">
@@ -389,18 +512,93 @@ function runreport1(POST, response){
 })
 }
 
-app.get("/runreport1a.html", function(request, response){
+app.post("/runreport1a.html", function(request, response){
   let POST = request.body;
   runreport1a(POST, response);
 });
  
 function runreport1a(POST, response){
-  reportsql = " SELECT * FROM Employer WHERE E_id IN (SELECT Emp_id FROM Presents_at WHERE Evt_name IN (SELECT Event_name FROM Events  WHERE Event_name = 'Career Expo Fall 2020' AND Events.Date = Presents_at.Date))"; 
+  semester = POST['semester'];
+  year = POST['year'];
+  console.log(semester);
+  console.log(year);
+  reportsql = " SELECT * FROM Employer WHERE E_id IN (SELECT Emp_id FROM Presents_at WHERE Evt_name IN (SELECT Event_name FROM Events  WHERE Event_name = 'Career Expo "+ semester + " " + year +"'))"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
+    if (res_json.length == 0){
+      runreport=` <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>EDS</title>
+     <link rel="stylesheet" href="reportstyle.css">
+     
+ </head>
+ <body>
+     
+    <h1>Shidler Career Services and Professional Development</h1> 
+   
+       <!-- The navigation menu -->
+ <div class="navbar">
+   <div class="subnav">
+    <a href="./officehomepage.html">Home</a>
+  </div>
+  <div class="subnav">
+    <a href="./runreports.html">Run Reports</a>
+  </div>
+     <div class="subnav">
+      <a href="./contactlist.html">Contact List</a>
+    </div>
+ 
+    <div class="subnav">
+      <a href="./employerlist.html">Employer List</a>
+    </div>
+
+    <div class="subnav">
+      <a href="./studentinformation.html">Student List</a>
+    </div>
+    
+    <div class="subnav">
+      <a href="./internshiplist.html">Internship List</a>
+    </div>
+
+     <div class="subnav">
+      <a href="./appointment.html">Appointments</a>
+    </div>
+
+     <div>
+      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+    </div>
+ </div>
+   </div>
+ <h2>Career Expo Attendees for ${semester} ${year}</h2>
+ <br>
+ <form action="/runreport1a.html" method="POST">
+ <label for="semester">Choose Semester</label>
+ <select name="semester" id="semester">
+ <option value="" disable selected>Semester</option>
+     <option value="Spring">Spring</option>
+     <option value="Fall">Fall</option>
+</select>
+     <label for="year">Choose Year</label>
+     <select name="year" id="year">
+     <option value="" disable selected>Year</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+</select>
+<input type="submit" id="submit" value="Run Report" name="submit">  
+ </form>
+<h2>No attendees this semester</h2>
+  </body>
+  </html>`;
+  response.send(runreport);
+    } else {
   runreport=` <!DOCTYPE html>
  <html lang="en">
  <head>
@@ -448,14 +646,14 @@ function runreport1a(POST, response){
     </div>
  </div>
    </div>
- <h2>Career Expo Attendees for Fall 2020</h2>
+ <h2>Career Expo Attendees for ${semester} ${year}</h2>
  <br>
- <form>
+ <form action="/runreport1a.html" method="POST">
  <label for="semester">Choose Semester</label>
  <select name="semester" id="semester">
  <option value="" disable selected>Semester</option>
-     <option value="spring">Spring</option>
-     <option value="fall">Fall</option>
+     <option value="Spring">Spring</option>
+     <option value="Fall">Fall</option>
 </select>
      <label for="year">Choose Year</label>
      <select name="year" id="year">
@@ -508,6 +706,7 @@ function runreport1a(POST, response){
   </body>
   </html>`;
   response.send(runreport);
+}
 })
 }
 
@@ -842,7 +1041,7 @@ app.post("/runreport5a.html", function(request, response){
 function runreport5a(POST, response){
   major = POST['Major'];
   console.log(major);
-  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id AND C_specialty = '" + major +"'"; 
+  reportsql = "SELECT * FROM contact_info WHERE C_specialty = '" + major +"'"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -962,7 +1161,7 @@ app.post("/runreport5b.html", function(request, response){
 function runreport5b(POST, response){
   major = POST['Major'];
   console.log(major);
-  reportsql = "SELECT * FROM Contact, Employer WHERE E_id = Empl_id AND C_specialty = '" + major +"'"; 
+  reportsql = "SELECT * FROM contact_info WHERE C_specialty = '" + major +"'"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -1081,7 +1280,7 @@ app.get("/runreport6.html", function(request, response){
 });
  
 function runreport6(POST, response){
-  reportsql = "SELECT * FROM Employer, Contact WHERE Primary_cid = C_id"; 
+  reportsql = "SELECT * FROM primary_contacts"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -1287,7 +1486,7 @@ app.get("/runreport8.html", function(request, response){
 });
  
 function runreport8(POST, response){
-  reportsql = "SELECT * FROM Student, Student_major WHERE S_id = St_id"; 
+  reportsql = "SELECT * FROM student_info"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
@@ -1404,119 +1603,209 @@ app.post("/runreport8a.html", function(request, response){
  
 function runreport8a(POST, response){
   major = POST['Major'];
-  reportsql = "SELECT * FROM Student, Student_major WHERE S_id = St_id AND St_major = '" + major+"'"; 
+  reportsql = "SELECT * FROM student_info WHERE St_major = '" + major+"'"; 
   con.query(reportsql, function(err, result, fields){
     if (err) throw err;
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
-  runreport=` <!DOCTYPE html>
- <html lang="en">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>EDS</title>
-     <link rel="stylesheet" href="reportstyle.css">
+    if (res_json.length == 0){
+      console.log('none of that major');
+      console.log(major);
+      runreport=` <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>EDS</title>
+          <link rel="stylesheet" href="reportstyle.css">
+          
+      </head>
+      <body>
+          
+         <h1>Shidler Career Services and Professional Development</h1> 
+        
+            <!-- The navigation menu -->
+      <div class="navbar">
+        <div class="subnav">
+         <a href="./officehomepage.html">Home</a>
+       </div>
+       <div class="subnav">
+         <a href="./runreports.html">Run Reports</a>
+       </div>
+          <div class="subnav">
+           <a href="./contactlist.html">Contact List</a>
+         </div>
+      
+         <div class="subnav">
+           <a href="./employerlist.html">Employer List</a>
+         </div>
      
- </head>
- <body>
+         <div class="subnav">
+           <a href="./studentinformation.html">Student List</a>
+         </div>
+         
+         <div class="subnav">
+           <a href="./internshiplist.html">Internship List</a>
+         </div>
      
-    <h1>Shidler Career Services and Professional Development</h1> 
-   
-       <!-- The navigation menu -->
- <div class="navbar">
-   <div class="subnav">
-    <a href="./officehomepage.html">Home</a>
-  </div>
-  <div class="subnav">
-    <a href="./runreports.html">Run Reports</a>
-  </div>
+          <div class="subnav">
+           <a href="./appointment.html">Appointments</a>
+         </div>
+     
+          <div>
+           <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+         </div>
+      </div>
+        </div>
+      <h2>Students in ${major}</h2>
+      <style>
+        .links {
+          background-color:rgb(136, 181, 192);
+          border-radius:28px;
+          display:inline-block;
+          cursor:pointer;
+          color: black;
+          font-family:Arial;
+          font-size:25px;
+          padding:16px 31px;
+          text-decoration:none;
+          font-weight: bold;
+          margin-inline: 50px;
+          text-align: center;
+        }
+        .links:hover {
+          background-color: rgb(23, 94, 112);
+      }
+        ul{
+          text-align: left;
+          padding: 20%;
+          ;
+        }
+      </style>
+      <form action="/runreport8a.html" method="POST">
+      <label for="major">Select Major to Search By</label>
+      <select name="Major" id="Major">
+      <option value="" disable selected>Choose a major</option>
+        <option value="Accounting">Accounting</option>
+          <option value="Finance">Finance</option>
+          <option value="Human Resource Management">Human Resource Management</option>
+          <option value="IT Management">IT Management</option>
+     </select>
+     <input type="submit" id="submit" value="Run Report" name="submit">  
+      </form>
+       </body>
+       </html>`;
+       response.send(runreport);
+    }else{  runreport=` <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>EDS</title>
+        <link rel="stylesheet" href="reportstyle.css">
+        
+    </head>
+    <body>
+        
+       <h1>Shidler Career Services and Professional Development</h1> 
+      
+          <!-- The navigation menu -->
+    <div class="navbar">
+      <div class="subnav">
+       <a href="./officehomepage.html">Home</a>
+     </div>
      <div class="subnav">
-      <a href="./contactlist.html">Contact List</a>
-    </div>
- 
-    <div class="subnav">
-      <a href="./employerlist.html">Employer List</a>
-    </div>
-
-    <div class="subnav">
-      <a href="./studentinformation.html">Student List</a>
-    </div>
+       <a href="./runreports.html">Run Reports</a>
+     </div>
+        <div class="subnav">
+         <a href="./contactlist.html">Contact List</a>
+       </div>
     
-    <div class="subnav">
-      <a href="./internshiplist.html">Internship List</a>
+       <div class="subnav">
+         <a href="./employerlist.html">Employer List</a>
+       </div>
+   
+       <div class="subnav">
+         <a href="./studentinformation.html">Student List</a>
+       </div>
+       
+       <div class="subnav">
+         <a href="./internshiplist.html">Internship List</a>
+       </div>
+   
+        <div class="subnav">
+         <a href="./appointment.html">Appointments</a>
+       </div>
+   
+        <div>
+         <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+       </div>
     </div>
+      </div>
+    <h2>Students in ${res_json[0].St_major}</h2>
+    <style>
+      .links {
+        background-color:rgb(136, 181, 192);
+        border-radius:28px;
+        display:inline-block;
+        cursor:pointer;
+        color: black;
+        font-family:Arial;
+        font-size:25px;
+        padding:16px 31px;
+        text-decoration:none;
+        font-weight: bold;
+        margin-inline: 50px;
+        text-align: center;
+      }
+      .links:hover {
+        background-color: rgb(23, 94, 112);
+    }
+      ul{
+        text-align: left;
+        padding: 20%;
+        ;
+      }
+    </style>
+    <form action="/runreport8a.html" method="POST">
+    <label for="major">Select Major to Search By</label>
+    <select name="Major" id="Major">
+    <option value="" disable selected>Choose a major</option>
+      <option value="Accounting">Accounting</option>
+        <option value="Finance">Finance</option>
+        <option value="Human Resource Management">Human Resource Management</option>
+        <option value="IT Management">IT Management</option>
+   </select>
+   <input type="submit" id="submit" value="Run Report" name="submit">  
+    </form>
+   
+    <table>
+    <td><strong>Student Name</strong></td><td><strong>Phone</strong></td><td><strong>Email</strong></td><td><strong>Major</strong></td><td><strong>Graduation</strong></td>`;
+    for (i in res_json){
+      runreport+=`
+      <tr>
+      <td>${res_json[i].S_fname} ${res_json[i].S_lname}</td>
+      <td>${res_json[i].S_phone}</td>
+      <td>${res_json[i].S_email}</td>
+      <td>${res_json[i].St_major}</td>
+      <td>${res_json[i].Expected_grad}</td>
+    </tr>
+   `}
+    runreport+=`
+    </table>
+     </body>
+     </html>`;
+     response.send(runreport);}
 
-     <div class="subnav">
-      <a href="./appointment.html">Appointments</a>
-    </div>
-
-     <div>
-      <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
-    </div>
- </div>
-   </div>
- <h2>Students in ${res_json[0].St_major}</h2>
- <style>
-   .links {
-     background-color:rgb(136, 181, 192);
-     border-radius:28px;
-     display:inline-block;
-     cursor:pointer;
-     color: black;
-     font-family:Arial;
-     font-size:25px;
-     padding:16px 31px;
-     text-decoration:none;
-     font-weight: bold;
-     margin-inline: 50px;
-     text-align: center;
-   }
-   .links:hover {
-     background-color: rgb(23, 94, 112);
- }
-   ul{
-     text-align: left;
-     padding: 20%;
-     ;
-   }
- </style>
- <form action="/runreport5a.html" method="POST">
- <label for="major">Select Major to Search By</label>
- <select name="Major" id="Major">
- <option value="" disable selected>Choose a major</option>
-   <option value="Accounting">Accounting</option>
-     <option value="Finance">Finance</option>
-     <option value="Human Resource Management">Human Resource Management</option>
-     <option value="IT Management">IT Management</option>
-</select>
-<input type="submit" id="submit" value="Run Report" name="submit">  
- </form>
-
- <table>
- <td><strong>Student Name</strong></td><td><strong>Phone</strong></td><td><strong>Email</strong></td><td><strong>Major</strong></td><td><strong>Graduation</strong></td>`;
- for (i in res_json){
-   runreport+=`
-   <tr>
-   <td>${res_json[i].S_fname} ${res_json[i].S_lname}</td>
-   <td>${res_json[i].S_phone}</td>
-   <td>${res_json[i].S_email}</td>
-   <td>${res_json[i].St_major}</td>
-   <td>${res_json[i].Expected_grad}</td>
- </tr>
-`}
- runreport+=`
- </table>
-  </body>
-  </html>`;
-  response.send(runreport);
 })
 }
 
 function studentinformation(POST, response){
           //note to self: need to create cases if person has no advising notes
-          var sql = "SELECT * FROM student, student_major WHERE s_id = st_id"; //query for the given student
+          var sql = "SELECT * FROM student_info"; //query for the given student
           con.query(sql,function (err, result, fields){ //run the query
           if (err) throw err;
         //  console.log(result);
@@ -1706,86 +1995,6 @@ app.post("/submitapp", function (request, response) {
   submitapp(POST, response);
 });
 
-//note:need to change attributes to eds
-/*function query_advisingnote(request, response){
-  //note to self: need to create cases if person has no advising notes
-  s_id = request.query.s_id;
-  var sql = "SELECT * FROM student, student_major WHERE s_id = st_id AND s_id = " + s_id; //query for the given student
-//  var sql1 = "SELECT IF(EXISTS(SELECT * FROM advises WHERE stud_id = '801'), '1','0'"; //query for the given student
-//  console.log(sql1);
-  con.query(sql,function (err, result, fields){ //run the query
-  if (err) throw err;
-//  console.log(result);
-  var res_string = JSON.stringify(result);
-  var res_json = JSON.parse(res_string);
-  console.log(res_json);
-
-  //now build the response for student detail page
-  response_form=`<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="style.css">
-      <title>Student Notes</title>
-  </head>
-  <body>
-      <h1>Shidler Career Services and Professional Development</h1> 
-      <h2>Student Notes</h2>
-  
-     <!-- The navigation menu -->
-      <div class="navbar">
-          <a href="index.html">Home</a>
-          <div class="subnav">
-      
-            <button class="subnavbtn">Companies<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./employers.html">Employers</a>
-              <a href="./contacts.html">Contacts</a>
-              <a href="./jobpostings.html">Job Postings</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Events<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./careerexpo.html">Career Expo</a>
-              <a href="./addemployer.html">Add Employer</a>
-            </div>
-          </div>
-      
-          <div class="subnav">
-            <button class="subnavbtn">Students<i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-              <a href="./studentinformation.html">Student Information</a>
-              <a href="./advising.html">Advising</a>
-        
-            </div>
-          </div>
-        </div>
-        <br>
-        <br>`
-    for (i in res_json){
-  response_form +=`<p>Name: ${res_json[i].S_id}</p>
-  <p>Phone: ${res_json[i].S_phone}</p>
-  <p>Email: ${res_json[i].S_email}</p>
-  <p>Major: ${res_json[i].St_major}</p>`
-                  }
-/*  response_form += `<form action="advising.html" method="GET">`;
-  response_form += `<table border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
-  response_form += `<td><B>Advising Note</td><td><B>Date</td></b>`;
-      for (i in res_json) {
-        response_form += `<tr><td> ${res_json[i].Advising_date}</td>`;
-        response_form += `<td> ${res_json[i].Advising_note}</td>`;
-      }
-      response_form += "</table>";
-      response_form += `<input type="submit" value="Add Advising Note"> </form>`;
-      response_form += `</html>`;
-      response.send(response_form);
-});
-}*/
-
 function query_internshipsearchstudent(POST, response){
   stuID = POST['studentID'];
   var sql = "SELECT * FROM student, interns_at, employer, job_posting WHERE Stu_id = S_id AND S_id = " + stuID + " AND Stu_id = " + stuID + " AND E_id = Empl_id AND Empl_id = Emplo_id AND Type = 'Internship'";
@@ -1909,7 +2118,7 @@ function query_internshipsearch(POST, response){
 
 function query_jobsearchname(POST, response){
   ename = POST['employer_name'];
-  var sql = "SELECT * FROM employer, job_posting WHERE E_name = '" + ename + "' AND E_id = empl_id";
+  var sql = "SELECT * FROM job_posting_info WHERE E_name = '" + ename + "'";
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
@@ -1998,7 +2207,7 @@ function query_jobsearchname(POST, response){
 
 function query_jobsearchtype(POST, response){
   jobtype = POST['job_type'];
-  var sql = "SELECT * FROM employer, job_posting WHERE type = " + jobtype + " AND e_id = empl_id";
+  var sql = "SELECT * FROM job_posting_info WHERE type = " + jobtype;
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
@@ -2087,7 +2296,7 @@ function query_jobsearchtype(POST, response){
 
 function apply(POST, response){
   job_id = POST['job_id'];
-  var sql = "SELECT * FROM employer, job_posting WHERE Job_id = " + job_id + " AND empl_id = e_id";
+  var sql = "SELECT * FROM job_posting_info WHERE Job_id = " + job_id;
   con.query(sql, function (err, result, fields){ 
     if (err) throw err;
     console.log(result);
@@ -2471,11 +2680,8 @@ app.post("/addappt", function (request, response) {
 function advisingnote(request,response){
   s_id = request.body.s_id;
  var sql = "SELECT * FROM student, student_major, advises, career_services_employee WHERE s_id = st_id AND s_id = stud_id AND Username = Uname AND s_id = " + s_id; //query for the given student
-//var sql1 = "SELECT * IF(s_id = " + s_id +" AND s_id = advises.Stud.id AND s_id = student_major.Stu_id, '1','0') AS meh FROM student, student_major, advises"; //query for the given student
-    //  console.log(sql1);
     con.query(sql,function (err, result, fields){ //run the query
       if (err) throw err;
-  //  console.log(result);
     var res_string = JSON.stringify(result);
     var res_json = JSON.parse(res_string);
     console.log(res_json);
@@ -2622,7 +2828,7 @@ function advisingnote(request,response){
 
         }
         response_form += "</table><br><br>";
-        response_form += `<form action="advising.html" method="GET">`;
+        response_form += `<form action="advising.html" method="POST">`;
         response_form += `<input type="hidden" id="s_id" name="s_id" value="${res_json[0].S_id}">`;
         response_form += `<input type="hidden" id="s_fname" name="s_fname" value="${res_json[0].S_fname}">`;
         response_form += `<input type="hidden" id="s_lname" name="s_lname" value="${res_json[0].S_lname}">`;
@@ -2921,11 +3127,6 @@ app.post("/apply", function (request,response){
 });
 
 
-app.post("/advisingnotes", function (request, response) {
-  let POST = request.body;
-  query_advisingnote(POST, response);
-});
-
 app.post("/name_query", function (request, response) {
   let POST = request.body;
 query_name(POST, response);
@@ -2974,7 +3175,7 @@ app.all('*', function (request, response, next) {
 
 function s_query_fname(POST, response) {
   Name = POST ['S_fname'];
-  var sql = "SELECT * FROM Student,Student_major WHERE S_id = St_id AND S_fname = '" + Name +"'";
+  var sql = "SELECT * FROM student_info WHERE S_fname = '" + Name +"'";
   con.query (sql, function (err, result, fields){
     if (err) throw err;
   console.log(result);
@@ -3074,7 +3275,7 @@ function s_query_fname(POST, response) {
 
 function s_query_st_major(POST, response) {
   major = POST ['S_major'];
-  var sql = "SELECT * FROM Student,Student_major WHERE S_id = St_id AND St_major = '" + major +"'";
+  var sql = "SELECT * FROM student_info WHERE St_major = '" + major +"'";
   con.query (sql, function (err, result, fields){
     if (err) throw err;
   console.log(result);
@@ -3174,7 +3375,7 @@ function s_query_st_major(POST, response) {
 
 function s_email_query(POST, response) {
   email = POST ['S_email'];
-  var sql = "SELECT * FROM Student,Student_major WHERE S_id = St_id AND S_email = '" + email +"'";
+  var sql = "SELECT * FROM student_info WHERE S_email = '" + email +"'";
   con.query (sql, function (err, result, fields){
     if (err) throw err;
   console.log(result);
@@ -3274,7 +3475,7 @@ function s_email_query(POST, response) {
 
 function s_phone_query(POST, response) {
   email = POST ['S_phone'];
-  var sql = "SELECT * FROM Student,Student_major WHERE S_id = St_id AND S_phone = '" + email +"'";
+  var sql = "SELECT * FROM student_info WHERE S_phone = '" + email +"'";
   con.query (sql, function (err, result, fields){
     if (err) throw err;
   console.log(result);
@@ -3374,7 +3575,7 @@ function s_phone_query(POST, response) {
 
 app.post("/s_phone_query", function (request, response) {
   let POST = request.body;
-  s_email_query(POST, response);
+  s_phone_query(POST, response);
 });
 
 app.post("/s_email_query", function (request, response) {
