@@ -27,6 +27,34 @@ con.connect(function (err) {
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
 
+app.post("/officehomepage", function(request,response){
+  let POST = request.body;
+  officehomepage(POST,response);
+})
+
+function officehomepage(POST,response){
+  username = POST['username'];
+  password = POST['password'];
+  reportsql = "SELECT * FROM career_services_employee WHERE Username ='" + username+ "'"; 
+  con.query(reportsql, function(err, result, fields){
+    if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+
+    if (res_json.length == 0){
+      response.redirect("/cs_login.html")
+    }else{
+    if(res_json[0].Password == password){
+      response.redirect("/officehomepage.html");}
+    else {
+      response.redirect("/cs_login.html")
+      }
+    }
+  })  
+
+}
+
 app.get("/runreport5.html", function(request, response){
   let POST = request.body;
   runreport5(POST, response);
