@@ -3681,39 +3681,39 @@ function contactlist(POST, response){
      </div>
      <H1>Search for Contacts</H1>
 
-     <Form action="/contact_query" method="POST">
+     <Form action="/cname_query" method="POST">
           <label for = "C_name">By Name</label><br>
          <input type='text' name='Contact_name'><BR>
          <input type="submit" value="Submit">
          </Form>
  <br>
-     <Form action="/email_query" method= "POST">
+     <Form action="/cemail_query" method= "POST">
            <label for="C_email">By Email:</label><br>
            <input type="text" name= "Contact_email"><br>
            <input type="submit" value="Submit">
          </Form> 
  <br>
  
-     <Form action="/phone_query" method="POST">
+     <Form action="/cphone_query" method="POST">
            <label for = "C_phone">By Phone</label><br>
            <input type='text' name='Contact_phone'><BR>
            <input type="submit" value="Submit">
          </Form>
  <br>
-     <Form action="/jobtitle_query" method= "POST">
+     <Form action="/cjobtitle_query" method= "POST">
            <label for="C_jobtitle">By Jobtitle:</label><br>
            <input type="text" name= "Contact_jobtitle"><br>
            <input type="submit" value="Submit">
          </Form> 
  <br>
-     <Form action="/specialty_query" method= "POST">
+     <Form action="/cspecialty_query" method= "POST">
            <label for="C_specialty">By Specialty:</label><br>
            <input type="text" name= "Contact_specialty"><br>
            <input type="submit" value="Submit">
          </Form> 
  <br>`
       response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
-      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Major Specialty</td></b>`;
+      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
       for (i in res_json){
         console.log(i)
         response_form +=`<form action="/advisingnotes" method="POST">`;
@@ -3723,7 +3723,9 @@ function contactlist(POST, response){
         <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
         <td>${res_json[i].C_phone}</td>
         <td>${res_json[i].C_email}</td>
+        <td>${res_json[i].C_jobtitle}</td>
         <td>${res_json[i].C_specialty}</td>`
+
         }
       response_form += `</tr></html>`;
       response.send(response_form);
@@ -3733,6 +3735,591 @@ function contactlist(POST, response){
 app.get("/contactlist.html", function (request, response) {
 let POST = request.body;
 contactlist(POST, response);
+});
+
+function cname_query(POST, response){
+  C_name = POST['Contact_name']
+  //note to self: need to create cases if person has no advising notes
+  var sql = "SELECT * FROM Contact WHERE C_fname = '"+C_name+"'"; //query for the given student
+  con.query(sql,function (err, result, fields){ //run the query
+  if (err) throw err;
+//  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+
+  //now build the response for student detail page
+  response_form=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html
+        
+        
+        ">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+     <H1>Search for Contacts</H1>
+
+     <Form action="/cname_query" method="POST">
+          <label for = "C_name">By Name</label><br>
+         <input type='text' name='Contact_name'><BR>
+         <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cemail_query" method= "POST">
+           <label for="C_email">By Email:</label><br>
+           <input type="text" name= "Contact_email"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+ 
+     <Form action="/cphone_query" method="POST">
+           <label for = "C_phone">By Phone</label><br>
+           <input type='text' name='Contact_phone'><BR>
+           <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cjobtitle_query" method= "POST">
+           <label for="C_jobtitle">By Jobtitle:</label><br>
+           <input type="text" name= "Contact_jobtitle"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+     <Form action="/cspecialty_query" method= "POST">
+           <label for="C_specialty">By Specialty:</label><br>
+           <input type="text" name= "Contact_specialty"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>`
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
+      for (i in res_json){
+        console.log(i)
+        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`
+        <tr>
+        <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
+        <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <td>${res_json[i].C_phone}</td>
+        <td>${res_json[i].C_email}</td>
+        <td>${res_json[i].C_jobtitle}</td>
+        <td>${res_json[i].C_specialty}</td>`
+
+        }
+      response_form += `</tr></html>`;
+      response.send(response_form);
+});
+}
+
+app.post("/cname_query", function (request, response) {
+let POST = request.body;
+cname_query(POST, response);
+});
+
+function cemail_query(POST, response){
+  C_email = POST['Contact_email']
+  //note to self: need to create cases if person has no advising notes
+  var sql = "SELECT * FROM Contact WHERE C_email = '"+C_email+"'"; //query for the given student
+  con.query(sql,function (err, result, fields){ //run the query
+  if (err) throw err;
+//  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+
+  //now build the response for student detail page
+  response_form=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html
+        
+        
+        ">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+     <H1>Search for Contacts</H1>
+
+     <Form action="/cname_query" method="POST">
+          <label for = "C_name">By Name</label><br>
+         <input type='text' name='Contact_name'><BR>
+         <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cemail_query" method= "POST">
+           <label for="C_email">By Email:</label><br>
+           <input type="text" name= "Contact_email"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+ 
+     <Form action="/cphone_query" method="POST">
+           <label for = "C_phone">By Phone</label><br>
+           <input type='text' name='Contact_phone'><BR>
+           <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cjobtitle_query" method= "POST">
+           <label for="C_jobtitle">By Jobtitle:</label><br>
+           <input type="text" name= "Contact_jobtitle"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+     <Form action="/cspecialty_query" method= "POST">
+           <label for="C_specialty">By Specialty:</label><br>
+           <input type="text" name= "Contact_specialty"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>`
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
+      for (i in res_json){
+        console.log(i)
+        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`
+        <tr>
+        <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
+        <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <td>${res_json[i].C_phone}</td>
+        <td>${res_json[i].C_email}</td>
+        <td>${res_json[i].C_jobtitle}</td>
+        <td>${res_json[i].C_specialty}</td>`        }
+      response_form += `</tr></html>`;
+      response.send(response_form);
+});
+}
+
+app.post("/cemail_query", function (request, response) {
+let POST = request.body;
+cemail_query(POST, response);
+});
+
+function cphone_query(POST, response){
+  C_phone = POST['Contact_phone']
+  //note to self: need to create cases if person has no advising notes
+  var sql = "SELECT * FROM Contact WHERE C_phone = '"+C_phone+"'"; //query for the given student
+  con.query(sql,function (err, result, fields){ //run the query
+  if (err) throw err;
+//  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+
+  //now build the response for student detail page
+  response_form=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html
+        
+        
+        ">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+     <H1>Search for Contacts</H1>
+
+     <Form action="/cname_query" method="POST">
+          <label for = "C_name">By Name</label><br>
+         <input type='text' name='Contact_name'><BR>
+         <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cemail_query" method= "POST">
+           <label for="C_email">By Email:</label><br>
+           <input type="text" name= "Contact_email"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+ 
+     <Form action="/cphone_query" method="POST">
+           <label for = "C_phone">By Phone</label><br>
+           <input type='text' name='Contact_phone'><BR>
+           <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cjobtitle_query" method= "POST">
+           <label for="C_jobtitle">By Jobtitle:</label><br>
+           <input type="text" name= "Contact_jobtitle"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+     <Form action="/cspecialty_query" method= "POST">
+           <label for="C_specialty">By Specialty:</label><br>
+           <input type="text" name= "Contact_specialty"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>`
+ response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+ response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
+ for (i in res_json){
+   console.log(i)
+   response_form +=`<form action="/advisingnotes" method="POST">`;
+   response_form +=`
+   <tr>
+   <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
+   <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+   <td>${res_json[i].C_phone}</td>
+   <td>${res_json[i].C_email}</td>
+   <td>${res_json[i].C_jobtitle}</td>
+   <td>${res_json[i].C_specialty}</td>`
+        }
+      response_form += `</tr></html>`;
+      response.send(response_form);
+});
+}
+
+app.post("/cphone_query", function (request, response) {
+let POST = request.body;
+cphone_query(POST, response);
+});
+
+function cjobtitle_query(POST, response){
+  C_jobtitle = POST['Contact_jobtitle']
+  //note to self: need to create cases if person has no advising notes
+  var sql = "SELECT * FROM Contact WHERE C_jobtitle = '"+C_jobtitle+"'"; //query for the given student
+  con.query(sql,function (err, result, fields){ //run the query
+  if (err) throw err;
+//  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+
+  //now build the response for student detail page
+  response_form=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html
+        
+        
+        ">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+     <H1>Search for Contacts</H1>
+
+     <Form action="/cname_query" method="POST">
+          <label for = "C_name">By Name</label><br>
+         <input type='text' name='Contact_name'><BR>
+         <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cemail_query" method= "POST">
+           <label for="C_email">By Email:</label><br>
+           <input type="text" name= "Contact_email"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+ 
+     <Form action="/cphone_query" method="POST">
+           <label for = "C_phone">By Phone</label><br>
+           <input type='text' name='Contact_phone'><BR>
+           <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cjobtitle_query" method= "POST">
+           <label for="C_jobtitle">By Jobtitle:</label><br>
+           <input type="text" name= "Contact_jobtitle"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+     <Form action="/cspecialty_query" method= "POST">
+           <label for="C_specialty">By Specialty:</label><br>
+           <input type="text" name= "Contact_specialty"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>`
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
+      for (i in res_json){
+        console.log(i)
+        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`
+        <tr>
+        <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
+        <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <td>${res_json[i].C_phone}</td>
+        <td>${res_json[i].C_email}</td>
+        <td>${res_json[i].C_jobtitle}</td>
+        <td>${res_json[i].C_specialty}</td>`
+        }
+      response_form += `</tr></html>`;
+      response.send(response_form);
+});
+}
+
+app.post("/cjobtitle_query", function (request, response) {
+let POST = request.body;
+cjobtitle_query(POST, response);
+});
+
+function cspecialty_query(POST, response){
+  C_specialty = POST['Contact_specialty']
+  //note to self: need to create cases if person has no advising notes
+  var sql = "SELECT * FROM Contact WHERE C_specialty = '"+C_specialty+"'"; //query for the given student
+  con.query(sql,function (err, result, fields){ //run the query
+  if (err) throw err;
+//  console.log(result);
+  var res_string = JSON.stringify(result);
+  var res_json = JSON.parse(res_string);
+  console.log(res_json);
+
+  //now build the response for student detail page
+  response_form=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Student Notes</title>
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Student Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html
+        
+        
+        ">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+     <H1>Search for Contacts</H1>
+
+     <Form action="/cname_query" method="POST">
+          <label for = "C_name">By Name</label><br>
+         <input type='text' name='Contact_name'><BR>
+         <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cemail_query" method= "POST">
+           <label for="C_email">By Email:</label><br>
+           <input type="text" name= "Contact_email"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+ 
+     <Form action="/cphone_query" method="POST">
+           <label for = "C_phone">By Phone</label><br>
+           <input type='text' name='Contact_phone'><BR>
+           <input type="submit" value="Submit">
+         </Form>
+ <br>
+     <Form action="/cjobtitle_query" method= "POST">
+           <label for="C_jobtitle">By Jobtitle:</label><br>
+           <input type="text" name= "Contact_jobtitle"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>
+     <Form action="/cspecialty_query" method= "POST">
+           <label for="C_specialty">By Specialty:</label><br>
+           <input type="text" name= "Contact_specialty"><br>
+           <input type="submit" value="Submit">
+         </Form> 
+ <br>`
+      response_form += `<table border="3" cellpadding="5" cellspacing="5">`;
+      response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
+      for (i in res_json){
+        console.log(i)
+        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`
+        <tr>
+        <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
+        <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <td>${res_json[i].C_phone}</td>
+        <td>${res_json[i].C_email}</td>
+        <td>${res_json[i].C_jobtitle}</td>
+        <td>${res_json[i].C_specialty}</td>`
+        }
+      response_form += `</tr></html>`;
+      response.send(response_form);
+});
+}
+
+app.post("/cspecialty_query", function (request, response) {
+let POST = request.body;
+cspecialty_query(POST, response);
 });
 
 app.listen(8080, () => console.log(`listening on port 8080`));
