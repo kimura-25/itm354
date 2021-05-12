@@ -1,0 +1,107 @@
+/* Creates background color */
+body {
+    background-color: rgb(186, 226, 233);
+}
+
+body {
+  text-align: center;
+}
+
+/* Centers text*/
+h1 {
+    text-align: center; 
+    font-size: 35px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+h3 {
+font-family: Arial, Helvetica, sans-serif; 
+}
+
+/* The navigation menu */
+.navbar {
+  
+  overflow: hidden;
+  background-color: rgb(41, 136, 160);
+  text-align: center;
+}
+
+/* Navigation links */
+.navbar a {
+    
+  float: left;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  padding: 14px 35px;
+  text-decoration: none;
+margin: 10px 20px;
+}
+
+/* The subnavigation menu */
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+/* Subnav button */
+.subnav .subnavbtn {
+  font-size: 22px;
+  border: none;
+  outline: none;
+  color:white;
+  padding: 14px 70px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 10px 20px;
+
+}
+
+a.logout {
+    color: rgb(9, 56, 68)
+}
+
+
+
+/* Adds background color to navigation links on hover */
+.subnavbtn:hover {
+  background-color: rgb(9, 100, 122);
+}
+.subnav:hover {
+  background-color: rgb(9, 100, 122);
+}
+
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: rgb(136, 181, 192);
+  width: 100%;
+  z-index: 1;
+  
+}
+
+/* Style the subnav links */
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+/* Adds background color on hover */
+.subnav-content a:hover {
+  background-color: rgb(116, 166, 179);
+  color:white;
+}
+
+/* When you move the mouse over the subnav container, open the subnav content */
+.subnav:hover .subnav-content {
+  display: block;
+}
