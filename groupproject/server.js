@@ -3716,11 +3716,12 @@ function contactlist(POST, response){
       response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
       for (i in res_json){
         console.log(i)
-        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`<form action="/callnotes" method="POST">`;
         response_form +=`
         <tr>
         <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
         <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <input type="submit" name="${res_json[i].C_id}" value="View"></form></td>
         <td>${res_json[i].C_phone}</td>
         <td>${res_json[i].C_email}</td>
         <td>${res_json[i].C_jobtitle}</td>
@@ -3834,16 +3835,16 @@ function cname_query(POST, response){
       response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
       for (i in res_json){
         console.log(i)
-        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`<form action="/callnotes" method="POST">`;
         response_form +=`
         <tr>
         <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
         <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <input type="submit" name="${res_json[i].C_id}" value="View"></form></td>
         <td>${res_json[i].C_phone}</td>
         <td>${res_json[i].C_email}</td>
         <td>${res_json[i].C_jobtitle}</td>
         <td>${res_json[i].C_specialty}</td>`
-
         }
       response_form += `</tr></html>`;
       response.send(response_form);
@@ -3952,15 +3953,17 @@ function cemail_query(POST, response){
       response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
       for (i in res_json){
         console.log(i)
-        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`<form action="/callnotes" method="POST">`;
         response_form +=`
         <tr>
         <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
         <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <input type="submit" name="${res_json[i].C_id}" value="View"></form></td>
         <td>${res_json[i].C_phone}</td>
         <td>${res_json[i].C_email}</td>
         <td>${res_json[i].C_jobtitle}</td>
-        <td>${res_json[i].C_specialty}</td>`        }
+        <td>${res_json[i].C_specialty}</td>`
+      }
       response_form += `</tr></html>`;
       response.send(response_form);
 });
@@ -4068,16 +4071,17 @@ function cphone_query(POST, response){
  response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
  for (i in res_json){
    console.log(i)
-   response_form +=`<form action="/advisingnotes" method="POST">`;
+   response_form +=`<form action="/callnotes" method="POST">`;
    response_form +=`
    <tr>
    <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
    <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+   <input type="submit" name="${res_json[i].C_id}" value="View"></form></td>
    <td>${res_json[i].C_phone}</td>
    <td>${res_json[i].C_email}</td>
    <td>${res_json[i].C_jobtitle}</td>
    <td>${res_json[i].C_specialty}</td>`
-        }
+   }
       response_form += `</tr></html>`;
       response.send(response_form);
 });
@@ -4185,15 +4189,17 @@ function cjobtitle_query(POST, response){
       response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
       for (i in res_json){
         console.log(i)
-        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`<form action="/callnotes" method="POST">`;
         response_form +=`
         <tr>
         <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
         <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <input type="submit" name="${res_json[i].C_id}" value="View"></form></td>
         <td>${res_json[i].C_phone}</td>
         <td>${res_json[i].C_email}</td>
         <td>${res_json[i].C_jobtitle}</td>
         <td>${res_json[i].C_specialty}</td>`
+
         }
       response_form += `</tr></html>`;
       response.send(response_form);
@@ -4302,15 +4308,17 @@ function cspecialty_query(POST, response){
       response_form += `<td><B>Name</td><td><B>Phone</td><td><B>Email</td><td><B>Job Title</td><td><B>Major Specialty</td></b>`;
       for (i in res_json){
         console.log(i)
-        response_form +=`<form action="/advisingnotes" method="POST">`;
+        response_form +=`<form action="/callnotes" method="POST">`;
         response_form +=`
         <tr>
         <td>${res_json[i].C_fname} ${res_json[i].C_minit} ${res_json[i].C_lname}
         <input type="hidden" id="C_id" name="C_id" value="${res_json[i].C_id}">
+        <input type="submit" name="${res_json[i].C_id}" value="View"></form></td>
         <td>${res_json[i].C_phone}</td>
         <td>${res_json[i].C_email}</td>
         <td>${res_json[i].C_jobtitle}</td>
         <td>${res_json[i].C_specialty}</td>`
+
         }
       response_form += `</tr></html>`;
       response.send(response_form);
@@ -4320,6 +4328,328 @@ function cspecialty_query(POST, response){
 app.post("/cspecialty_query", function (request, response) {
 let POST = request.body;
 cspecialty_query(POST, response);
+});
+
+function callnotes(request,response){
+ var sql = "SELECT * FROM contact_info, calls WHERE Cont_id = C_id AND Cont_id =" + C_id; //query for the given student
+    con.query(sql,function (err, result, fields){ //run the query
+      if (err) throw err;
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+    console.log(res_json.length);
+
+    if (res_json.length == 0){
+      console.log('no advising')
+      console.log(C_id);
+      var sql2 = "SELECT * FROM contact_info WHERE C_id = " + C_id;
+    con.query(sql2,function (err, result, fields){ //run the query
+      if (err) throw err;
+  //  console.log(result);
+    var res_string = JSON.stringify(result);
+    var res_json = JSON.parse(res_string);
+    console.log(res_json);
+    console.log(res_json.length);
+    
+      response_form=`<!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="stylesheet" href="reportstyle.css">
+          <title>Student Notes</title>
+      </head>
+      <body>
+          <h1>Shidler Career Services and Professional Development</h1> 
+          <h2>Call Notes</h2>
+      
+          <!-- The navigation menu -->
+          <div class="navbar">
+            <div class="subnav">
+             <a href="./officehomepage.html">Home</a>
+           </div>
+           <div class="subnav">
+             <a href="./runreports.html">Run Reports</a>
+           </div>
+              <div class="subnav">
+               <a href="./contactlist.html">Contact List</a>
+             </div>
+          
+             <div class="subnav">
+               <a href="./employerlist.html">Employer List</a>
+             </div>
+         
+             <div class="subnav">
+               <a href="./studentinformation.html">Student List</a>
+             </div>
+             
+             <div class="subnav">
+               <a href="./internshiplist.html">Internship List</a>
+             </div>
+         
+              <div class="subnav">
+               <a href="./appointment.html">Appointments</a>
+             </div>
+         
+              <div>
+               <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+             </div>
+          </div>               <br>
+            <br>`
+        for (i in res_json){
+          console.log(i);
+          response_form +=`<p>Name: ${res_json[i].C_fname} ${res_json[i].C_lname}</p>
+      <p>Phone: ${res_json[i].C_phone}</p>
+      <p>Email: ${res_json[i].C_email}</p>
+      <p>Major: ${res_json[i].C_specialty}</p>`
+                      }
+                      response_form += `<form action="calllog.html" method="POST">`;
+                      response_form += `<input type="hidden" id="C_id" name="C_id" value="${res_json[0].C_id}">`;
+                      response_form += `<input type="hidden" id="C_fname" name="C_fname" value="${res_json[0].C_fname}">`;
+                      response_form += `<input type="hidden" id="C_lname" name="C_lname" value="${res_json[0].C_lname}">`;
+                      response_form += `<input type="submit" value="Add Call Note"> </form>`;
+                  
+          response_form += `</html>`;
+          response.send(response_form);
+        })} else {
+    
+    //now build the response for student detail page
+    response_form=`<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="reportstyle.css">
+        <title>Student Notes</title>
+    </head>
+    <body>
+        <h1>Shidler Career Services and Professional Development</h1> 
+        <h2>Student Notes</h2>
+    
+        <!-- The navigation menu -->
+        <div class="navbar">
+          <div class="subnav">
+           <a href="./officehomepage.html">Home</a>
+         </div>
+         <div class="subnav">
+           <a href="./runreports.html">Run Reports</a>
+         </div>
+            <div class="subnav">
+             <a href="./contactlist.html">Contact List</a>
+           </div>
+        
+           <div class="subnav">
+             <a href="./employerlist.html">Employer List</a>
+           </div>
+       
+           <div class="subnav">
+             <a href="./studentinformation.html">Student List</a>
+           </div>
+           
+           <div class="subnav">
+             <a href="./internshiplist.html">Internship List</a>
+           </div>
+       
+            <div class="subnav">
+             <a href="./appointment.html">Appointments</a>
+           </div>
+       
+            <div>
+             <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+           </div>
+        </div>
+          </div>
+          <br>
+          <br>`
+        response_form +=`<p>Name: ${res_json[0].C_fname} ${res_json[0].C_lname}</p>
+    <p>Phone: ${res_json[0].C_phone}</p>
+    <p>Email: ${res_json[0].C_email}</p>
+    <p>Major: ${res_json[0].C_specialty}</p>`
+                    
+    response_form += `<table class="center" border="3" cellpadding="5" cellspacing="5" bgcolor="white">`;
+    response_form += `<td><B>Call Date</B></td><td><B>Call Note</B></td><td><B>User</B></td>`;
+        for (i in res_json) {
+          response_form += `<tr><td> ${res_json[i].Call_date}</td>`;
+          response_form += `<td> ${res_json[i].Call_note}</td>`;
+          response_form += `<td> ${res_json[i].User}</td>`;
+        }
+        response_form += "</table><br><br>";
+        response_form += `<form action="/calllog.html" method="POST">`;
+        response_form += `<input type="hidden" id="C_id" name="C_id" value="${res_json[0].C_id}">`;
+        response_form += `<input type="hidden" id="C_fname" name="C_fname" value="${res_json[0].C_fname}">`;
+        response_form += `<input type="hidden" id="C_lname" name="C_lname" value="${res_json[0].C_lname}">`;
+        response_form += `<input type="submit" value="Add Call Note"> </form>`;
+        response_form += `</html>`;
+        response.send(response_form);
+   
+      }});
+}
+
+
+app.post("/callnotes", function (request, response) {
+  //note to self: need to create cases if person has no advising notes
+  C_id = request.body.C_id;
+  console.log(C_id);
+  callnotes(request,response);
+});
+
+app.post("/calllog.html", function (request, response) {
+  //note to self: need to create cases if person has no advising notes
+  let POST = request.body;
+  C_id = POST['C_id'];
+  console.log(C_id);
+  callpg=`<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="reportstyle.css">
+      <title>Log Call Notes</title>
+      
+  </head>
+  <body>
+      <h1>Shidler Career Services and Professional Development</h1> 
+      <h2>Log Call Notes</h2>
+  
+      <!-- The navigation menu -->
+      <div class="navbar">
+       <div class="subnav">
+        <a href="./officehomepage.html">Home</a>
+      </div>
+      <div class="subnav">
+        <a href="./runreports.html">Run Reports</a>
+      </div>
+         <div class="subnav">
+          <a href="./contactlist.html">Contact List</a>
+        </div>
+     
+        <div class="subnav">
+          <a href="./employerlist.html">Employer List</a>
+        </div>
+    
+        <div class="subnav">
+          <a href="./studentinformation.html">Student List</a>
+        </div>
+        
+        <div class="subnav">
+          <a href="./internshiplist.html">Internship List</a>
+        </div>
+    
+         <div class="subnav">
+          <a href="./appointment.html">Appointments</a>
+        </div>
+    
+         <div>
+          <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+        </div>
+     </div>
+        </div>
+        <br>
+    <form action="/addcall" method="POST" name="addcall"  >
+      <input type="hidden" id="C_id" name="C_id" value=${C_id}>
+      <label for="date">Call Date</label>
+      <br>
+      <input type="date" id="date" name="date" required>
+      <br>
+      <br>
+      <br>
+      <label for="advisor">Choose Advisor</label>
+      <select name="user" id="user">
+          <option value="rvarley">Richard Varley</option>
+          <option value="jpstuart">Patrick Stuart</option>
+          <option value="student">Student</option>
+          </select>
+
+      <br>
+      <br>
+      <br>
+      <label for="call_note">Call Notes</label>
+      <br>
+      <input type="text" id="call_note" name="call_note" style="height:200px;width:400px;">
+      <br>
+      <input type="submit" id="addcall" name="addcall">
+  </form>
+  <br>
+  <br>
+      <button onclick="window.location.href='/student-single.html'">Back</button>
+  </body>
+  
+  </html>`;
+  response.send(callpg);
+});
+
+
+function addcall(POST, response){
+addcall=`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reportstyle.css">
+    <title>Log Call Notes</title>
+    
+</head>
+<body>
+    <h1>Shidler Career Services and Professional Development</h1> 
+    <h2>Log Call Notes</h2>
+
+    <!-- The navigation menu -->
+    <div class="navbar">
+     <div class="subnav">
+      <a href="./officehomepage.html">Home</a>
+    </div>
+    <div class="subnav">
+      <a href="./runreports.html">Run Reports</a>
+    </div>
+       <div class="subnav">
+        <a href="./contactlist.html">Contact List</a>
+      </div>
+   
+      <div class="subnav">
+        <a href="./employerlist.html">Employer List</a>
+      </div>
+  
+      <div class="subnav">
+        <a href="./studentinformation.html">Student List</a>
+      </div>
+      
+      <div class="subnav">
+        <a href="./internshiplist.html">Internship List</a>
+      </div>
+  
+       <div class="subnav">
+        <a href="./appointment.html">Appointments</a>
+      </div>
+  
+       <div>
+        <a class="logout" href="index.html"subnavbtn">Log Out</i></button></a>
+      </div>
+   </div>
+      </div>
+      </div>
+      <br>
+      <p><strong>Company Call Added</strong></p>
+      </html>`;
+    response.send(addcall);
+  C_id = POST['C_id'];
+  user = POST['user'];
+  date = POST['date'];
+  call_note = POST['call_note'];
+  console.log(C_id);
+sql = "INSERT INTO Calls(Cont_id,User,Call_date,Call_note) VALUES ('"+ C_id +"', '" + user + "', '" + date + "','" + call_note + "')";
+con.query(sql,function(err){
+if(err) throw err
+console.log(sql)
+})
+}
+
+app.post("/addcall", function (request, response) {
+  let POST = request.body;
+  addcall(POST, response);
 });
 
 app.listen(8080, () => console.log(`listening on port 8080`));
